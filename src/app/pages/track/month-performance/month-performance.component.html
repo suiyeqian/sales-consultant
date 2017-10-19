@@ -1,0 +1,36 @@
+<div class="month-performance">
+  <div class="sub-title-wrap">
+    <h4 class="sub-title">团队成员进度</h4>
+  </div>
+  <div class="member-list">
+    <div class="member-progress" *ngFor="let i of [1,2,3,4,5]">
+      <i class="avatar-icon"></i>
+      <span class="volume-key text-left">慕容潇潇</span>
+      <ngb-progressbar *ngIf="75>=timeProgress" type="customized" [value]="75" [striped]="true" [animated]="true" class="member-progress-bar">
+        <i>{{4800 | number}}</i>
+      </ngb-progressbar>
+      <ngb-progressbar *ngIf="75<timeProgress" type="warn" [value]="75" [striped]="true" [animated]="true" class="member-progress-bar">
+        <i>{{4800 | number}}</i>
+      </ngb-progressbar>
+      <span class="volume-val text-center pull-right">{{75}}%</span>
+    </div>
+    <div class="member-progress">
+      <i class="avatar-icon"></i>
+      <span class="volume-key text-left">张三</span>
+      <ngb-progressbar *ngIf="30>=timeProgress" type="customized" [value]="30" [striped]="true" [animated]="true" class="member-progress-bar">
+        <i>{{1800 | number}}</i>
+      </ngb-progressbar>
+      <ngb-progressbar *ngIf="30<timeProgress" type="warn" [value]="30" [striped]="true" [animated]="true" class="member-progress-bar">
+        <i>{{1800 | number}}</i>
+      </ngb-progressbar>
+      <span class="volume-val text-center pull-right">{{30}}%</span>
+    </div>
+  </div>
+
+  <div class="sub-title-wrap">
+    <h4 class="sub-title">每周团队销售情况</h4>
+  </div>
+  <div class="performance-trend">
+    <div echarts [options]="trendOption" class="trend-chart"></div>
+  </div>
+</div>

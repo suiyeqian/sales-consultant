@@ -1,0 +1,106 @@
+/* this file will be extracted to main dist folder and is imported in index.html */
+/* This file is for setting global styles  */
+@import 'variables';
+
+// styles in src/style directory are applied to the whole page
+
+body {
+  background: $bg-color;
+  color: #fff;
+  font-family: "Hiragino Sans GB", "冬青黑体", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "苹方", "Heiti SC", "黑体-简", "Microsoft YaHei", "微软雅黑", "WenQuanYi Micro Hei", "文泉驿微米黑", sans-serif;
+  overflow-x: hidden!important;
+  font-size: 26px;
+  position: relative;
+}
+
+// 修改bootstrap进度条
+.bg-customized {
+  background-color: $main-color !important;
+}
+.bg-warn {
+  background-color: $red-color !important;
+}
+.progress{
+  background-color: $grey-color!important;
+  height: .6rem;
+  line-height: .6rem;
+  border-radius: 6px;
+}
+.progress-bar {
+  height: inherit;
+  line-height: inherit;
+  font-size: .27rem;
+  color: $bg-color;
+}
+// main
+p {
+  margin-bottom: 0;
+}
+.pull-right {
+  float: right!important;
+}
+.font-blue {
+  color: $main-color!important;
+}
+.font-red {
+  color: $red-color!important;
+}
+.bg-red {
+  background-color: $red-color;
+  border-radius: 5px;
+}
+.bold {
+  font-weight: bold!important;
+}
+// 子标题
+.sub-title-wrap{
+  position: relative;
+  margin-left: .36rem;
+  margin-bottom: .69rem;
+  height: .51rem;
+  overflow: hidden;
+}
+.sub-title-wrap::before{
+  content: '';
+  height: .4rem;
+  position: absolute;
+  top:0;
+  left:0;
+  border: 3px solid $main-color;
+  border-radius: 2px;
+}
+.sub-title {
+  position: absolute;
+  color: $main-color;
+  font-size: .4rem;
+  margin-left: 6px;
+  padding: 0 .27rem;
+}
+.amount-value {
+  font-size: .45rem;
+  font-weight: bold;
+}
+// table common
+.table thead{
+  background-color: $main-color;
+}
+.table thead th{
+  height: .92rem;
+  color: $bg-color;
+  font-size: .37rem;
+  border-right: 1px solid $bg-color;
+}
+.table thead th, .table td{
+  border-top-width: 0;
+  border-bottom-width: 0;
+  text-align: center;
+  padding: .32rem 0;
+}
+.table td {
+  font-size: .33rem;
+  vertical-align: middle;
+  word-wrap:break-word;
+}
+.table tr:nth-child(even) {
+  background-color: #101224;
+}

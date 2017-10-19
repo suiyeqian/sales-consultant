@@ -1,0 +1,132 @@
+.info {
+  padding-top:.48rem;
+}
+.person-info {
+  margin-top: .59rem;
+  margin-bottom: .59rem;
+  padding: 0 .6rem 0 .8rem;
+}
+.person-info .col-7, .person-info .col-5, .person-info .col-12{
+  padding-left: .2rem;
+  padding-right: .2rem;
+}
+.avatar {
+  border-radius: 2px;
+  margin-top: 7%;
+}
+.info-item{
+  position: relative;
+  overflow: hidden;
+  height: .53rem;
+  margin-bottom: .25rem;
+  padding-bottom: .1rem;
+  border-bottom: 1px dashed #828187;
+}
+.item-name{
+  width: 50%;
+  line-height: .4rem;
+  font-size: .38rem;
+  position: absolute;
+}
+.person-info .col-12 .item-name{
+  width: 25%;
+}
+.item-name::before{
+  content: '';
+  display: inline-block;
+  border: .11rem solid #fdbf04;
+  border-radius: 50%;
+  margin-right: .3rem;
+}
+.item-value {
+  width: 50%;
+  font-size: .4rem;
+  font-weight: normal;
+  line-height: .42rem;
+  position: absolute;
+  right: 0;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.person-info .col-12 .item-value{
+  width: 75%;
+}
+.team {
+  font-size: .45rem;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin-top: .93rem;
+  margin-bottom: 1.2rem;
+}
+
+// 竞争力
+.radar-chart-wrap{
+  margin-top: .59rem;
+  margin-bottom: .59rem;
+}
+.radar-chart {
+  height: 6.8rem;
+}
+
+// timeline
+.timeline{
+  margin-top: 1.07rem;
+  margin-bottom: .88rem;
+  padding-left: .8rem;
+}
+.timeline .timeline-item:not(:last-child){
+  height: 3.8rem;
+}
+.timeline .timeline-badge {
+    float: left;
+    position: relative;
+    top: 0.72rem;
+    height: .4rem;
+    width: .4rem;
+    background-color: #fdcb04;
+    border-radius: 50%;
+}
+.timeline .timeline-item:not(:last-child) .timeline-badge::after {
+  content: '';
+  position: absolute;
+  border-right: 1px solid #75621b;
+  height: 2.4rem;
+  top: 0.52rem;
+  left: .185rem;
+}
+.timeline .timeline-body {
+    position: relative;
+    padding: 15px .48rem;
+    margin-left: 1rem;
+    margin-top: -0.72rem;
+    font-size: 16px;
+    color: #ccc;
+    width: 70vw;
+    height: 80px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    border-radius: 4px;
+}
+.timeline .timeline-body-arrow {
+    position: absolute;
+    top: 0.72rem;
+    left: -.34rem;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: .2rem .35rem .2rem 0;
+    border-color: transparent #272a39 transparent transparent;
+}
+// .timeline .timeline-body-content p:first-child{
+//   margin-bottom: .14rem;
+// }
+.timeline .timeline-body-content p:last-child{
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  font-size: 15px;
+}

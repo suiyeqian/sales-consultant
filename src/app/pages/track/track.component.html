@@ -1,0 +1,159 @@
+
+<div class="row time-progress">
+  <div class="col-6 text-left">
+    {{achievement.curDay}}
+  </div>
+  <div class="col-6 text-right">
+    本月时间进度：{{achievement.dateRate ? achievement.dateRate : 0}}%
+  </div>
+</div>
+<my-ribbon ribbonNum="1" contentTxt="当日团队销售进度"></my-ribbon>
+<div class="overview">
+  <div>
+    <div class="index-item">
+      <span class="text-left">申请单量</span>
+      <span class="text-right pull-right">{{ +achievement.monAppNum | number}}</span>
+    </div>
+    <div class="index-item">
+      <span class="text-left">通过单量</span>
+      <span class="text-right pull-right">{{ +achievement.monPassNum | number}}</span>
+    </div>
+    <div class="index-item">
+      <span class="text-left">拒绝单量</span>
+      <span class="text-right pull-right">{{ +achievement.monRefuseNum | number}}</span>
+    </div>
+    <div class="index-item">
+      <span class="text-left">放款单量</span>
+      <span class="text-right pull-right">{{ +achievement.monLoanNum | number}}</span>
+    </div>
+    <div class="index-item">
+      <span class="text-left">通过率</span>
+      <span class="text-right pull-right">{{ +achievement.monPassRate }}%</span>
+    </div>
+    <div class="index-item">
+      <span class="text-left font-blue">合同金额</span>
+      <span class="text-center pull-right bg-red">¥{{+achievement.monAmt | number}}</span>
+    </div>
+  </div>
+</div>
+
+<my-ribbon ribbonNum="2" contentTxt="本月团队销售进度"></my-ribbon>
+<div class="month-overview">
+  <div class="row">
+    <div class="col-6">
+      <div class="chart-wrap">
+        <div echarts [options]="saleProgressOption"  class="sale-progress-chart"></div>
+      </div>
+      <div class="text-center amt-info">
+        <p class="font-red amount-value">¥{{+achievement.monAmt | number}}</p>
+        <span>合同金额</span>
+      </div>
+    </div>
+    <div class="col-6 right-list">
+      <div class="index-item row bold font-blue">
+        <span class="col-5 text-left">本月目标</span>
+        <span class="col-7 text-right index-value target-val">¥{{ +achievement.monGoalAmt | number}}</span>
+      </div>
+      <div class="index-item row">
+        <span class="col-5 text-left">申请单量</span>
+        <span class="col-7 text-right index-value">{{ +achievement.monAppNum | number}}</span>
+      </div>
+      <div class="index-item row">
+        <span class="col-5 text-left">通过单量</span>
+        <span class="col-7 text-right index-value">{{ +achievement.monPassNum | number}}</span>
+      </div>
+      <div class="index-item row">
+        <span class="col-5 text-left">拒绝单量</span>
+        <span class="col-7 text-right index-value">{{ +achievement.monRefuseNum | number}}</span>
+      </div>
+      <div class="index-item row">
+        <span class="col-5 text-left">放款单量</span>
+        <span class="col-7 text-right index-value">{{ +achievement.monLoanNum | number}}</span>
+      </div>
+      <div class="index-item row">
+        <span class="col-5 text-left">通过率</span>
+        <span class="col-7 text-right index-value">{{ +achievement.monPassRate }}%</span>
+      </div>
+    </div>
+  </div>
+  <my-month-performance [timeProgress]="achievement.dateRate"></my-month-performance>
+</div>
+
+<my-ribbon ribbonNum="3" contentTxt="本月业绩预测"></my-ribbon>
+<div class="forecast-overview">
+  <my-month-forecast></my-month-forecast>
+</div>
+
+<my-ribbon ribbonNum="4" contentTxt="本月考核预警"></my-ribbon>
+<div class="month-assessment">
+  <my-assessment-warning></my-assessment-warning>
+</div>
+
+<my-ribbon ribbonNum="5" contentTxt="风控情况"></my-ribbon>
+<div class="risk-overview">
+  <my-risk-control></my-risk-control>
+</div>
+
+
+<!-- <my-ribbon ribbonNum="3" contentTxt="申请单追踪"></my-ribbon>
+<div class="requisition-tracking" (swipeleft)="swipe(pfmtckCurPage, $event.type, 'performancetrack')" (swiperight)="swipe(pfmtckCurPage, $event.type, 'performancetrack')">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>申请编号</th>
+        <th>借款人</th>
+        <th>产品</th>
+        <th>金额</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor = "let item of displayPerformance">
+        <td class="contract-no">{{item.cntNum}}</td>
+        <td class="borrower">{{item.borrower}}</td>
+        <td>{{item.product}}</td>
+        <td>{{+item.amt | number}}</td>
+        <td>{{item.status}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 class="text-center no-record" *ngIf="displayPerformance.length === 0" >本月暂无申请单</h3>
+</div>
+<div class="slide-indicators" *ngIf="displayPerformance.length > 0">
+  <ol>
+    <li *ngFor = "let i of pfmtckPages" [class.active]="i == pfmtckCurPage-1"></li>
+  </ol>
+</div>
+
+<my-ribbon ribbonNum="4" contentTxt="逾期提醒"></my-ribbon>
+<div class="overdue-reminder" (swipeleft)="swipe(overduermdCurPage, $event.type, 'overdueremind')" (swiperight)="swipe(overduermdCurPage, $event.type, 'overdueremind')">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>合同号</th>
+        <th>借款人</th>
+        <th>借款金额</th>
+        <th>本期应还</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="text-center" *ngFor = "let item of displayOverdue">
+        <td class="contract-no">{{item.cntNum}}</td>
+        <td class="borrower">{{item.borrower}}</td>
+        <td class="amount">{{+item.amt | number}}</td>
+        <td class="amount">{{+item.repayAmt | number}}</td>
+        <td *ngIf="item.status == 0">{{item.days}}日内还款</td>
+        <td *ngIf="item.status == 1" class="overdue">已逾期{{item.days}}天</td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 class="text-center no-record" *ngIf="displayOverdue.length === 0" >本月暂无逾期提醒</h3>
+</div>
+<div class="slide-indicators"  *ngIf="displayOverdue.length > 0">
+  <ol>
+    <li [class.active]="overduermdCurPage == 1"></li>
+    <li [class.active]="overduermdCurPage != 1 && overduermdCurPage != overduermdPages.length" *ngIf="overduermdPages.length > 2"></li>
+    <li [class.active]="overduermdCurPage == overduermdPages.length" *ngIf="overduermdPages.length > 1"></li>
+  </ol>
+</div> -->

@@ -1,0 +1,10 @@
+<div class="review" id="review">
+  <my-ribbon ribbonNum="1" contentTxt="上月业绩回顾"></my-ribbon>
+  <my-last-month-review></my-last-month-review>
+
+  <my-ribbon ribbonNum="2" contentTxt="奖金趋势回顾"></my-ribbon>
+  <div class="chart-wrap">
+    <div echarts [options]="lineOption" class="line-chart"></div>
+    <p class="remark">* 奖金金额仅供参考，实际奖金金额以薪酬核算结果为准</p>
+  </div>
+</div>

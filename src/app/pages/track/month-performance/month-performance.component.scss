@@ -1,0 +1,36 @@
+// 成员进度
+.member-list {
+  font-size: .35rem;
+
+}
+.member-progress{
+  margin-bottom: .77rem;
+}
+i.avatar-icon {
+  width: .47rem;
+  height: .53rem;
+  position: relative;
+  top: .13rem;
+  display: inline-block;
+  margin-left: .37rem;
+  background-image: url(/assets/img/avatar.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.member-progress .volume-key{
+  padding: 0 .12rem;
+  width: 18%;
+  display: inline-block;
+}
+.member-progress .volume-val{
+  width: auto;
+  line-height: .8rem;
+}
+.member-progress-bar {
+  display: inline-block;
+  width: 60%;
+}
+// 团队销售情况
+.trend-chart{
+  height: 300px;
+}

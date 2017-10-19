@@ -1,0 +1,67 @@
+<div class="month-forecast">
+  <div class="sub-title-wrap">
+    <h4 class="sub-title">月度业绩</h4>
+  </div>
+  <div class="performance-forecast">
+    <div class="forecast-list">
+      <p class="forecast-item">
+        <span class="item-name text-left">本月目标金额</span>
+        <span class="item-value text-right">{{achieveforecast.goalAmt | number}}</span>
+      </p>
+      <p class="forecast-item">
+        <span class="dash-line"></span>
+        <span class="item-name text-left">本月已完成金额</span>
+        <span class="item-value text-right">{{achieveforecast.cmpeAmt | number}}</span>
+      </p>
+      <p class="forecast-item">
+        <span class="dash-line"></span>
+        <span class="item-name text-left">预计完成合同金额</span>
+        <span class="item-value text-right">{{achieveforecast.expectAmt | number}}</span>
+      </p>
+      <p class="forecast-item">
+        <span class="dash-line"></span>
+        <span class="item-name text-left">预计完成率</span>
+        <span class="item-value text-right">{{achieveforecast.completionRate}}%</span>
+      </p>
+      <p class="forecast-item">
+        <span class="dash-line"></span>
+        <span class="item-name text-left">预计提成系数</span>
+        <span class="item-value text-right">{{achieveforecast.coefficient | number:'1.1-1'}} %</span>
+      </p>
+    </div>
+    <div class="pay-percent">
+      <div class="percent-bar">
+        <span *ngFor="let i of achieveforecast.coefficients" class="royalty-coefficient">{{i | number:'1.1-2'}}%</span>
+      </div>
+      <div class="interval-num">
+        <span *ngFor="let i of achieveforecast.sections">{{i}}</span>
+      </div>
+      <div id="my-real-percent" [style.left]="myRealPctPosition">
+        <div class="cursor"><img src="/assets/img/cursor-green.png" height="100%"></div>
+        <span>{{achieveforecast.cmpeAmt?achieveforecast.cmpeAmt/10000:0 | number:'1.0-2'}}万</span>
+      </div>
+      <div id="my-percent" [style.left]="myPctPosition">
+        <div class="cursor"><img src="/assets/img/cursor.png" height="100%"></div>
+        <span>{{achieveforecast.expectAmt?achieveforecast.expectAmt/10000:0 | number:'1.0-2'}}万</span>
+      </div>
+    </div>
+    <div class="text-center row bonus-box">
+      <div class="col-6">
+        <span>
+          本月已完成业绩奖金  <i class="bonus-status" (click)="bonusShow = !bonusShow" [class.show]="bonusShow"></i>
+        </span>
+        <p class="font-blue bonus-val" *ngIf="bonusShow">{{ achieveforecast.cmpeBonus | number:'1.0-2'}} 元</p>
+        <p class="font-blue bonus-val" *ngIf="!bonusShow"><span class="bonus-hide">****</span> 元</p>
+      </div>
+      <div class="col-6">
+        <span>本月预计奖金 <i class="bonus-status" (click)="awardShow = !awardShow" [class.show]="awardShow"></i></span>
+        <p class="font-blue bonus-val" *ngIf="awardShow">{{achieveforecast.royaltyAmt | number:'1.0-2'}} 元</p>
+        <p class="font-blue bonus-val" *ngIf="!awardShow"><span class="bonus-hide">****</span> 元</p>
+      </div>
+    </div>
+    <p class="remark">* 奖金金额仅供参考，实际奖金金额以薪酬核算结果为准</p>
+  </div>
+  <div class="sub-title-wrap">
+    <h4 class="sub-title">风控绩效</h4>
+  </div>
+</div>

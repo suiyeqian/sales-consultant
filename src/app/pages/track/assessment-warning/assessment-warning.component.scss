@@ -1,0 +1,40 @@
+// 考核预警
+.early-warning {
+  margin-bottom: .91rem;
+  font-size: .4rem;
+}
+.time-line{
+  // font-size: .27rem;
+  margin-right: 5px;
+  margin-top: .27rem;
+  display: inline-flex;
+}
+.time-line, .volume{
+  margin-left: 1rem;
+  width: 75%;
+}
+.volume-progress {
+  margin-bottom: .33rem;
+}
+.volume-progress span{
+  display: inline-block;
+  vertical-align: sub;
+  line-height: 11px;
+}
+.volume-key{
+  text-align: center;
+  width: 13%;
+  position: relative;
+}
+.volume-val {
+  width: 10%;
+}
+.volume-progress-bar{
+  display: inline-block;
+  width: 74%;
+}
+.early-warning h3{
+  font-size: .45rem;
+  font-weight: bold;
+  margin: .56rem auto 0;
+}

@@ -1,0 +1,121 @@
+.month-forecast {
+  margin-top: .77rem;
+}
+// 眼睛
+i.bonus-status{
+  width: .36rem;
+  height: .21rem;
+  display: inline-block;
+  margin-left: .07rem;
+  margin-bottom: -.04rem;
+  background-image: url(/assets/img/eye-close.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+i.bonus-status.show{
+  width: .36rem;
+  height: .30rem;
+  background-image: url(/assets/img/eye.png);
+}
+// 业绩预测
+.performance-forecast {
+  font-size: .4rem;
+  margin-bottom: 1.52rem;
+}
+.forecast-list {
+  margin-top: -.15rem;
+}
+.forecast-item{
+  height: 1.21rem;
+  line-height: 1.21rem;
+  padding: 0 .6rem 0 .27rem;
+  border-bottom: 1px dashed #b7bac3;
+}
+.item-name{
+  width: 60%;
+}
+.item-value {
+  width: 40%;
+  float: right;
+}
+
+.pay-percent{
+  position: relative;
+  padding: 0 .3rem;
+  margin-bottom: 1.33rem;
+  margin-top: 1.33rem;
+}
+.percent-bar {
+  display: inline-flex;
+  height: .55rem;
+  width: 100%;
+  border-radius: 3px;
+  background: -webkit-linear-gradient(left,  #06e7e9 0%,#019b9b 100%);
+  background: -o-linear-gradient(left,  #06e7e9 0%,#019b9b 100%);
+  background: -ms-linear-gradient(left,  #06e7e9 0%,#019b9b 100%);
+  background: linear-gradient(to right,  #06e7e9 0%,#019b9b 100%);
+}
+.royalty-coefficient{
+  display: inline-block;
+  line-height: .55rem;
+  color: #000;
+  font-size: .24rem;
+  text-align: center;
+  border-right: 1px solid #272a39;
+  &:nth-child(1) { width: 12%; }
+  &:nth-child(2) { width: 15%; }
+  &:nth-child(3) { width: 18%; }
+  &:nth-child(4) { width: 21%; }
+  &:last-child { width: 28%; border-right-width: 0 }
+}
+.interval-num{
+  font-size: .24rem;
+  position: relative;
+  left: 0;
+  span{
+    position: absolute;
+    top:.23rem;
+    left: -1%;
+    &:nth-child(2){ left: 11% }
+    &:nth-child(3){ left: 24.5% }
+    &:nth-child(4){ left: 43% }
+    &:nth-child(5){ left: 64% }
+  }
+}
+#my-percent{
+  color: #fe4504;
+  position: absolute;
+  top: 1px;
+  span {
+    position: relative;
+    top:-.13rem;
+    left:.13rem;
+  }
+}
+#my-real-percent {
+  color: #638c0b;
+  position: absolute;
+  top: -.65rem;
+  span {
+    position: relative;
+    top:-1.7rem;
+  }
+}
+.cursor{
+  height: 1.3rem;
+}
+.cursor img{
+  width: 10px;
+  position: relative;
+  left: -5.5px;
+}
+.bonus-box .col-6:first-child{
+  padding-right: 0;
+}
+.bonus-hide {
+  vertical-align: middle;
+}
+.remark {
+  margin-top: .27rem;
+  font-size: .21rem;
+}

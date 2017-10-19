@@ -1,0 +1,123 @@
+
+.time-progress {
+  padding: .53rem 6px 0 6px;
+  margin-bottom: .64rem;
+  font-size: .35rem;
+}
+//当日团队销售进度
+.overview,.month-overview,.forecast-overview,.month-assessment{
+  margin: .41rem -13px 1.37rem -13px;
+  padding: 0 13px 1.76rem 13px;
+  border-bottom: 2px solid #191b2f;
+}
+.risk-overview {
+  margin: .41rem -13px .5rem -13px;
+  padding: 0 13px 0 13px;
+}
+.overview .index-item{
+  height: 1.21rem;
+  line-height: 1.21rem;
+  font-size: .4rem;
+  padding: 0 .6rem 0 .27rem;
+  border-bottom: 1px dashed #b7bac3;
+}
+.overview .index-item:last-child{
+  border-width: 0;
+  font-size: .45rem;
+  padding-top: .27rem;
+  padding-right: 0;
+  font-weight: bold;
+}
+.overview .index-item:last-child .bg-red{
+  padding: 0 .3rem;
+}
+// 月销售进度
+.month-overview > .row:first-child{
+  margin: 0 2px .67rem -7px;
+}
+.month-overview > .row:first-child > .col-6:first-child{
+  padding-left: 0;
+}
+.sale-progress-chart{
+  height: 4.53rem;
+}
+.amt-info{
+  margin-top: -.23rem;
+  font-size: .4rem;
+}
+.amt-info .amount-value{
+  margin-bottom: .25rem;
+}
+.month-overview .index-item{
+  height: 1.05rem;
+  line-height: 1.05rem;
+  font-size: .4rem;
+  border-bottom: 1px dashed #b7bac3;
+}
+.month-overview span.text-left,.month-overview span.text-right{
+  padding: 0;
+}
+.month-overview .target-val {
+  padding-left: 0;
+}
+
+
+
+
+// 申请单
+// .requisition-tracking, .overdue-reminder {
+//   margin-top: .53rem;
+//   overflow: hidden;
+//   min-height: 6rem;
+// }
+// .table td.contract-no {
+//   font-size: .21rem;
+//   max-width: 2.4rem;
+// }
+// .table td.date, .table td.amount {
+//   min-width: 49px;
+// }
+// .table td.borrower {
+//   min-width: 38px;
+// }
+// .table td.overdue {
+//   font-weight: bold;
+//   color: #fe4504;
+// }
+// .no-record {
+//   font-size: .53rem;
+//   font-weight: bolder;
+//   color: #fdbf04;
+//   margin-top: 25%;
+// }
+// .slide-indicators{
+//   position: relative;
+//   ol {
+//       position: relative;
+//       right: 0;
+//       left: 0;
+//       display: -ms-flexbox;
+//       display: flex;
+//       -ms-flex-pack: center;
+//       justify-content: center;
+//       padding-left: 0;
+//       margin-right: 15%;
+//       margin-left: 15%;
+//       list-style: none;
+//   }
+// }
+// .slide-indicators li.active{
+//   background-color: #fdbf04;
+// }
+// .slide-indicators li {
+//   position: relative;
+//   -ms-flex: 0 1 auto;
+//   flex: 0 1 auto;
+//   width: 6px;
+//   height: 6px;
+//   border-radius: 50%;
+//   margin-right: 3px;
+//   margin-left: 3px;
+//   text-indent: -999px;
+//   background-color: hsla(0,0%,100%,.5);
+// }

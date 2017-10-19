@@ -1,0 +1,46 @@
+.tabbar{
+  width: inherit;
+  font-size: .27rem;
+  border-top: 1px solid #34353c;
+  background-color: #101224;
+}
+.tabbar .row {
+  margin-right: 0px;
+  margin-left: 0px;
+}
+a.tab-button{
+  padding:.2rem;
+  color: #fff;
+  text-decoration: none;
+  i{
+    width: .6rem;
+    height: .6rem;
+    display: block;
+    margin: auto;
+    margin-bottom: .07rem;
+    background-image: url(/assets/img/tab-icon.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+}
+.icon-track{
+  background-position: 10% 0;
+}
+.icon-review{
+  background-position: 50% 0;
+}
+.icon-rank{
+  background-position: 70% 0;
+}
+.icon-info{
+  background-position: 90% 0;
+}
+.icon-target{
+  background-position: 30% 0;
+}
+a.tab-button.active{
+  color: #05e8e9;
+  i{
+    background-image: url(/assets/img/tab-active-icon.png);
+  }
+}
