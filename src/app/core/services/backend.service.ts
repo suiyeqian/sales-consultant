@@ -41,10 +41,10 @@ export class BackendService {
     return this.http.get(this.baseUrl + url, {headers: jsonHeaders})
                .toPromise()
                .then(response => {
-                 if (!localStorage.getItem('weiXinDeviceId')) {
-                   localStorage.clear();
-                   window.location.reload();
-                 }
+                //  if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+                //    localStorage.clear();
+                //    window.location.reload();
+                //  }
                  if (response.json().code === 50013) {
                    this.getNewToken();
                  }

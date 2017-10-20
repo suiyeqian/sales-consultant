@@ -1,11 +1,19 @@
 <div class="rank">
-  <my-ribbon ribbonNum="1" contentTxt="我的排名"></my-ribbon>
+  <div class="tabset row text-center">
+    <div class="col-6">
+      <span class="tab-title" [class.selected]="curRank === 'loan'" (click)="changeTab('loan')">放款金额排行榜</span>
+    </div>
+    <div class="col-6">
+      <span class="tab-title" [class.selected]="curRank === 'overdue'" (click)="changeTab('overdue')">逾期控制排行榜</span>
+    </div>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">团队排名</h4></div>
   <div class="my-rank" [ngClass]="imgClass">
     <img [src]="imgUrl" alt="">
-    <span class="percent-num font-yellow" *ngIf="myRank.rank < 4" [class.rankOne]="myRank.percent == 0">{{100 - myRank.percent}}<span class="percent-symble">%</span></span>
-    <span class="rank-num" *ngIf="myRank.rank > 3">{{myRank.rank}}</span>
+    <!-- <span class="percent-num font-yellow" *ngIf="myRank.rank < 4" [class.rankOne]="myRank.percent == 0">{{100 - myRank.percent}}<span class="percent-symble">%</span></span> -->
+    <span class="rank-num" [class.top-num]="myRank.rank < 4">{{myRank.rank}}</span>
   </div>
-  <my-ribbon ribbonNum="2" contentTxt="TOP 10"></my-ribbon>
+  <div class="sub-title-wrap"><h4 class="sub-title">前十排名</h4></div>
   <div class="table-wrap">
     <table class="table">
       <thead>

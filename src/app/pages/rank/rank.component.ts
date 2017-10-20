@@ -9,6 +9,7 @@ import { WaterMarkService } from '../../core/services/watermark.service';
   styleUrls: ['./rank.component.scss']
 })
 export class RankComponent implements OnInit, AfterContentInit {
+  curRank = 'loan';
   private myrankUrl = 'rankinginfo/my_rank';
   myRank = Object.assign({});
   imgClass: string;
@@ -39,19 +40,14 @@ export class RankComponent implements OnInit, AfterContentInit {
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;
-            // let resData = {rank: 24, percent: 98};
+            // let resData = {rank: 4, percent: 98};
             this.myRank = resData;
             if (resData.rank < 4) {
               this.imgClass = 'rank-top';
-              this.imgUrl = '/assets/img/rank' + resData.rank + '.png';
+              this.imgUrl = '/assets/img/top-bg.jpg';
             } else {
-              if (resData.percent >= 90) {
-                this.imgClass = 'rank-per-10';
-                this.imgUrl = '/assets/img/rank-per-10.png';
-              } else {
-                this.imgClass = 'rank-other';
-                this.imgUrl = '/assets/img/rank-other.png';
-              }
+              this.imgClass = 'rank-other';
+              this.imgUrl = '/assets/img/rank-bg.jpg';
             }
           };
         });
@@ -66,5 +62,14 @@ export class RankComponent implements OnInit, AfterContentInit {
           };
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 160);
         });
+  }
+
+  changeTab(type): void {
+    if (type === this.curRank) {
+      return;
+    }
+    this.curRank = type;
+    this.getMyRank();
+    this.getTopTen();
   }
 }
