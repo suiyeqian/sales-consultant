@@ -22,7 +22,8 @@ const pagesRoutes: Routes = [
           { path: 'track', component: TrackComponent },
           { path: 'review', loadChildren: 'app/pages/review/review.module#ReviewModule'},
           { path: 'rank', loadChildren: 'app/pages/rank/rank.module#RankModule'},
-          { path: 'info', loadChildren: 'app/pages/info/info.module#InfoModule'}
+          { path: 'info', loadChildren: 'app/pages/info/info.module#InfoModule'},
+          { path: 'goal', loadChildren: 'app/pages/goal/goal.module#GoalModule'}
         ]
       }
     ]

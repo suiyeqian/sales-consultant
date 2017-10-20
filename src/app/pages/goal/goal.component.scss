@@ -1,0 +1,114 @@
+.goal {
+  font-size: .4rem;
+  margin-bottom: 1.16rem;
+}
+
+.time-progress {
+  padding: .53rem 6px 0 6px;
+  margin-bottom: .64rem;
+  font-size: .35rem;
+}
+
+// goal
+.team-goal {
+  margin: -.5rem .36rem .84rem .36rem;
+  border-top: 2px solid #191b2f;
+  border-bottom: 2px solid #191b2f;
+  padding: .83rem 0 .83rem .3rem;
+}
+.team-goal .col-6{
+  margin-left: -.27rem;
+}
+.form-group{
+  font-size: .45rem;
+  margin-bottom: .41rem;
+}
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand { display: none; }
+select.form-control:not([size]):not([multiple]){
+  // 将默认的select选择框样式清除*
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  border-width: 0;
+
+  margin-top: -.2rem;
+  color: #fff;
+  height: 1.1rem;
+  line-height: 1.1rem;
+  padding: 0 .4rem;
+  border-radius: 0;
+  font-size: .45rem;
+  background: #101224 url("/assets/img/arrow.png") no-repeat scroll right center;
+  background-size: 1.4rem 1.1rem;
+}
+.goal-1 {
+  margin-bottom: .5rem;
+}
+// 目标分配
+.member-goal {
+  padding: 0 .14rem;
+}
+.member-goal h5{
+  font-size: .45rem;
+  font-weight: bold;
+  padding-left: .48rem;
+  margin-bottom: 1rem;
+}
+.setting-item {
+  height: .53rem;
+  line-height: .53rem;
+  margin-bottom: .8rem;
+}
+i.avatar {
+  height: .53rem;
+  width: .47rem;
+  position: relative;
+  display: inline-block;
+  margin-left: .37rem;
+  margin-right: .21rem;
+  background-image: url(/assets/img/avatar.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+.member-name, .goal-val{
+  width: 19%;
+  display: inline-block;
+  vertical-align: super;
+}
+.slide-bar {
+  width: 47%;
+  display: inline-block;
+  vertical-align: super;
+}
+.slide-bar .ng2-nouislider {
+  margin: 0;
+}
+.goal-val {
+  line-height: .53rem;
+  text-align: right;
+}
+.result {
+  margin-bottom: .8rem;
+}
+.result p:first-child{
+  margin-bottom: .2rem;
+}
+
+.goal .btn {
+  width: 2.43rem;
+  height: .93rem;
+  font-size: .53rem;
+  padding: .15rem 0;
+  border-radius: 6px;
+}
+.btn-confirm {
+  background-color: #05e8e9;
+  color: #030419;
+  margin-right: 1.33rem;
+}
+.btn-cancel {
+  background-color: #101224;
+  border: 1px solid #fff;
+  color: #fff
+}

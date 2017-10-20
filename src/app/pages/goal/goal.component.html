@@ -1,0 +1,52 @@
+<div class="goal">
+  <div class="row time-progress">
+    <div class="col-6 text-left">
+      {{achievement.curDay}}
+    </div>
+    <div class="col-6 text-right">
+      本月时间进度：{{achievement.dateRate ? achievement.dateRate : 0}}%
+    </div>
+  </div>
+  <div class="goal-setting">
+    <div class="sub-title-wrap"><h4 class="sub-title">目标设定</h4></div>
+    <form [formGroup]="goalForm">
+      <div class="team-goal form-group">
+        <div class="form-group row">
+          <label class="col-5 control-label bold">销售周期</label>
+          <select class="form-control col-6">
+            <option>2017年9月</option>
+            <option>2017年10月</option>
+          </select>
+        </div>
+        <p class="row goal-1" ><span class="col-5">营业部目标</span> <span class="col-6">{{2000000 | number}}元</span></p>
+        <p class="row" ><span class="col-5">团队目标</span> <span class="col-6">{{goalVal | number}}元</span></p>
+      </div>
+      <div class="member-goal">
+        <h5>任务分配</h5>
+        <div class="setting-list">
+          <div class="setting-item" *ngFor="let item of teams">
+            <i class="avatar"></i>
+            <span class="member-name">{{item.name}}</span>
+            <div class="slide-bar">
+              <nouislider class [connect]="[true,false]" [formControl]="goalForm.controls['single'+item.id]" [min]="0" [max]="100" [step]="1" [tooltips]=" true" (ngModelChange)="countSum()"></nouislider>
+            </div>
+            <span class="pull-right goal-val">{{goalVal * goalForm.value['single'+item.id]/100 |number}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="result text-center">
+        <p class="bold">总计：{{goalSum|number}}元</p>
+        <p *ngIf="goalVal<=goalSum">
+          超出团队目标<span class="bold font-blue">{{goalSum - goalVal|number}}</span>元
+        </p>
+        <p *ngIf="goalVal>goalSum">
+          距离团队目标差<span class="font-red bold">{{goalVal - goalSum|number}}</span>元
+        </p>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-confirm" type="button">确定</button>
+        <button class="btn btn-cancel" type="button">重置</button>
+      </div>
+    </form>
+  </div>
+</div>
