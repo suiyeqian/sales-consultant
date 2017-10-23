@@ -56,13 +56,14 @@ export class GoalComponent implements OnInit, AfterContentInit {
           if ( res.code === 0) {
             this.achievement = res.data;
           }
+          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });
   }
 
   countSum() {
     let sum = 0;
-    for (let key of Object.keys(this.goalForm.value)) {
-      sum += this.goalVal * this.goalForm.value[key] / 100;
+    for (let item of this.teams) {
+      sum += this.goalVal * this.goalForm.value['single' + item.id] / 100;
     }
     this.goalSum = sum;
   }

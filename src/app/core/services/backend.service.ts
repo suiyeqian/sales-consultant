@@ -25,8 +25,6 @@ export class BackendService {
     private http: Http,
     private router: Router,
     private oauth: AuthorizeService) {
-      console.log(localStorage.getItem('accessToken'));
-      console.log(localStorage.getItem('refreshToken'));
   }
 
   getAll(url: string ): Promise<any> {

@@ -41,8 +41,15 @@ export const LineBarChartOptions = {
         formatter: '{value}',
         textStyle: { color: '#fff' }
       },
-      axisLine: { show: false },
-      splitLine: { show: false },
+      axisLine: {
+        lineStyle: { show: false }
+      },
+      splitLine: {
+        lineStyle: {
+            color: '#030519',
+            type: 'dashed'
+        }
+      },
     },
     {
       type : 'value',
