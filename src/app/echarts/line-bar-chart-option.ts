@@ -35,33 +35,28 @@ export const LineBarChartOptions = {
       type : 'value',
       name: '单位(万元)',
       nameTextStyle: { color: '#fff' },
-      splitNumber: 3,
       axisTick: { show: false },
       axisLabel: {
         formatter: '{value}',
         textStyle: { color: '#fff' }
       },
-      axisLine: {
-        lineStyle: { show: false }
-      },
-      splitLine: {
-        lineStyle: {
-            color: '#030519',
-            type: 'dashed'
-        }
-      },
+      axisLine: {  show: false },
     },
     {
       type : 'value',
       name: '单位(件)',
       nameTextStyle: { color: '#fff' },
-      splitNumber: 3,
       axisTick: { show: false },
       axisLabel: {
-        textStyle: { color: '#ccc' }
+        textStyle: { color: '#fff' }
       },
       axisLine: { show: false },
-      splitLine: { show: false },
+      splitLine: {
+        lineStyle: {
+          color: '#030519',
+          type: 'dashed'
+        }
+      },
     }
   ],
   series: [
@@ -87,7 +82,7 @@ export const LineBarChartOptions = {
       type: 'bar',
       yAxisIndex: 1,
       data: [],
-      barWidth: '40%',
+      barWidth: '30%',
       itemStyle: {
         normal: {
           color: '#d74b49',
@@ -100,8 +95,8 @@ export const LineBarChartOptions = {
       type: 'bar',
       yAxisIndex: 1,
       data: [],
-      barGap: '15%',
-      barWidth: '40%',
+      barGap: '20%',
+      barWidth: '30%',
       itemStyle: {
         normal: {
           color: '#05e8e9',

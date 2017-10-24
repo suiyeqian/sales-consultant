@@ -25,6 +25,7 @@
     setTimeout("document.getElementById('preloader').style['display'] = 'none'",1000);
   </script>
   <script src="/assets/js/index.min.js"></script>
+  <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en,Intl.~locale.zh"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   <!-- base url -->
   <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
@@ -59,6 +60,7 @@
   </app>
   <!-- Scripts will be injected by webpack here -->
 </body>
+<!--
 <style media="screen">
   .eruda-entry-btn{
     top:0!important;
@@ -72,4 +74,5 @@ eruda.init({
     container: el
 });
 </script>
+-->
 </html>

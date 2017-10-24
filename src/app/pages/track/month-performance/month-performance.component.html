@@ -23,7 +23,7 @@
       <ngb-progressbar *ngIf="30<timeProgress" type="warn" [value]="30" [striped]="true" [animated]="true" class="member-progress-bar">
         <i>{{1800 | number}}</i>
       </ngb-progressbar>
-      <span class="volume-val text-center pull-right">{{30}}%</span>
+      <span class="volume-val text-center pull-right" [class.font-red]="30<timeProgress">{{30}}%</span>
     </div>
   </div>
 
