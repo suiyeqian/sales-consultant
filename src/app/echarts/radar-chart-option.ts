@@ -6,7 +6,7 @@ export const RadarChartOptions = {
       radius: 80,
       name: {
         textStyle: {
-          color: '#fdcb04',
+          color: '#fff',
           fontSize: 14
         }
       },
@@ -19,7 +19,7 @@ export const RadarChartOptions = {
   ],
   series: [
     {
-      name: '我的竞争力',
+      name: '我的团队竞争力',
       type: 'radar',
       symbol: 'none',
       lineStyle: {
@@ -29,16 +29,8 @@ export const RadarChartOptions = {
       },
       areaStyle: {
         normal: {
-          opacity: 1,
-          color: {
-            type: 'linear',
-            x: 0, y: 0,
-            x2: 0, y2: 1,
-            colorStops: [
-              { offset: 0, color: '#fb9a02' },
-              { offset: 1, color: '#fdbf04' }
-            ]
-          }
+          opacity: 0.7,
+          color: '#ffcc00'
        }
      },
       data: [{ value: [] }]

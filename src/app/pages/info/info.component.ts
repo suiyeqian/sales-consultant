@@ -12,6 +12,7 @@ import * as echart from '../../echarts';
 })
 export class InfoComponent implements OnInit, AfterContentInit {
   myInfo = Object.assign({});
+  private userUrl = 'personalinfo/my_info';
   private mycompUrl = 'personalinfo/my_comp';
   radarOption = {};
   private growthtrackUrl = 'personalinfo/growth_track';
@@ -24,13 +25,7 @@ export class InfoComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-    let userInfo = JSON.parse(localStorage.user);
-    if (userInfo.sex === '男') {
-      userInfo.avatarUrl = '/assets/img/man.png';
-    } else {
-      userInfo.avatarUrl = '/assets/img/woman.png';
-    }
-    this.myInfo = userInfo;
+    this.getInfo();
     this.getMyComp();
     this.getGrowthTrack();
     this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
@@ -40,6 +35,28 @@ export class InfoComponent implements OnInit, AfterContentInit {
     if (document.body.scrollTop > 0) {
       document.body.scrollTop = 0;
     }
+  }
+
+  getInfo(): void {
+    this.setMyInfo();
+    this.bdService
+    .getAll(this.userUrl)
+    .then(res => {
+      if ( res.code === 0 && res.data) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        this.setMyInfo();
+      }
+    });
+  }
+
+  setMyInfo(): void {
+    let userInfo = JSON.parse(localStorage.user);
+    if (userInfo.sex === '男') {
+      userInfo.avatarUrl = '/assets/img/man.png';
+    } else {
+      userInfo.avatarUrl = '/assets/img/woman.png';
+    }
+    this.myInfo = userInfo;
   }
 
   getMyComp(): void {

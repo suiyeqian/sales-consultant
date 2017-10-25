@@ -34,11 +34,12 @@ export class GoalComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.getSaleAchievement();
-    let initGoals = Object.assign({});
+    let initForm = Object.assign({});
     for (let item of this.teams) {
-      initGoals['single' + item.id] = item.per;
+      initForm['goal' + item.id] = item.per;
     }
-    this.goalForm = this.fb.group(initGoals);
+    initForm.cyc = '2017年9月';
+    this.goalForm = this.fb.group(initForm);
     this.countSum();
     this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 230);
   }
@@ -63,7 +64,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
   countSum() {
     let sum = 0;
     for (let item of this.teams) {
-      sum += this.goalVal * this.goalForm.value['single' + item.id] / 100;
+      sum += this.goalVal * this.goalForm.value['goal' + item.id] / 100;
     }
     this.goalSum = sum;
   }

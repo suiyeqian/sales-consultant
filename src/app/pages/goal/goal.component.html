@@ -13,7 +13,7 @@
       <div class="team-goal">
         <div class="form-group row">
           <label class="col-5 control-label bold">销售周期</label>
-          <select class="form-control col-6">
+          <select class="form-control col-6" formControlName="cyc">
             <option>2017年9月</option>
             <option>2017年10月</option>
           </select>
@@ -28,9 +28,9 @@
             <i class="avatar"></i>
             <span class="member-name">{{item.name}}</span>
             <div class="slide-bar">
-              <nouislider class [connect]="[true,false]" [formControl]="goalForm.controls['single'+item.id]" [min]="0" [max]="100" [step]="1" [tooltips]=" true" (ngModelChange)="countSum()"></nouislider>
+              <nouislider class [connect]="[true,false]" [formControl]="goalForm.controls['goal'+item.id]" [min]="0" [max]="100" [step]="1" [tooltips]=" true" (ngModelChange)="countSum()"></nouislider>
             </div>
-            <span class="pull-right goal-val">{{goalVal * goalForm.value['single'+item.id]/100 |number}}</span>
+            <span class="pull-right goal-val">{{goalVal * goalForm.value['goal'+item.id]/100 |number}}</span>
           </div>
         </div>
       </div>

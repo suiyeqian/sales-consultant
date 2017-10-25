@@ -1,35 +1,35 @@
 <div class="info">
-  <my-ribbon ribbonNum="1" contentTxt="个人信息"></my-ribbon>
+  <div class="sub-title-wrap"><h4 class="sub-title">个人资料</h4></div>
   <div class="person-info row">
     <!-- <div class=""> -->
       <div class="col-7">
         <p class="info-item">
-          <span class="item-name text-left">姓名</span>
-          <span class="item-value text-center font-yellow">{{myInfo.name}}</span>
+          <span class="item-name text-center font-blue">姓名</span>
+          <span class="item-value text-left">{{myInfo.name}}</span>
         </p>
         <p class="info-item">
-          <span class="item-name text-left">工号</span>
-          <span class="item-value text-center font-yellow">{{myInfo.number}}</span>
+          <span class="item-name text-center font-blue">工号</span>
+          <span class="item-value text-left">{{myInfo.number}}</span>
         </p>
         <p class="info-item">
-          <span class="item-name text-left">职位</span>
-          <span class="item-value text-center font-yellow">{{myInfo.position}}</span>
+          <span class="item-name text-center font-blue">职位</span>
+          <span class="item-value text-left">{{myInfo.position}}</span>
         </p>
         <p class="info-item">
-          <span class="item-name text-left">职级</span>
-          <span class="item-value text-center font-yellow">{{myInfo.rank}}</span>
+          <span class="item-name text-center font-blue">职级</span>
+          <span class="item-value text-left">{{myInfo.rank}}</span>
         </p>
         <p class="info-item">
-          <span class="item-name text-left">上级</span>
-          <span class="item-value text-center font-yellow">{{myInfo.superior}}</span>
+          <span class="item-name text-center font-blue">上级</span>
+          <span class="item-value text-left">{{myInfo.superior}}</span>
         </p>
         <p class="info-item">
-          <span class="item-name text-left">入职时间</span>
-          <span class="item-value text-center font-yellow">{{myInfo.dateStr}}</span>
+          <span class="item-name text-center font-blue">入职时间</span>
+          <span class="item-value text-left">{{myInfo.dateStr}}</span>
         </p>
         <!-- <p class="info-item">
           <span class="item-name text-left">MOB</span>
-          <span class="item-value text-center font-yellow">{{myInfo.mob}}</span>
+          <span class="item-value text-center">{{myInfo.mob}}</span>
         </p> -->
       </div>
       <div class="col-5">
@@ -37,31 +37,31 @@
       </div>
       <div class="col-12">
         <p class="info-item">
-          <span class="item-name text-left">区域</span>
-          <span class="item-value text-center font-yellow">{{myInfo.bigArea + '-' + myInfo.smallArea}}</span>
+          <span class="item-name text-center font-blue">区域</span>
+          <span class="item-value text-left">{{myInfo.bigArea + '-' + myInfo.smallArea}}</span>
         </p>
         <p class="info-item">
-          <span class="item-name text-left">团队</span>
-          <span class="item-value text-center font-yellow">{{myInfo.store + '-' + myInfo.team}}</span>
+          <span class="item-name text-center font-blue">团队</span>
+          <span class="item-value text-left">{{myInfo.store + '-' + myInfo.team}}</span>
         </p>
       </div>
     <!-- </div> -->
   </div>
 
-  <my-ribbon ribbonNum="2" contentTxt="我的竞争力"></my-ribbon>
+  <div class="sub-title-wrap"><h4 class="sub-title">我的团队竞争力</h4></div>
   <div class="radar-chart-wrap">
     <div echarts [options]="radarOption" class="radar-chart"></div>
   </div>
 
-  <my-ribbon ribbonNum="3" contentTxt="我的成长轨迹"></my-ribbon>
+  <div class="sub-title-wrap"><h4 class="sub-title">我的成长轨迹</h4></div>
   <div class="timeline">
     <div class="timeline-item" *ngFor="let item of growthTrack">
       <div class="timeline-badge"></div>
-      <div class="timeline-body has-grey-bgc">
-        <div class="timeline-body-arrow"> </div>
+      <div class="timeline-body">
+        <!-- <div class="timeline-body-arrow"> </div> -->
         <div class="timeline-body-content">
-          <p class="font-yellow">{{item.dateStr}}</p>
-          <p>{{item.event}}</p>
+          <p class="timeline-date">{{item.dateStr}}</p>
+          <p class="timeline-content">{{item.event}}</p>
         </div>
       </div>
     </div>
