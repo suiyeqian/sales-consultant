@@ -8,9 +8,8 @@ import { AuthorizeService } from './authorize.service';
 export class AuthGuard implements CanActivate {
   // private apiUrl = 'http://10.17.2.177:8886';
   private apiUrl = 'https://xszs-test.niudingfeng.com';
-  private requestUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/staff/sso';
   // private apiUrl = window.location.origin;
-  // private requestUrl = '/servegateway/rest/bduser/weixin/staff/sso';
+  private requestUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/staff/sso';
   private redirectUri = encodeURIComponent(this.apiUrl + '/bdsa/').toLowerCase();
   private appId = 1;
   private redirectUrl = this.apiUrl + '/servegateway/wxgateway/oauth2/authorize?appId=' + this.appId + '&redirectUri=' + this.redirectUri;

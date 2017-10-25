@@ -103,7 +103,7 @@
 }
 .timeline .timeline-body {
     position: relative;
-    padding: 37px .6rem;
+    padding: 1rem .6rem;
     margin-left: 1rem;
     margin-top: -0.72rem;
     font-size: .4rem;
@@ -124,8 +124,8 @@
 .timeline-content{
   background-color: #101225;
   width: 7.6rem;
-  height: .76rem;
-  line-height: .76rem;
+  height: .8rem;
+  line-height: .8rem;
   padding-left: .16rem;
 }
 // .timeline .timeline-body-arrow {
@@ -142,5 +142,4 @@
   text-overflow:ellipsis;
   overflow:hidden;
   white-space:nowrap;
-  font-size: 15px;
 }
