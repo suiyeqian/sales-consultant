@@ -32,7 +32,7 @@
     </div>
     <div class="index-item">
       <span class="text-left font-blue">合同金额</span>
-      <span class="text-center pull-right bg-red">¥ {{achievement.monAmt?+achievement.monAmt:0 | number}}</span>
+      <span class="text-center pull-right bg-red">¥ {{+achievement.monAmt | number}}</span>
     </div>
   </div>
 </div>
@@ -45,14 +45,14 @@
         <div echarts [options]="saleProgressOption"  class="sale-progress-chart"></div>
       </div>
       <div class="text-center amt-info">
-        <p class="font-red amount-value">¥ {{achievement.monAmt?+achievement.monAmt:0 | number}}</p>
+        <p class="font-red amount-value">¥ {{+achievement.monAmt | number}}</p>
         <span>合同金额</span>
       </div>
     </div>
     <div class="col-6 right-list">
       <div class="index-item row bold font-blue">
         <span class="col-5 text-left">本月目标</span>
-        <span class="col-7 text-right index-value target-val">¥ {{ achievement.monGoalAmt?+achievement.monGoalAmt:0 | number}}</span>
+        <span class="col-7 text-right index-value target-val">¥ {{ +achievement.monGoalAmt | number}}</span>
       </div>
       <div class="index-item row">
         <span class="col-5 text-left">申请单量</span>

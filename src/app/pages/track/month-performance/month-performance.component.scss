@@ -17,6 +17,9 @@ i.avatar-icon {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+.member-progress.font-red i.avatar-icon{
+  background-image: url(/assets/img/avatar-red.png);
+}
 .member-progress .volume-key{
   padding: 0 .12rem;
   width: 18%;

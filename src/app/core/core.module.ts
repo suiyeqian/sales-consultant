@@ -11,6 +11,7 @@ import { AuthGuard } from './services/auth-guard.service';
 import { SpinnerService } from './services/spinner.service';
 import { WaterMarkService } from './services/watermark.service';
 import { AuthorizeService } from './services/authorize.service';
+import { CommonFnService } from './services/commonfn.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import { AuthorizeService } from './services/authorize.service';
     BackendService,
     SpinnerService,
     WaterMarkService,
-    AuthorizeService
+    AuthorizeService,
+    CommonFnService
   ]
 })
 export class CoreModule {
