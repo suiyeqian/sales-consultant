@@ -28,6 +28,8 @@ import 'core-js/es6/weak-map';
 import 'core-js/es6/weak-set';
 import 'core-js/es6/typed';
 import 'core-js/es6/reflect';
+import 'intl';
+import 'intl/locale-data/jsonp/zh';
 /**
  * See issue https://github.com/AngularClass/angular-starter/issues/709
  */

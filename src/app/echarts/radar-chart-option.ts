@@ -30,7 +30,7 @@ export const RadarChartOptions = {
       areaStyle: {
         normal: {
           opacity: 0.7,
-          color: '#ffcc00'
+          color: '#d74b49'
        }
      },
       data: [{ value: [] }]

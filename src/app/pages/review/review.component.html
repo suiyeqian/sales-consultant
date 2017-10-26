@@ -1,4 +1,15 @@
 <div class="review" id="review">
+  <div class="tabset row text-center">
+    <div class="col-4">
+      <span class="tab-title" [class.selected]="curTab === 'track'" (click)="changeTab('track')">业绩分析</span>
+    </div>
+    <div class="col-4">
+      <span class="tab-title" [class.selected]="curTab === 'human'" (click)="changeTab('human')">人力分析</span>
+    </div>
+    <div class="col-4">
+      <span class="tab-title" [class.selected]="curTab === 'produce'" (click)="changeTab('produce')">产品分析</span>
+    </div>
+  </div>
   <my-ribbon ribbonNum="1" contentTxt="上月业绩回顾"></my-ribbon>
   <my-last-month-review></my-last-month-review>
 

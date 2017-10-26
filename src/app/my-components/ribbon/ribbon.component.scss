@@ -3,7 +3,7 @@
 }
 .ribbon-wrap {
   position: relative;
-  height: 1.08rem;
+  height: 1.05rem;
   overflow: hidden;
 }
 #ribbon {
@@ -16,23 +16,32 @@
 #ribbon::after {
 	content:"";
 	position:absolute;
-	top: .15rem;
-	left: 94%;
+	top: .17rem;
+	left: 93%;
 	width: .77rem;
   height: .77rem;
 	border-left:1px dashed #05E8E9;
   border-top:1px dashed #05E8E9;
   transform: rotate(136deg);
+  background-color: #101224;
+  z-index: 8;
 }
 .base{
   padding-left: .9rem;
+  position: absolute;
+  height: 1.05rem;
+  width: 5.3rem;
+  top: 0;
+  left: 0;
   border-top: 1px dashed #05E8E9;
   border-bottom: 1px dashed #05E8E9;
+  background-color: #101224;
+  z-index: 9;
 }
 .ribbon-num{
   width: .8rem;
-  height: 1.08rem;
-  line-height: 1.08rem;
+  height: 1.06rem;
+  line-height: 1.05rem;
   background-color: #05E8E9;
   position: absolute;
   top: 0;
@@ -43,4 +52,5 @@
   font-style: italic;
   color: #222;
   transform: skew(-8deg);
+  z-index: 10;
 }

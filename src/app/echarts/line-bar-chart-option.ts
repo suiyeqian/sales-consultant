@@ -6,7 +6,8 @@ export const LineBarChartOptions = {
   calculable : true,
   legend: {
     data: ['合同金额', '申请单量', '放款单量'],
-    right: 0,
+    // right: 0,
+    bottom: 0,
     textStyle: { color: '#fff' }
   },
   xAxis : [
@@ -41,6 +42,13 @@ export const LineBarChartOptions = {
         textStyle: { color: '#fff' }
       },
       axisLine: {  show: false },
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: '#b7bac3',
+          type: 'dashed'
+        }
+      },
     },
     {
       type : 'value',
@@ -52,8 +60,9 @@ export const LineBarChartOptions = {
       },
       axisLine: { show: false },
       splitLine: {
+        show: false,
         lineStyle: {
-          color: '#030519',
+          color: '#b7bac3',
           type: 'dashed'
         }
       },
@@ -67,13 +76,13 @@ export const LineBarChartOptions = {
       data: [],
       itemStyle: {
         normal: {
-          color: '#4b6577',
+          color: '#fad972',
         },
         opacity: 0
       },
       lineStyle: {
         normal: {
-          color: '#4b6577',
+          color: '#fad972',
         }
       }
     },
@@ -85,7 +94,7 @@ export const LineBarChartOptions = {
       barWidth: '30%',
       itemStyle: {
         normal: {
-          color: '#d74b49',
+          color: '#05e8e9',
           barBorderRadius: 5
         }
       }
@@ -99,7 +108,7 @@ export const LineBarChartOptions = {
       barWidth: '30%',
       itemStyle: {
         normal: {
-          color: '#05e8e9',
+          color: '#d74b49',
           barBorderRadius: 5
         }
       }

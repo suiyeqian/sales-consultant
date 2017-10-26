@@ -7,7 +7,7 @@ i.bonus-status{
   height: .21rem;
   display: inline-block;
   margin-left: .07rem;
-  margin-bottom: -.04rem;
+  margin-bottom: .04rem;
   background-image: url(/assets/img/eye-close.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
@@ -115,7 +115,33 @@ i.bonus-status.show{
 .bonus-hide {
   vertical-align: middle;
 }
+
 .remark {
   margin-top: .27rem;
   font-size: .21rem;
+}
+.riskCtrl-performance {
+  font-size: .4rem;
+}
+.riskCtrl-performance .bonus-status{
+  margin-left: .2rem;
+  margin-bottom: .02rem;
+}
+.ctrlAwd-hide{
+  vertical-align: sub;
+}
+.bonusSum-hide{
+  line-height: 0.59rem;
+  vertical-align: bottom;
+}
+.bonusSum{
+  margin-top: 1.17rem;
+  font-size: .45rem;
+}
+.bonusSum p {
+  margin-bottom: .31rem;
+}
+.bonusSum-val{
+  font-size: .59rem;
+  padding: .2rem .7rem;
 }
