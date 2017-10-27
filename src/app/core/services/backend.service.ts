@@ -97,7 +97,7 @@ export class BackendService {
                  localStorage.setItem('user', JSON.stringify(response.json().data));
                }
                this.firstOverdue = true;
-              //  window.location.reload();
+               window.location.reload();
              })
              .catch(this.handleError);
     }

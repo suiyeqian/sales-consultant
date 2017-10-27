@@ -11,8 +11,7 @@ import * as echart from '../../../echarts';
 export class LastMonthReviewComponent implements OnInit {
   private pfmcanalysisUrl = 'performancereview/perf_anls';
   pfmcAnalysis = Object.assign({});
-  private pfmctrendUrl = 'performancereview/perf_trend';
-  trendOption = {};
+
   private pfmccompositionUrl = 'performancereview/perf_form';
   pfmcComposition = [];
   legendList = [];
@@ -28,7 +27,7 @@ export class LastMonthReviewComponent implements OnInit {
 
   ngOnInit() {
     this.getPfmcAnalysis();
-    this.getPfmcTrend();
+    // this.getPfmcTrend();
     this.getPfmcComposition();
   }
 
@@ -42,28 +41,7 @@ export class LastMonthReviewComponent implements OnInit {
         });
   }
 
-  getPfmcTrend(): void {
-    this.bdService
-        .getAll(this.pfmctrendUrl)
-        .then((res) => {
-          if ( res.code === 0) {
-            let resData = res.data;
-            let xAxisData = [];
-            for (let item of resData.months) {
-              xAxisData.push(item + '月');
-            }
-            echart.LineBarChartOptions.xAxis[0].data = xAxisData;
-            echart.LineBarChartOptions.series[0].data =
-              [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt].reverse();
-            echart.LineBarChartOptions.series[1].data =
-              [resData.m1AppNumber, resData.m2AppNumber, resData.m3AppNumber, resData.m4AppNumber, resData.m5AppNumber,
-              resData.m6AppNumber].reverse();
-            echart.LineBarChartOptions.series[2].data =
-              [resData.m1Number, resData.m2Number, resData.m3Number, resData.m4Number, resData.m5Number, resData.m6Number].reverse();
-            this.trendOption = echart.LineBarChartOptions;
-          }
-        });
-  }
+
 
   getPfmcComposition(): void {
     this.bdService

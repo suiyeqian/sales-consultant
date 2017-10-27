@@ -5,10 +5,9 @@ export const LineBarChartOptions = {
   },
   calculable : true,
   legend: {
-    data: ['合同金额', '申请单量', '放款单量'],
-    // right: 0,
+    data: ['申请单量', '放款单量', '合同金额'],
     bottom: 0,
-    textStyle: { color: '#fff' }
+    textStyle: { color: '#fff' },
   },
   xAxis : [
     {
@@ -34,6 +33,23 @@ export const LineBarChartOptions = {
   yAxis: [
     {
       type : 'value',
+      name: '单位(件)',
+      nameTextStyle: { color: '#fff' },
+      axisTick: { show: false },
+      axisLabel: {
+        textStyle: { color: '#fff' }
+      },
+      axisLine: { show: false },
+      splitLine: {
+        show: false,
+        lineStyle: {
+          color: '#b7bac3',
+          type: 'dashed'
+        }
+      },
+    },
+    {
+      type : 'value',
       name: '单位(万元)',
       nameTextStyle: { color: '#fff' },
       axisTick: { show: false },
@@ -49,30 +65,41 @@ export const LineBarChartOptions = {
           type: 'dashed'
         }
       },
-    },
-    {
-      type : 'value',
-      name: '单位(件)',
-      nameTextStyle: { color: '#fff' },
-      axisTick: { show: false },
-      axisLabel: {
-        textStyle: { color: '#fff' }
-      },
-      axisLine: { show: false },
-      splitLine: {
-        show: false,
-        lineStyle: {
-          color: '#b7bac3',
-          type: 'dashed'
-        }
-      },
     }
   ],
   series: [
     {
+      name: '申请单量',
+      type: 'bar',
+      yAxisIndex: 0,
+      data: [],
+      barWidth: '30%',
+      itemStyle: {
+        normal: {
+          color: '#05e8e9',
+          barBorderRadius: 5
+        }
+      }
+    },
+    {
+      name: '放款单量',
+      type: 'bar',
+      yAxisIndex: 0,
+      data: [],
+      barGap: '20%',
+      barWidth: '30%',
+      itemStyle: {
+        normal: {
+          color: '#d74b49',
+          barBorderRadius: 5
+        }
+      }
+    },
+    {
       name: '合同金额',
       type: 'line',
       symbol: 'circle',
+      yAxisIndex: 1,
       data: [],
       itemStyle: {
         normal: {
@@ -86,32 +113,5 @@ export const LineBarChartOptions = {
         }
       }
     },
-    {
-      name: '申请单量',
-      type: 'bar',
-      yAxisIndex: 1,
-      data: [],
-      barWidth: '30%',
-      itemStyle: {
-        normal: {
-          color: '#05e8e9',
-          barBorderRadius: 5
-        }
-      }
-    },
-    {
-      name: '放款单量',
-      type: 'bar',
-      yAxisIndex: 1,
-      data: [],
-      barGap: '20%',
-      barWidth: '30%',
-      itemStyle: {
-        normal: {
-          color: '#d74b49',
-          barBorderRadius: 5
-        }
-      }
-    }
   ]
 };
