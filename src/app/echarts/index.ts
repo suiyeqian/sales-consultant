@@ -5,3 +5,4 @@ export * from './pie-chart-option';
 export * from './line-chart-option';
 export * from './radar-chart-option';
 export * from './stackbar-chart-option';
+export * from './bar-chart-option';

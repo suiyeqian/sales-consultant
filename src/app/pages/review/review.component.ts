@@ -18,11 +18,18 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   loanOption: any;
   overdueOption: any;
   capacityOption: any;
-  private bonustrendUrl = 'performancereview/bonus_trend';
-  lineOption = {};
 
   tmSeniority = [];
   teamMbs = [];
+  products = ['工薪贷', '按揭贷', '精英贷', '保单贷', '生意贷'];
+  passRateOption: any;
+  private pfmccompositionUrl = 'performancereview/perf_form';
+  legendList = [];
+  legendColorList = ['#f88681', '#fada71', '#3ae3bb', '#11b8ff', '#919af2', '#05e8e9'];
+  applyOrderOption: any;
+  loanAmtOption: any;
+  overdueRateOption: any;
+  avgAmtOption: any;
 
   constructor(
     private bdService: BackendService,
@@ -33,12 +40,6 @@ export class ReviewComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.getPfmcTrend();
-    this.getBonusTrend();
-
-    this.getTmCapacity();
-    this.getTmSeniority();
-    this.getTmComp();
-
     this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 100);
   }
 
@@ -94,26 +95,6 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         });
   }
 
-  getBonusTrend(): void {
-    this.bdService
-        .getAll(this.bonustrendUrl)
-        .then((res) => {
-          if ( res.code === 0) {
-            let resData = res.data;
-            let xAxisData = [];
-            let seriesData = [];
-            for (let item of resData) {
-              xAxisData.push(item.month + '月');
-              seriesData.push(+item.amt);
-            }
-            echart.LineChartOptions.xAxis.data = xAxisData;
-            echart.LineChartOptions.series[0].data = seriesData;
-            this.lineOption = echart.LineChartOptions;
-          }
-          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 100);
-        });
-  }
-
   getTmCapacity(): void {
     this.capacityOption = echart.StackBarChartOptions;
   }
@@ -155,12 +136,111 @@ export class ReviewComponent implements OnInit, AfterContentInit {
     }
   }
 
+  getPassRate(): void {
+    this.passRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
+    this.passRateOption.xAxis.data = ['1月', '2月', '3月', '4月', '5月', '6月'];
+    this.passRateOption.legend.data = this.products;
+    for (let item of this.products) {
+      let datas = [];
+      for (let i = 0; i < 6; i++) {
+        datas.push(Math.floor(Math.random() * 100));
+      }
+      this.passRateOption.series.push({
+        name: item,
+        type: 'line',
+        symbol: 'circle',
+        symbolSize: 8,
+        data: datas
+      });
+    }
+  }
+
+  getPfmcComposition(): void {
+    this.bdService
+        .getAll(this.pfmccompositionUrl)
+        .then((res) => {
+          if ( res.code === 0) {
+            let commonOption = echart.PieChartOptions;
+            commonOption.color = this.legendColorList;
+            let deepCopy = function(parent, clone) {
+              let child = clone || {};
+              for (let i in parent) {
+                if (!parent.hasOwnProperty(i)) {
+                  continue;
+                }
+                if (typeof parent[i] === 'object') {
+                  child[i] = (parent[i].constructor === Array) ? [] : {};
+                  deepCopy(parent[i], child[i]);
+                } else {
+                  child[i] = parent[i];
+                }
+              }
+              return child;
+            };
+            let loanOrderChartData = [];
+            let cntAmtChartData = [];
+            for (let item of res.data) {
+              this.legendList.push(item.prodName);
+              loanOrderChartData.push({value: item.loanNum, name: item.prodName});
+              cntAmtChartData.push({value: item.cntAmt, name: item.prodName});
+            }
+            this.applyOrderOption = deepCopy(commonOption, {});
+            this.applyOrderOption.series[0].data = loanOrderChartData;
+            this.loanAmtOption = deepCopy(commonOption, {});
+            this.loanAmtOption.series[0].data = cntAmtChartData;
+          }
+        });
+  }
+
+  getOverdueRate(): void {
+    this.overdueRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
+    this.overdueRateOption.xAxis.data = ['1月', '2月', '3月', '4月', '5月', '6月'];
+    this.overdueRateOption.legend.data = this.products;
+    for (let item of this.products) {
+      let datas = [];
+      for (let i = 0; i < 6; i++) {
+        datas.push(Math.floor(Math.random() * 100));
+      }
+      this.overdueRateOption.series.push({
+        name: item,
+        type: 'line',
+        symbol: 'circle',
+        symbolSize: 8,
+        data: datas
+      });
+    }
+  }
+
+  getAvgAmt(): void {
+    this.avgAmtOption = this.cmnFn.deepCopy(echart.BarChartOptions, {});
+    this.avgAmtOption.xAxis[0].data = this.products;
+    this.avgAmtOption.series[0].name = '件均金额';
+    let datas = [];
+    for (let item of this.products) {
+      datas.push(Math.floor(Math.random() * 10));
+    }
+    this.avgAmtOption.series[0].data = datas;
+  }
+
   changeTab(type): void {
     if (type === this.curTab) {
       return;
     }
     this.curTab = type;
-    this.getBonusTrend();
+    switch (type) {
+      case 'human':
+        this.getTmCapacity();
+        this.getTmSeniority();
+        this.getTmComp();
+        break;
+      case 'produce':
+        this.getPassRate();
+        this.getPfmcComposition();
+        this.getOverdueRate();
+        this.getAvgAmt();
+        break;
+      default:
+        this.getPfmcTrend();
+      }
   }
-
 }

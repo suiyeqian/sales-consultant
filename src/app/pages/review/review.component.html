@@ -84,19 +84,41 @@
     </div>
   </div>
 
-  <div class="tab-produce" *ngIf="curTab === 'track'">
+  <div class="tab-produce" *ngIf="curTab === 'produce'">
     <div class="sub-title-wrap"><h4 class="sub-title">产品通过率</h4></div>
+    <div class="passRate-chart-wrap">
+      <div echarts [options]="passRateOption" class="passRate-chart"></div>
+    </div>
     <div class="sub-title-wrap"><h4 class="sub-title">产品份额</h4></div>
+    <div class="row">
+      <div class="col-6">
+        <div class="pie-chart-wrap">
+          <div echarts [options]="applyOrderOption" class="pie-chart"></div>
+          <h4 class="text-center chart-title">申请单量构成</h4>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="pie-chart-wrap">
+          <div echarts [options]="loanAmtOption" class="pie-chart"></div>
+          <h4 class="text-center chart-title">放款金额构成</h4>
+        </div>
+      </div>
+      <div class="legendlist">
+        <div class="legend" *ngFor="let item of legendList;let i=index">
+          <div [style.backgroundColor]="legendColorList[i]" class="legend-box">
+          </div>
+          <span>{{item}}</span>
+        </div>
+      </div>
+    </div>
     <div class="sub-title-wrap"><h4 class="sub-title">产品逾期率(金额)</h4></div>
+    <div class="overdueRate-chart-wrap">
+      <div echarts [options]="overdueRateOption" class="overdueRate-chart"></div>
+    </div>
     <div class="sub-title-wrap"><h4 class="sub-title">产品件均金额</h4></div>
+    <div class="avgAmt-chart-wrap">
+      <div echarts [options]="avgAmtOption" class="avgAmt-chart"></div>
+    </div>
   </div>
 
-
-  <my-last-month-review></my-last-month-review>
-
-  <my-ribbon ribbonNum="2" contentTxt="奖金趋势回顾"></my-ribbon>
-  <div class="chart-wrap">
-    <div echarts [options]="lineOption" class="line-chart"></div>
-    <p class="remark">* 奖金金额仅供参考，实际奖金金额以薪酬核算结果为准</p>
-  </div>
 </div>

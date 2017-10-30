@@ -1,58 +1,59 @@
 export const LineChartOptions = {
   tooltip: {
-    show: false
+    trigger: 'axis',
+    // formatter: '{a0}: {c0}<br />{a1}: {c1}'
+  },
+  legend: {
+    data: [],
+    bottom: 0,
+    textStyle: { color: '#fff' },
+    itemWidth: 14,
+    itemHeight: 10
+  },
+  grid: {
+    left: '0%',
+    // bottom: '11%',
+    containLabel: true
   },
   xAxis:  {
       type: 'category',
       data: [],
-      axisTick: { show: false },
-      axisLabel: {
-        textStyle: {
-          color: '#ccc'
+      axisTick: {
+        length: 10,
+        lineStyle: {
+          color: '#fff'
         }
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#b7bac3',
+          type: 'dashed'
+        }
+      },
+      axisLabel: {
+        textStyle: { color: '#fff' }
       }
   },
   yAxis: {
     type: 'value',
-    name: '单位(元)',
-    nameTextStyle: {
-      color: '#ccc'
-    },
-    splitNumber: 3,
+    // name: '单位(元)',
+    // nameTextStyle: { color: '#fff' },
     axisTick: { show: false },
     axisLabel: {
-      formatter:  function (value) {
-        return value / 1000 + 'k';
-      },
-      textStyle: {
-        color: '#ccc'
-      }
+      formatter: '{value} %'
     },
     axisLine: { show: false },
     splitLine: {
       show: true,
       lineStyle: {
-        color: ['#3a3b45']
+        color: '#b7bac3',
+        type: 'dashed'
       }
-    },
-  },
-  color: ['#fe4504'],
-  textStyle: {
-    color: '#fdcb04'
-  },
-  series: [
-    {
-        type: 'line',
-        data: [],
-        label: {
-          normal: {
-           show: true,
-           position: 'bottom',
-           fontSize: 14
-         }
-        },
-        symbol: 'circle',
-        symbolSize: 10
     }
-  ]
+  },
+  color: ['#f88681', '#fada71', '#3ae3bb', '#11b8ff', '#919af2', '#05e8e9'],
+  textStyle: {
+    color: '#fff'
+  },
+  series: []
 };
