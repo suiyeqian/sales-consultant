@@ -4,6 +4,16 @@
   margin-bottom: .64rem;
   font-size: .35rem;
 }
+.time-progress .col.text-left {
+  padding-right: 0;
+}
+.time-progress .col.text-right {
+  padding-left: 0;
+}
+.time-progress .col.text-center {
+  padding-left: 0;
+  padding-right: 0;
+}
 //当日团队销售进度
 .overview,.month-overview,.forecast-overview,.month-assessment{
   margin: .41rem -13px 1.37rem -13px;
@@ -33,7 +43,7 @@
 }
 // 月销售进度
 .month-overview > .row:first-child{
-  margin: 0 2px .67rem -7px;
+  margin: 0 2px 1.4rem -7px;
 }
 .month-overview > .row:first-child > .col-6:first-child{
   padding-left: 0;

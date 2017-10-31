@@ -12,7 +12,7 @@ import * as echart from '../../echarts';
   styleUrls: ['./review.component.scss']
 })
 export class ReviewComponent implements OnInit, AfterContentInit {
-  curTab = 'track';
+  curTab: string;
   private pfmctrendUrl = 'performancereview/perf_trend';
   applyOption: any;
   loanOption: any;
@@ -39,7 +39,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-    this.getPfmcTrend();
+    this.changeTab('track');
     this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 100);
   }
 

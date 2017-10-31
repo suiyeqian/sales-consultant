@@ -11,7 +11,7 @@ export const GaugeChartOptions = {
         lineStyle: {
           color: [
             [0, '#05e8e9'],
-            [1, '#fff']
+            [1, '#aaadac']
           ],
           width: 23
         }

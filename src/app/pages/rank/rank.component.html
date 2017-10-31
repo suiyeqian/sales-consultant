@@ -15,20 +15,34 @@
   </div>
   <div class="sub-title-wrap"><h4 class="sub-title">前十排名</h4></div>
   <div class="table-wrap">
-    <table class="table">
+    <table class="table" *ngIf="curRank === 'loan'">
       <thead>
         <tr>
           <th>排名</th>
-          <th>营业部</th>
-          <th>姓名</th>
-          <th>合同金额(万元)</th>
+          <th>团队名称</th>
+          <th>放款金额(万元)</th>
         </tr>
       </thead>
       <tbody>
         <tr class="text-center" *ngFor="let item of topTen" [class.font-yellow]="item.rank === myRank.rank">
           <td class="font-yellow">{{item.rank}}</td>
           <td>{{item.deptName}}</td>
-          <td>{{item.name}}</td>
+          <td>{{item.loanAmt | number}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table"*ngIf="curRank === 'overdue'">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>团队名称</th>
+          <th>C-M2</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="text-center" *ngFor="let item of topTen" [class.font-yellow]="item.rank === myRank.rank">
+          <td class="font-yellow">{{item.rank}}</td>
+          <td>{{item.deptName}}</td>
           <td>{{item.loanAmt | number}}</td>
         </tr>
       </tbody>

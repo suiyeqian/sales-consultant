@@ -1,10 +1,13 @@
 
 <div class="row time-progress">
-  <div class="col-4 text-left">
+  <div class="col text-left">
     {{achievement.curDay}}
   </div>
-  <div class="col-8 text-right">
-    本月时间进度：17/21天
+  <div class="col text-center">
+    工作日: {{achievement.pastWorkDay ? achievement.pastWorkDay : 0}}/{{achievement.workDay ? achievement.workDay : 0}}天
+  </div>
+  <div class="col text-right">
+    时间进度：{{achievement.dateRate ? achievement.dateRate : 0}}%
   </div>
 </div>
 <my-ribbon ribbonNum="1" contentTxt="当日团队销售进度"></my-ribbon>

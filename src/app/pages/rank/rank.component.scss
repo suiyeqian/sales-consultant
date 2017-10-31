@@ -1,13 +1,14 @@
 
-// .rank {
-//   padding-top:.48rem;
-// }
 .table-wrap {
   margin-top: .51rem;
   min-height: 300px;
 }
 .table td {
   font-size: 14px;
+  width: 40%;
+}
+.table tr td:first-child{
+  width: 20%;
 }
 .my-rank {
   position: relative;

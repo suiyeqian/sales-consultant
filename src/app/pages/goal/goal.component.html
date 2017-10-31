@@ -24,13 +24,16 @@
       <div class="member-goal">
         <h5>任务分配</h5>
         <div class="setting-list">
+          <div class="unit">
+              <span class="pull-right">（单位：万元）</span>
+          </div>
           <div class="setting-item" *ngFor="let item of teams">
-            <i class="avatar"></i>
+            <!-- <i class="avatar"></i> -->
             <span class="member-name">{{item.name}}</span>
             <div class="slide-bar">
               <nouislider class [connect]="[true,false]" [formControl]="goalForm.controls['goal'+item.id]" [min]="0" [max]="100" [step]="1" [tooltips]=" true" (ngModelChange)="countSum()"></nouislider>
             </div>
-            <span class="pull-right goal-val">{{goalVal * goalForm.value['goal'+item.id]/100 |number}}</span>
+            <span class="pull-right goal-val">{{goalVal * goalForm.value['goal'+item.id]/1000000 |number}}</span>
           </div>
         </div>
       </div>

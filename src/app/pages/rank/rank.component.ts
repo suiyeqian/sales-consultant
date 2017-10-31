@@ -38,9 +38,9 @@ export class RankComponent implements OnInit, AfterContentInit {
     this.bdService
         .getAll(this.myrankUrl)
         .then((res) => {
-          if ( res.code === 0) {
-            let resData = res.data;
-            // let resData = {rank: 4, percent: 98};
+          // if ( res.code === 0) {
+            // let resData = res.data;
+            let resData = {rank: 4, percent: 98};
             this.myRank = resData;
             if (resData.rank < 4) {
               this.imgClass = 'rank-top';
@@ -49,7 +49,7 @@ export class RankComponent implements OnInit, AfterContentInit {
               this.imgClass = 'rank-other';
               this.imgUrl = '/assets/img/rank-bg.jpg';
             }
-          };
+          // };
         });
   }
 

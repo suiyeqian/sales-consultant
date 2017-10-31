@@ -58,6 +58,9 @@ body {
 .bg-customized {
   background-color: $main-color !important;
 }
+.member-progress.font-red .bg-customized {
+  background-color: $red-color !important;
+}
 .bg-warn {
   background-color: $red-color !important;
 }

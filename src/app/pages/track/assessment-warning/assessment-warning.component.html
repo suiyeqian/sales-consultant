@@ -10,7 +10,7 @@
         <span class="col-4" *ngFor="let i of warningInfos.months">{{i}}月</span>
       </p>
       <span>剩余</span>
-      <p class="volume row text-center">
+      <p class="volume row text-center font-blue">
         <span class="col-4">{{warningInfos.m2Amt | number}}</span>
         <span class="col-4">{{warningInfos.m1Amt | number}}</span>
         <span class="col-4">{{warningInfos.amt | number}}</span>
@@ -20,7 +20,7 @@
         <ngb-progressbar type="customized" [value]="warningInfos.amtRate*100" class="volume-progress-bar">
           <i>{{warningInfos.totalAmt | number:'1.0-2'}}</i>
         </ngb-progressbar>
-        <span class="font-yellow volume-val text-center">{{+warningInfos.goalAmt - warningInfos.totalAmt <= 0 ? 0 : warningInfos.goalAmt - warningInfos.totalAmt | number:'1.0-2'}}</span>
+        <span class="font-red volume-val text-center">{{+warningInfos.goalAmt - warningInfos.totalAmt <= 0 ? 0 : warningInfos.goalAmt - warningInfos.totalAmt | number:'1.0-2'}}</span>
       </div>
       <h3 class="text-center font-red">{{(warningInfos.amtRate < 1)?'考核尚未达标，请继续加油!':'恭喜，本次考核已达标！'}}</h3>
     </div>
