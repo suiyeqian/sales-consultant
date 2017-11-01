@@ -25,23 +25,14 @@ export class AssessmentWarningComponent implements OnInit {
     this.bdService
         .getAll(this.checkwarningUrl)
         .then((res) => {
-          // if ( res.code === 0) {
-            // let resData = res.data;
-            // 自己的数据
-            let resData = Object.assign({});
-            resData.mob = '团队经理（中级）';
-            resData.goalAmt = 100;
-            resData.m2Amt = 27;
-            resData.m1Amt = 26;
-            resData.amt = 15;
-            resData.months = [8, 9, 10];
-
+          if ( res.code === 0) {
+            let resData = res.data;
             resData.totalNum = resData.m2Number + resData.m1Number + resData.number;
             resData.cntRate = resData.totalNum / resData.goalCnt;
             resData.totalAmt = resData.m2Amt + resData.m1Amt + resData.amt;
             resData.amtRate = resData.totalAmt / resData.goalAmt;
             this.warningInfos = resData;
-          // }
+          }
         });
   }
 

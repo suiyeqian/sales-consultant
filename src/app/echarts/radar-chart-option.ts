@@ -1,5 +1,8 @@
 export const RadarChartOptions = {
-  tooltip: { show: true},
+  tooltip: {
+    show: true,
+    formatter: function (value) {}
+  },
   radar: [
     {
       indicator: [],

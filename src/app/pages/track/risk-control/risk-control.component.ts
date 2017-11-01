@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { BackendService } from '../../../core/services/backend.service';
 import { CommonFnService } from '../../../core/services/commonfn.service';
 import * as echart from '../../../echarts';
+import { WaterMarkService } from '../../../core/services/watermark.service';
 
 @Component({
   selector: 'my-risk-control',
@@ -15,15 +16,19 @@ export class RiskControlComponent implements OnInit {
   riskControlOption1: any;
   riskControlOption2: any;
   cm2: number;
+  private mbRiskUrl = 'performancetrack/member_risk';
+  mbsRisk = [];
 
   constructor(
     private bdService: BackendService,
     private cmnFn: CommonFnService,
+    private waterMark: WaterMarkService
   ) {
   }
 
   ngOnInit() {
     this.getRiskcontrol();
+    this.getMbRisk();
   }
 
   getRiskcontrol(): void {
@@ -46,6 +51,17 @@ export class RiskControlComponent implements OnInit {
               +resData.loanNumber ? (resData.overDueNumber / resData.loanNumber) : 0;
             this.riskControlOption2.series[0].data[0].value =
               +resData.loanNumber ? (resData.overDueNumber * 100 / resData.loanNumber).toFixed(2) : 0;
+          }
+        });
+  }
+
+  getMbRisk(): void {
+    this.bdService
+        .getDataByPost(this.mbRiskUrl, {posId: localStorage.posId})
+        .then((res) => {
+          if ( res.code === 0) {
+            this.mbsRisk = res.data;
+            this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 400);
           }
         });
   }

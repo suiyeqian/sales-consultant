@@ -11,11 +11,11 @@
     <div class="col-6 right-box">
       <p class="risk-item">
         <span class="text-left risk-name">逾期笔数：</span>
-        <span class="text-right font-yellow risk-val">{{+riskControl.overDueNumber | number}}</span>
+        <span class="text-right risk-val">{{+riskControl.overDueNumber | number}}</span>
       </p>
       <p class="risk-item">
         <span class="text-left risk-name">待收笔数：</span>
-        <span class="text-right font-yellow risk-val">{{+riskControl.loanNumber | number}}</span>
+        <span class="text-right risk-val">{{+riskControl.loanNumber | number}}</span>
       </p>
     </div>
   </div>
@@ -31,11 +31,11 @@
     <div class="col-6 right-box">
       <p class="risk-item">
         <span class="text-left risk-name">逾期金额：</span>
-        <span class="text-right font-yellow risk-val">{{+riskControl.overDueAmt | number:'1.0-0'}}</span>
+        <span class="text-right risk-val">{{+riskControl.overDueAmt | number:'1.0-0'}}</span>
       </p>
       <p class="risk-item">
         <span class="text-left risk-name">待收余额：</span>
-        <span class="text-right font-yellow risk-val">{{+riskControl.loanAmt | number:'1.0-0'}}</span>
+        <span class="text-right risk-val">{{+riskControl.loanAmt | number:'1.0-0'}}</span>
       </p>
     </div>
   </div>
@@ -58,12 +58,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center" *ngFor="let item of [1,2,3,4,5]">
-          <td>{{'纳兰容若'}}</td>
-          <td>{{3}}</td>
-          <td>{{30}}</td>
-          <td>{{10000 | number}}</td>
-          <td>{{150000 | number}}</td>
+        <tr class="text-center" *ngFor="let member of mbsRisk">
+          <td>{{member.name}}</td>
+          <td>{{member.overDueNumber | number}}</td>
+          <td>{{member.loanNumber | number}}</td>
+          <td>{{member.overDueAmt | number:'1.0-0'}}</td>
+          <td>{{member.loanAmt | number:'1.0-0'}}</td>
         </tr>
       </tbody>
     </table>

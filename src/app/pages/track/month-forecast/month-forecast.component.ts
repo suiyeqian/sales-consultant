@@ -30,7 +30,7 @@ export class MonthForecastComponent implements OnInit {
 
   ngOnInit() {
     this.getAchieveForecast();
-    if (this.myPosId === '2'){
+    if (this.myPosId === '2') {
       this.getRiskCoff();
     }
   }
