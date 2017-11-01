@@ -17,9 +17,9 @@ i.avatar-icon {
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
-.member-progress.font-red i.avatar-icon{
-  background-image: url(/assets/img/avatar-red.png);
-}
+// .member-progress.warn-red i.avatar-icon{
+//   background-image: url(/assets/img/avatar-red.png);
+// }
 .member-progress .volume-key{
   padding: 0 .12rem;
   width: 18%;
@@ -28,6 +28,9 @@ i.avatar-icon {
 .member-progress .volume-val{
   width: auto;
   line-height: .8rem;
+}
+.warn-red .volume-val {
+  color: #d74b49;
 }
 .member-progress-bar {
   display: inline-block;
