@@ -36,9 +36,9 @@ export class TrackComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.getSaleAchievement();
-    this.getPerformanceTrack();
-    this.getOverdueRemind();
-    this.getCustBd();
+    // this.getPerformanceTrack();
+    // this.getOverdueRemind();
+    // this.getCustBd();
   }
 
 
@@ -50,13 +50,14 @@ export class TrackComponent implements OnInit, AfterContentInit {
 
   getSaleAchievement(): void {
     this.bdService
-        .getAll(this.saleachievementUrl)
+        .getDataByPost(this.saleachievementUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
             this.achievement = res.data;
             echart.ProgressChartOptions.series[0].data[0].value = res.data.monSaleRate;
             echart.ProgressChartOptions.series[0].data[1].value = (100 - res.data.monSaleRate < 0) ? 0 : (100 - res.data.monSaleRate);
             this.saleProgressOption = echart.ProgressChartOptions;
+            this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 230);
           }
         });
   }
@@ -91,7 +92,6 @@ export class TrackComponent implements OnInit, AfterContentInit {
             this.overduereminds.slice(this.pageLength * (this.overduermdCurPage - 1), this.pageLength * this.overduermdCurPage);
           }
           // console.log(JSON.parse(localStorage.user))
-          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 230);
         });
   }
 

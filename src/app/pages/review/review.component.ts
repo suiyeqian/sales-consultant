@@ -179,11 +179,13 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             };
             let loanOrderChartData = [];
             let cntAmtChartData = [];
+            let legendList = [];
             for (let item of res.data) {
-              this.legendList.push(item.prodName);
+              legendList.push(item.prodName);
               loanOrderChartData.push({value: item.loanNum, name: item.prodName});
               cntAmtChartData.push({value: item.cntAmt, name: item.prodName});
             }
+            this.legendList = legendList;
             this.applyOrderOption = deepCopy(commonOption, {});
             this.applyOrderOption.series[0].data = loanOrderChartData;
             this.loanAmtOption = deepCopy(commonOption, {});

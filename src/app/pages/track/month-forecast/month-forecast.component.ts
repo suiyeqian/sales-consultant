@@ -8,6 +8,7 @@ import { BackendService } from '../../../core/services/backend.service';
   styleUrls: ['./month-forecast.component.scss']
 })
 export class MonthForecastComponent implements OnInit {
+  myPosId = localStorage.posId;
   private achieveforecastUrl = 'performancetrack/achievement_forecast';
   achieveforecast = Object.assign({});
   private positionPoint = [3.6, 14.4, 28.6, 45.5, 65.2];
@@ -15,6 +16,11 @@ export class MonthForecastComponent implements OnInit {
   myRealPctPosition: string;
   bonusShow = false;
   awardShow = false;
+  private riskCoffUrl = 'performancetrack/risk_coff';
+  riskCoff = Object.assign({});
+  myRskCfPosition: string;
+  ctrlAwdShow = false;
+  bonusSumShow = false;
   @Input() timeProgress: number;
 
   constructor(
@@ -24,25 +30,17 @@ export class MonthForecastComponent implements OnInit {
 
   ngOnInit() {
     this.getAchieveForecast();
+    if (this.myPosId === '2'){
+      this.getRiskCoff();
+    }
   }
 
   getAchieveForecast(): void {
     this.bdService
-        .getAll(this.achieveforecastUrl)
+        .getDataByPost(this.achieveforecastUrl, {posId: localStorage.posId})
         .then((res) => {
-          // if ( res.code === 0) {
-            // let resData = res.data;
-            let resData = {
-              goalAmt: 50000,
-              expectAmt: 0,
-              completionRate: 10,
-              sections: [0, 5, 15, 30, 45],
-              coefficients: [1.0, 2.3, 3.1, 3.4, 4.0],
-              coefficient: 1.0,
-              royaltyAmt: 0,
-              cmpeAmt: 29800,
-              cmpeBonus: 0
-            };
+          if ( res.code === 0) {
+            let resData = res.data;
             // 计算提成系数和位置及预计奖金
             let expectAmt = resData.expectAmt / 10000;
             for (let i = resData.sections.length - 1; i >= 0; i--) {
@@ -86,7 +84,39 @@ export class MonthForecastComponent implements OnInit {
               }
             }
             this.achieveforecast = resData;
-          // }
+          }
+        });
+  }
+
+  getRiskCoff(): void {
+    this.bdService
+        .getAll(this.riskCoffUrl)
+        .then((res) => {
+          if ( res.code === 0) {
+            let resData = res.data;
+            // 计算提成系数和位置及预计奖金
+            for (let i = resData.sections.length - 1; i >= 0; i--) {
+              if (+resData.cm2Rate === +resData.sections[i]) {
+                this.myRskCfPosition = this.positionPoint[i] + '%';
+                resData.coefficient = resData.coefficients[i];
+                resData.ctrlAwd = 1500 * resData.coefficient;
+                break;
+              }
+              if (+resData.cm2Rate > +resData.sections[i]) {
+                resData.coefficient = resData.coefficients[i];
+                resData.ctrlAwd = 1500 * resData.coefficient;
+                if (i === resData.sections.length - 1) {
+                  this.myRskCfPosition = '76%';
+                  break;
+                }
+                let interval_n = +resData.sections[i + 1] - resData.sections[i];
+                let interval_p = +this.positionPoint[i + 1] - this.positionPoint[i];
+                this.myRskCfPosition = +this.positionPoint[i] + (resData.cm2Rate - resData.sections[i]) * interval_p / interval_n + '%';
+                break;
+              }
+            }
+            this.riskCoff = resData;
+          }
         });
   }
 

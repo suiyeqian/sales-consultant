@@ -11,11 +11,11 @@
     <div class="col-6 right-box">
       <p class="risk-item">
         <span class="text-left risk-name">逾期笔数：</span>
-        <span class="text-right font-yellow risk-val">{{riskControl.overDueNumber | number}}</span>
+        <span class="text-right font-yellow risk-val">{{+riskControl.overDueNumber | number}}</span>
       </p>
       <p class="risk-item">
-        <span class="text-left risk-name">放款笔数：</span>
-        <span class="text-right font-yellow risk-val">{{riskControl.loanNumber | number}}</span>
+        <span class="text-left risk-name">待收笔数：</span>
+        <span class="text-right font-yellow risk-val">{{+riskControl.loanNumber | number}}</span>
       </p>
     </div>
   </div>
@@ -31,11 +31,11 @@
     <div class="col-6 right-box">
       <p class="risk-item">
         <span class="text-left risk-name">逾期金额：</span>
-        <span class="text-right font-yellow risk-val">{{riskControl.overDueAmt | number}}</span>
+        <span class="text-right font-yellow risk-val">{{+riskControl.overDueAmt | number:'1.0-0'}}</span>
       </p>
       <p class="risk-item">
-        <span class="text-left risk-name">待收金额：</span>
-        <span class="text-right font-yellow risk-val">{{riskControl.loanAmt | number}}</span>
+        <span class="text-left risk-name">待收余额：</span>
+        <span class="text-right font-yellow risk-val">{{+riskControl.loanAmt | number:'1.0-0'}}</span>
       </p>
     </div>
   </div>

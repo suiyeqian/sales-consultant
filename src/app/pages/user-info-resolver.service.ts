@@ -12,9 +12,9 @@ export class UserInfoResolver implements Resolve<any> {
 
     return this.bdService.getAll(this.userUrl).then(res => {
       if ( res.code === 0 && res.data) {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        localStorage.setItem('posId', res.data.posId ? res.data.posId : 2);
         return res.data;
-        // localStorage.clear();
-        // localStorage.setItem('user', JSON.stringify(res.data));
       } else {
         alert('用户不存在！');
         return null;

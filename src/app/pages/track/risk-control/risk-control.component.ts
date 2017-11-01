@@ -28,19 +28,11 @@ export class RiskControlComponent implements OnInit {
 
   getRiskcontrol(): void {
     this.bdService
-        .getAll(this.riskcontrolUrl)
+        .getDataByPost(this.riskcontrolUrl, {posId: localStorage.posId})
         .then((res) => {
-          // if ( res.code === 0) {
+          if ( res.code === 0) {
             let commonOption = echart.GaugeChartOptions;
-            // let resData = res.data;
-            let resData = Object.assign({});
-            resData.overDueNumber = 18;
-            resData.loanNumber = 100;
-            resData.overDueAmt = 17000;
-            resData.loanAmt = 100000;
-            resData.cAmt = 100;
-            resData.m2Amt = 1.8;
-
+            let resData = res.data;
             this.riskControl = resData;
             this.cm2 = resData.cAmt > 0 ? resData.m2Amt / resData.cAmt * 100 : 0;
             this.riskControlOption1 = this.cmnFn.deepCopy(commonOption, {});
@@ -54,7 +46,7 @@ export class RiskControlComponent implements OnInit {
               +resData.loanNumber ? (resData.overDueNumber / resData.loanNumber) : 0;
             this.riskControlOption2.series[0].data[0].value =
               +resData.loanNumber ? (resData.overDueNumber * 100 / resData.loanNumber).toFixed(2) : 0;
-          // }
+          }
         });
   }
 }

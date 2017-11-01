@@ -1,5 +1,5 @@
 import { Injectable }    from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions, URLSearchParams } from '@angular/http';
 import { AuthorizeService } from './authorize.service';
 import * as CryptoJS from 'crypto-js';
 import { Router, RouterState, RouterStateSnapshot } from '@angular/router';
@@ -8,10 +8,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BackendService {
-  // private apiUrl = 'http://10.17.2.177:8886';
-  private apiUrl = 'https://xszs-test.niudingfeng.com';
+  private apiUrl = 'http://10.17.2.161:9994/bdss/rest/';
+  private baseUrl = this.apiUrl;
+  // private apiUrl = 'https://xszs-test.niudingfeng.com';
   // private apiUrl = window.location.origin;
-  private baseUrl = this.apiUrl + '/servegateway/rest/bdsa/';
+  // private baseUrl = this.apiUrl + '/servegateway/rest/bdsa/';
   private refreshUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/user/access_token';
   firstOverdue = true;
   headersObj = {
@@ -55,12 +56,44 @@ export class BackendService {
                .catch(this.handleError);
   }
 
+  getDataByPost(url: string, params: Object): Promise<any> {
+    this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
+    this.headersObj['X-Requested-Nonce'] = this.MathRand();
+    let jsonHeaders = new Headers(this.headersObj);
+    jsonHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
+    let body = this.urlEncode(params);
+    return this.http.post(this.baseUrl + url, body, {headers: jsonHeaders})
+           .toPromise()
+           .then(response => {
+             //  if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+             //    localStorage.clear();
+             //    window.location.reload();
+             //  }
+              if (response.json().code === 50013) {
+                this.getNewToken();
+              }
+              if (!response.json().data) {
+                return [];
+              }
+              return response.json();
+           })
+           .catch(this.handleError);
+  }
+
   MathRand() {
     let Num = '';
     for (let i = 0; i < 6; i++) {
       Num += Math.floor(Math.random() * 10);
     }
     return Num;
+  }
+
+  urlEncode(obj: Object): string {
+    let urlSearchParams = new URLSearchParams();
+    for (let key of Object.keys(obj)) {
+        urlSearchParams.append(key, obj[key]);
+    }
+    return urlSearchParams.toString();
   }
 
   getNewToken() {

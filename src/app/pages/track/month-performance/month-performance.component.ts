@@ -9,6 +9,8 @@ import * as echart from '../../../echarts';
   styleUrls: ['./month-performance.component.scss']
 })
 export class MonthPerformanceComponent implements OnInit {
+  private mbScheduleUrl = 'performancetrack/member_schedule';
+  mbsPerformance = [];
   private weeklytrendUrl = 'performancetrack/weekly_trend';
   trendOption = Object.assign({});
   @Input() timeProgress: number;
@@ -19,12 +21,23 @@ export class MonthPerformanceComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getMbSchedule();
     this.getWeeklyTrend();
+  }
+
+  getMbSchedule(): void {
+    this.bdService
+        .getDataByPost(this.mbScheduleUrl, {posId: localStorage.posId})
+        .then((res) => {
+          if ( res.code === 0) {
+            this.mbsPerformance = res.data;
+          }
+        });
   }
 
   getWeeklyTrend(): void {
     this.bdService
-        .getAll(this.weeklytrendUrl)
+        .getDataByPost(this.weeklytrendUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;

@@ -3,21 +3,13 @@
     <h4 class="sub-title">团队成员进度</h4>
   </div>
   <div class="member-list">
-    <div class="member-progress" *ngFor="let i of [1,2,3,4,5]" [class.font-red]="100<timeProgress">
+    <div class="member-progress" *ngFor="let member of mbsPerformance" [class.font-red]="member.rate<timeProgress">
       <i class="avatar-icon"></i>
-      <span class="volume-key text-left">慕容潇潇</span>
-      <ngb-progressbar type="customized" [value]="100" [striped]="true" [animated]="true" class="member-progress-bar">
-        <i>{{4800 | number}}</i>
+      <span class="volume-key text-left">{{member.name}}</span>
+      <ngb-progressbar type="customized" [value]="member.rate" [striped]="true" [animated]="true" class="member-progress-bar">
+        <i>{{member.amt | number}}</i>
       </ngb-progressbar>
-      <span class="volume-val text-center pull-right">{{100}}%</span>
-    </div>
-    <div class="member-progress" [class.font-red]="30<timeProgress">
-      <i class="avatar-icon"></i>
-      <span class="volume-key text-left">张三</span>
-      <ngb-progressbar  type="customized" [value]="30" [striped]="true" [animated]="true" class="member-progress-bar">
-        <i>{{1800 | number}}</i>
-      </ngb-progressbar>
-      <span class="volume-val text-center pull-right">{{30}}%</span>
+      <span class="volume-val text-center pull-right">{{member.rate}}%</span>
     </div>
   </div>
 
