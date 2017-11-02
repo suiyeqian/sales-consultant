@@ -17,20 +17,25 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   applyOption: any;
   loanOption: any;
   overdueOption: any;
+
+  private tmCapacityUrl = 'humananls/capacity_anls';
   capacityOption: any;
+  private tmCompUrl = 'humananls/member_comp';
+  teamMbs = [];
 
   tmSeniority = [];
-  teamMbs = [];
-  products = ['工薪贷', '按揭贷', '精英贷', '保单贷', '生意贷'];
-  passRateOption: any;
 
-  private pfmccompositionUrl = 'productanls/total_achv';
   legendList = [];
   legendColorList = ['#f88681', '#fada71', '#3ae3bb', '#11b8ff', '#919af2', '#05e8e9'];
+  products = ['工薪贷', '按揭贷', '精英贷', '保单贷', '生意贷'];
+  passRateOption: any;
+  overdueRateOption: any;
+  private pfmccompositionUrl = 'productanls/total_achv';
   applyOrderOption: any;
   loanAmtOption: any;
-  overdueRateOption: any;
   avgAmtOption: any;
+
+
 
   constructor(
     private bdService: BackendService,
@@ -106,7 +111,37 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   }
 
   getTmCapacity(): void {
-    this.capacityOption = echart.StackBarChartOptions;
+    this.bdService
+        .getDataByPost(this.tmCapacityUrl, {posId: localStorage.posId})
+        .then((res) => {
+          if ( res.code === 0) {
+            let resData = res.data;
+            let xAxisData = [];
+            let seriesData = [];
+            for (let i = 0; i < resData.months.length; i ++) {
+              xAxisData.push(resData.months[i] + '月');
+              let dataset = [];
+              for (let item of resData.dataList) {
+                dataset.push(item['m' + (i + 1) + 'Amt']);
+              }
+              seriesData.push({
+                name: resData.months[i] + '月',
+                type: 'bar',
+                stack: '总量',
+                barWidth: 14,
+                data: dataset
+              });
+            }
+            let yAxisData = [];
+            for (let item of resData.dataList) {
+              yAxisData.push(item.name);
+            }
+            this.capacityOption = echart.StackBarChartOptions;
+            this.capacityOption.legend.data = xAxisData;
+            this.capacityOption.yAxis.data = yAxisData;
+            this.capacityOption.series = seriesData;
+          }
+        });
   }
 
   getTmSeniority(): void {
@@ -119,31 +154,41 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   }
 
   getTmComp(): void {
-    this.teamMbs = [
-      {name: '李一', radarChartOpt: this.cmnFn.deepCopy(echart.RadarChartOptions, {})},
-      {name: '王二', radarChartOpt: this.cmnFn.deepCopy(echart.RadarChartOptions, {})},
-      {name: '张三', radarChartOpt: this.cmnFn.deepCopy(echart.RadarChartOptions, {})},
-      {name: '李四', radarChartOpt: this.cmnFn.deepCopy(echart.RadarChartOptions, {})},
-      {name: '孙五', radarChartOpt: this.cmnFn.deepCopy(echart.RadarChartOptions, {})},
-      {name: '吴六', radarChartOpt: this.cmnFn.deepCopy(echart.RadarChartOptions, {})},
-      {name: '钱七', radarChartOpt: this.cmnFn.deepCopy(echart.RadarChartOptions, {})}
-    ];
-    let indicator = [
-      {text: 'A', max: 5},
-      {text: 'B', max: 5},
-      {text: 'C', max: 5},
-      {text: 'D', max: 5},
-      {text: 'E', max: 5},
-    ];
-    let dataVals = [];
-    for (let item of this.teamMbs) {
-      item.radarChartOpt.radar[0].indicator = indicator;
-      item.radarChartOpt.radar[0].radius = 60;
-      item.radarChartOpt.series[0].name = item.name;
-      for (let i = 0; i < 5; i++) {
-        item.radarChartOpt.series[0].data[0].value.push(Math.floor(Math.random() * 5) + 1);
-      }
-    }
+    this.bdService
+        .getDataByPost(this.tmCompUrl, {posId: localStorage.posId})
+        .then((res) => {
+          if ( res.code === 0) {
+            let indicator = [
+              {text: 'A', max: 5},
+              {text: 'B', max: 5},
+              {text: 'C', max: 5},
+              {text: 'D', max: 5},
+              {text: 'E', max: 5},
+            ];
+            let resData = res.data;
+            for (let item of resData){
+              let radarChartOpt = this.cmnFn.deepCopy(echart.RadarChartOptions, {});
+              radarChartOpt.radar[0].indicator = indicator;
+              radarChartOpt.radar[0].radius = 60;
+              radarChartOpt.tooltip.position = 'top';
+              let tooltipText = '';
+              for (let data of item.dataList) {
+                radarChartOpt.series[0].data[0].value.push(data.value);
+                tooltipText += data.name + ': ' + data.origValue + '<br/>';
+              }
+              radarChartOpt.tooltip.formatter = function() {
+                return tooltipText;
+              };
+              this.teamMbs.push({
+                name: item.name,
+                radarChartOpt: radarChartOpt
+              });
+            };
+            // console.log(res.data);
+            this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' +
+             JSON.parse(localStorage.user).number }, 280 * Math.ceil(res.data.length / 2));
+          }
+        });
   }
 
   getPassRate(): void {
@@ -196,6 +241,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             this.avgAmtOption.series[0].name = '件均金额';
             this.avgAmtOption.series[0].data = avgAmtArrays;
           }
+          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 100);
         });
   }
 

@@ -6,7 +6,7 @@ export const StackBarChartOptions = {
     }
   },
   legend: {
-    data: ['1月', '2月', '3月', '4月', '5月', '6月'],
+    data: [],
     bottom: 0,
     textStyle: { color: '#fff' },
     itemWidth: 14,
@@ -25,7 +25,10 @@ export const StackBarChartOptions = {
     nameLocation: 'end',
     axisLine: { show: false },
     axisLabel: {
-      textStyle: { color: '#fff' }
+      textStyle: { color: '#fff' },
+      formatter:  function (value) {
+        return value / 10000;
+      },
     },
     splitLine: {
       show: true,
@@ -36,7 +39,7 @@ export const StackBarChartOptions = {
   },
   yAxis: {
     type: 'category',
-    data: ['李一一一', '王二', '张三', '赵四', '孙五', '吴六', '钱七'],
+    data: [],
     axisTick: { show: false },
     axisLabel: {
       textStyle: { color: '#fff' }
@@ -44,43 +47,5 @@ export const StackBarChartOptions = {
     axisLine: { show: false },
     splitLine: {show: false },
   },
-  series: [
-    {
-      name: '1月',
-      type: 'bar',
-      stack: '总量',
-      barWidth: 14,
-      data: [320, 302, 301, 334, 390, 330, 320]
-    },
-    {
-      name: '2月',
-      type: 'bar',
-      stack: '总量',
-      data: [120, 132, 101, 134, 90, 230, 210]
-    },
-    {
-      name: '3月',
-      type: 'bar',
-      stack: '总量',
-      data: [220, 182, 191, 234, 290, 330, 310]
-    },
-    {
-      name: '4月',
-      type: 'bar',
-      stack: '总量',
-      data: [150, 212, 201, 154, 190, 330, 410]
-    },
-    {
-      name: '5月',
-      type: 'bar',
-      stack: '总量',
-      data: [820, 832, 901, 934, 1290, 1330, 1320]
-    },
-    {
-      name: '6月',
-      type: 'bar',
-      stack: '总量',
-      data: [320, 432, 501, 234, 290, 330, 320]
-    }
-  ]
+  series: []
 };
