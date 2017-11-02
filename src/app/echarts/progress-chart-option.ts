@@ -42,7 +42,7 @@ export const ProgressChartOptions = {
           value: 100 - 0,
           itemStyle: {
             normal: {
-              color: '#aaadad',
+              color: '#29293b',
               label: {
                 show: true,
                 position: 'center'

@@ -13,7 +13,7 @@ import * as echart from '../../echarts';
 })
 export class ReviewComponent implements OnInit, AfterContentInit {
   curTab: string;
-  private pfmctrendUrl = 'performancereview/perf_trend';
+  private pfmctrendUrl = 'achievementanls/month_trend';
   applyOption: any;
   loanOption: any;
   overdueOption: any;
@@ -51,9 +51,10 @@ export class ReviewComponent implements OnInit, AfterContentInit {
 
   getPfmcTrend(): void {
     this.bdService
-        .getAll(this.pfmctrendUrl)
+        .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
+            console.log(res.data)
             let resData = res.data;
             let xAxisData = [];
             for (let item of resData.months) {
