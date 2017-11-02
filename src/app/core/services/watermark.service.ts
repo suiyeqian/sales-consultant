@@ -12,7 +12,7 @@ export class WaterMarkService {
     wmk_x_space: 10, // x轴间隔
     wmk_y_space: 100, // y轴间隔
     wmk_font: '微软雅黑',
-    wmk_color: '#ccc',
+    wmk_color: 'rgba(255, 255, 255, 0.93)',
     wmk_fontsize: '.32rem',
     wmk_alpha: 0.12, // 水印透明度
     wmk_width: Math.max(document.body.scrollWidth, document.body.clientWidth) > 450 ? 200 : 120, // 水印宽

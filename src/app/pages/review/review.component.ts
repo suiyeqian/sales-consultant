@@ -23,7 +23,8 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   teamMbs = [];
   products = ['工薪贷', '按揭贷', '精英贷', '保单贷', '生意贷'];
   passRateOption: any;
-  private pfmccompositionUrl = 'performancereview/perf_form';
+
+  private pfmccompositionUrl = 'productanls/total_achv';
   legendList = [];
   legendColorList = ['#f88681', '#fada71', '#3ae3bb', '#11b8ff', '#919af2', '#05e8e9'];
   applyOrderOption: any;
@@ -40,7 +41,6 @@ export class ReviewComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.changeTab('track');
-    this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 100);
   }
 
   ngAfterContentInit() {
@@ -54,12 +54,12 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
-            console.log(res.data)
             let resData = res.data;
             let xAxisData = [];
             for (let item of resData.months) {
               xAxisData.push(item + '月');
             }
+            // 申请情况
             this.applyOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
             this.applyOption.xAxis[0].data = xAxisData;
             this.applyOption.legend.data = ['申请单量', '放款单量', '通过率'];
@@ -70,29 +70,38 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             this.applyOption.series[1].data =
               [resData.m1Number, resData.m2Number, resData.m3Number, resData.m4Number, resData.m5Number, resData.m6Number].reverse();
             this.applyOption.series[2].name = '通过率';
+            this.applyOption.yAxis[1].axisLabel.formatter = '{value} %';
             this.applyOption.series[2].data =
-              [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt].reverse();
-
+              [resData.m1PassRate, resData.m2PassRate, resData.m3PassRate, resData.m4PassRate,
+                resData.m5PassRate, resData.m6PassRate].reverse();
+            // 放款情况
             this.loanOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
             this.loanOption.xAxis[0].data = xAxisData;
             this.loanOption.legend.data = ['放款单量', '放款金额'];
             this.loanOption.series[1].data =
               [resData.m1Number, resData.m2Number, resData.m3Number, resData.m4Number, resData.m5Number, resData.m6Number].reverse();
             this.loanOption.series[2].name = '放款金额';
+            this.loanOption.yAxis[1].axisLabel.formatter = function (value) {
+                return value / 10000;
+              };
             this.loanOption.series[2].data =
               [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt].reverse();
-
+            // 逾期情况
             this.overdueOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
             this.overdueOption.xAxis[0].data = xAxisData;
             this.overdueOption.legend.data = ['逾期单量', '逾期金额'];
             this.overdueOption.series[0].name = '逾期单量';
             this.overdueOption.series[0].data =
-              [resData.m1AppNumber, resData.m2AppNumber, resData.m3AppNumber, resData.m4AppNumber,
-                 resData.m5AppNumber, resData.m6AppNumber].reverse();
+              [resData.m1OvdNumber, resData.m2OvdNumber, resData.m3OvdNumber, resData.m4OvdNumber,
+                 resData.m5OvdNumber, resData.m6OvdNumber].reverse();
             this.overdueOption.series[2].name = '逾期金额';
+            this.overdueOption.yAxis[1].axisLabel.formatter = function (value) {
+                return value / 10000;
+              };
             this.overdueOption.series[2].data =
-              [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt].reverse();
+              [resData.m1OvdAmt, resData.m2OvdAmt, resData.m3OvdAmt, resData.m4OvdAmt, resData.m5OvdAmt, resData.m6OvdAmt].reverse();
           }
+          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });
   }
 
@@ -158,39 +167,34 @@ export class ReviewComponent implements OnInit, AfterContentInit {
 
   getPfmcComposition(): void {
     this.bdService
-        .getAll(this.pfmccompositionUrl)
+        .getDataByPost(this.pfmccompositionUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
-            let commonOption = echart.PieChartOptions;
-            commonOption.color = this.legendColorList;
-            let deepCopy = function(parent, clone) {
-              let child = clone || {};
-              for (let i in parent) {
-                if (!parent.hasOwnProperty(i)) {
-                  continue;
-                }
-                if (typeof parent[i] === 'object') {
-                  child[i] = (parent[i].constructor === Array) ? [] : {};
-                  deepCopy(parent[i], child[i]);
-                } else {
-                  child[i] = parent[i];
-                }
-              }
-              return child;
-            };
+            // 产品份额
+            echart.PieChartOptions.color = this.legendColorList;
             let loanOrderChartData = [];
             let cntAmtChartData = [];
             let legendList = [];
+            let avgAmtArrays = [];
             for (let item of res.data) {
-              legendList.push(item.prodName);
-              loanOrderChartData.push({value: item.loanNum, name: item.prodName});
-              cntAmtChartData.push({value: item.cntAmt, name: item.prodName});
+              legendList.push(item.productName);
+              loanOrderChartData.push({value: item.appNum, name: item.productName});
+              cntAmtChartData.push({value: item.loanAmt, name: item.productName});
+              avgAmtArrays.push(item.avgAmt);
             }
             this.legendList = legendList;
-            this.applyOrderOption = deepCopy(commonOption, {});
+            this.applyOrderOption = this.cmnFn.deepCopy(echart.PieChartOptions, {});
             this.applyOrderOption.series[0].data = loanOrderChartData;
-            this.loanAmtOption = deepCopy(commonOption, {});
+            this.loanAmtOption = this.cmnFn.deepCopy(echart.PieChartOptions, {});
             this.loanAmtOption.series[0].data = cntAmtChartData;
+            // 件均金额
+            this.avgAmtOption = this.cmnFn.deepCopy(echart.BarChartOptions, {});
+            this.avgAmtOption.xAxis[0].data = legendList;
+            this.avgAmtOption.yAxis[0].axisLabel.formatter = function (value) {
+                return value / 10000;
+              };
+            this.avgAmtOption.series[0].name = '件均金额';
+            this.avgAmtOption.series[0].data = avgAmtArrays;
           }
         });
   }
@@ -214,16 +218,6 @@ export class ReviewComponent implements OnInit, AfterContentInit {
     }
   }
 
-  getAvgAmt(): void {
-    this.avgAmtOption = this.cmnFn.deepCopy(echart.BarChartOptions, {});
-    this.avgAmtOption.xAxis[0].data = this.products;
-    this.avgAmtOption.series[0].name = '件均金额';
-    let datas = [];
-    for (let item of this.products) {
-      datas.push(Math.floor(Math.random() * 10));
-    }
-    this.avgAmtOption.series[0].data = datas;
-  }
 
   changeTab(type): void {
     if (type === this.curTab) {
@@ -240,7 +234,6 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         this.getPassRate();
         this.getPfmcComposition();
         this.getOverdueRate();
-        this.getAvgAmt();
         break;
       default:
         this.getPfmcTrend();

@@ -1,7 +1,7 @@
 export const PieChartOptions = {
   tooltip : {
     trigger: 'item',
-    formatter: '{b}<br/><span style="color:#fbcb04">{d}%</span>',
+    formatter: '{b}<br/><span style="color:#05e8e9">{d}%</span>',
     textStyle: { fontSize: 12 }
   },
   color: [],
