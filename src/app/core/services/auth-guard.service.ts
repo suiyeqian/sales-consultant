@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate {
   // private apiUrl = window.location.origin;
   private requestUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/staff/sso';
   private redirectUri = encodeURIComponent(this.apiUrl + '/bdsa/').toLowerCase();
-  private appId = 1;
+  private appId = 2;
   private redirectUrl = this.apiUrl + '/servegateway/wxgateway/oauth2/authorize?appId=' + this.appId + '&redirectUri=' + this.redirectUri;
   headerObj = {
     'X-Requested-SystemCode' : 'neo_bdsa',

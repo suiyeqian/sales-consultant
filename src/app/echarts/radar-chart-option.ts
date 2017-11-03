@@ -1,6 +1,7 @@
 export const RadarChartOptions = {
   tooltip: {
     show: true,
+    textStyle: {},
     formatter: function (value) {}
   },
   radar: [

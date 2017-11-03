@@ -158,24 +158,36 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         .getDataByPost(this.tmCompUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
-            let indicator = [
-              {text: 'A', max: 5},
-              {text: 'B', max: 5},
-              {text: 'C', max: 5},
-              {text: 'D', max: 5},
-              {text: 'E', max: 5},
+            let codeArray = [
+              {name: '合同金额', code: 'S'},
+              {name: '申请单量', code: 'N'},
+              {name: '件均金额', code: 'A'},
+              {name: '通过率', code: 'P'},
+              {name: 'C-M2', code: 'C-M2'}
             ];
             let resData = res.data;
             for (let item of resData){
+              let indicator = [];
               let radarChartOpt = this.cmnFn.deepCopy(echart.RadarChartOptions, {});
-              radarChartOpt.radar[0].indicator = indicator;
               radarChartOpt.radar[0].radius = 60;
+              radarChartOpt.tooltip.textStyle.fontSize = 12;
               radarChartOpt.tooltip.position = 'top';
               let tooltipText = '';
               for (let data of item.dataList) {
+                for (let codeItem of codeArray) {
+                  if (data.name === codeItem.name) {
+                    data.code = codeItem.code
+                  }
+                }
+                indicator.push({text: data.code, max: 5});
                 radarChartOpt.series[0].data[0].value.push(data.value);
-                tooltipText += data.name + ': ' + data.origValue + '<br/>';
+                if (data.name === 'C-M2') {
+                  tooltipText += `${data.name}: ${data.origValue}<br/>`;
+                } else {
+                  tooltipText += `${data.name}(${data.code}): ${data.origValue}<br/>`;
+                }
               }
+              radarChartOpt.radar[0].indicator = indicator;
               radarChartOpt.tooltip.formatter = function() {
                 return tooltipText;
               };

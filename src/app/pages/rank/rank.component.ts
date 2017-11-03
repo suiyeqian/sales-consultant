@@ -35,9 +35,9 @@ export class RankComponent implements OnInit, AfterContentInit {
   }
 
   getMyRank(): void {
-    this.bdService
-        .getAll(this.myrankUrl)
-        .then((res) => {
+    // this.bdService
+    //     .getAll(this.myrankUrl)
+    //     .then((res) => {
           // if ( res.code === 0) {
             // let resData = res.data;
             let resData = {rank: 4, percent: 98};
@@ -50,18 +50,18 @@ export class RankComponent implements OnInit, AfterContentInit {
               this.imgUrl = '/assets/img/rank-bg.jpg';
             }
           // };
-        });
+        // });
   }
 
   getTopTen(): void {
-    this.bdService
-        .getAll(this.toptenUrl)
-        .then((res) => {
-          if ( res.code === 0) {
-            this.topTen = res.data;
-          };
-          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 160);
-        });
+    // this.bdService
+    //     .getAll(this.toptenUrl)
+    //     .then((res) => {
+    //       if ( res.code === 0) {
+    //         this.topTen = res.data;
+    //       };
+    //       this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 160);
+    //     });
   }
 
   changeTab(type): void {
