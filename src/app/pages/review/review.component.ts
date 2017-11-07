@@ -12,37 +12,37 @@ import * as echart from '../../echarts';
   styleUrls: ['./review.component.scss']
 })
 export class ReviewComponent implements OnInit, AfterContentInit {
+  deviceWidth = document.body.clientWidth;
   curTab: string;
   private pfmctrendUrl = 'achievementanls/month_trend';
   applyOption: any;
   loanOption: any;
   overdueOption: any;
+  private pfmcTotalUrl = 'achievementanls/year_achv';
+  pfmcTotal = {};
 
   private tmCapacityUrl = 'humananls/capacity_anls';
   capacityOption: any;
+  private tmSeniorityUrl = 'humananls/seniority_anls';
+  tmSeniority = [];
   private tmCompUrl = 'humananls/member_comp';
   teamMbs = [];
 
-  tmSeniority = [];
-
   legendList = [];
   legendColorList = ['#f88681', '#fada71', '#3ae3bb', '#11b8ff', '#919af2', '#05e8e9'];
-  products = ['工薪贷', '按揭贷', '精英贷', '保单贷', '生意贷'];
+  private prodctPandOUrl = 'productanls/month_trend';
   passRateOption: any;
   overdueRateOption: any;
-  private pfmccompositionUrl = 'productanls/total_achv';
+  private prodctCompositionUrl = 'productanls/total_achv';
   applyOrderOption: any;
   loanAmtOption: any;
   avgAmtOption: any;
-
-
 
   constructor(
     private bdService: BackendService,
     private waterMark: WaterMarkService,
     private cmnFn: CommonFnService,
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.changeTab('track');
@@ -67,13 +67,11 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             // 申请情况
             this.applyOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
             this.applyOption.xAxis[0].data = xAxisData;
-            this.applyOption.legend.data = ['申请单量', '放款单量', '通过率'];
+            this.applyOption.legend.data = ['申请单量', '通过率'];
             this.applyOption.yAxis[1].name = null;
             this.applyOption.series[0].data =
               [resData.m1AppNumber, resData.m2AppNumber, resData.m3AppNumber, resData.m4AppNumber,
                  resData.m5AppNumber, resData.m6AppNumber].reverse();
-            this.applyOption.series[1].data =
-              [resData.m1Number, resData.m2Number, resData.m3Number, resData.m4Number, resData.m5Number, resData.m6Number].reverse();
             this.applyOption.series[2].name = '通过率';
             this.applyOption.yAxis[1].axisLabel.formatter = '{value} %';
             this.applyOption.series[2].data =
@@ -96,6 +94,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             this.overdueOption.xAxis[0].data = xAxisData;
             this.overdueOption.legend.data = ['逾期单量', '逾期金额'];
             this.overdueOption.series[0].name = '逾期单量';
+            this.overdueOption.series[0].itemStyle.normal.color = '#4993d8';
             this.overdueOption.series[0].data =
               [resData.m1OvdNumber, resData.m2OvdNumber, resData.m3OvdNumber, resData.m4OvdNumber,
                  resData.m5OvdNumber, resData.m6OvdNumber].reverse();
@@ -107,6 +106,14 @@ export class ReviewComponent implements OnInit, AfterContentInit {
               [resData.m1OvdAmt, resData.m2OvdAmt, resData.m3OvdAmt, resData.m4OvdAmt, resData.m5OvdAmt, resData.m6OvdAmt].reverse();
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
+        });
+  }
+
+  getPfmcTotal(): void {
+    this.bdService
+        .getDataByPost(this.pfmcTotalUrl, {posId: localStorage.posId})
+        .then((res) => {
+          this.pfmcTotal = res.data;
         });
   }
 
@@ -145,15 +152,17 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   }
 
   getTmSeniority(): void {
-    this.tmSeniority = [
-      {mob: '0-2', appNum: 1, loanNum: 1, avgAmt: 20, passRate: 15},
-      {mob: '3-6', appNum: 1, loanNum: 1, avgAmt: 20, passRate: 15},
-      {mob: '7-12', appNum: 1, loanNum: 1, avgAmt: 20, passRate: 15},
-      {mob: '12+', appNum: 1, loanNum: 1, avgAmt: 20, passRate: 15},
-    ];
+    this.bdService
+        .getDataByPost(this.tmSeniorityUrl, {posId: localStorage.posId})
+        .then((res) => {
+          this.tmSeniority = res.data;
+        });
   }
 
   getTmComp(): void {
+    this.teamMbs = [];
+    let radius = Math.floor((this.deviceWidth - 120) / 4);
+    let radarHeight = 6 * 75 * (this.deviceWidth / 750);
     this.bdService
         .getDataByPost(this.tmCompUrl, {posId: localStorage.posId})
         .then((res) => {
@@ -169,14 +178,16 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             for (let item of resData){
               let indicator = [];
               let radarChartOpt = this.cmnFn.deepCopy(echart.RadarChartOptions, {});
-              radarChartOpt.radar[0].radius = 60;
-              radarChartOpt.tooltip.textStyle.fontSize = 12;
-              radarChartOpt.tooltip.position = 'top';
+              radarChartOpt.radar[0].radius = radius;
+              radarChartOpt.radar[0].name.textStyle.fontSize = 11;
+              radarChartOpt.radar[0].nameGap = 8;
+              radarChartOpt.tooltip.textStyle.fontSize = 10;
+              radarChartOpt.tooltip.position = 'bottom';
               let tooltipText = '';
               for (let data of item.dataList) {
                 for (let codeItem of codeArray) {
                   if (data.name === codeItem.name) {
-                    data.code = codeItem.code
+                    data.code = codeItem.code;
                   }
                 }
                 indicator.push({text: data.code, max: 5});
@@ -196,35 +207,50 @@ export class ReviewComponent implements OnInit, AfterContentInit {
                 radarChartOpt: radarChartOpt
               });
             };
-            // console.log(res.data);
-            this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' +
-             JSON.parse(localStorage.user).number }, 280 * Math.ceil(res.data.length / 2));
+            this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number },
+            radarHeight * (Math.ceil(this.teamMbs.length / 2) + 1));
           }
         });
   }
 
-  getPassRate(): void {
-    this.passRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
-    this.passRateOption.xAxis.data = ['1月', '2月', '3月', '4月', '5月', '6月'];
-    this.passRateOption.legend.data = this.products;
-    for (let item of this.products) {
-      let datas = [];
-      for (let i = 0; i < 6; i++) {
-        datas.push(Math.floor(Math.random() * 100));
-      }
-      this.passRateOption.series.push({
-        name: item,
-        type: 'line',
-        symbol: 'circle',
-        symbolSize: 8,
-        data: datas
-      });
-    }
+  getProdctPandO(): void {
+    this.bdService
+        .getDataByPost(this.prodctPandOUrl, {posId: localStorage.posId})
+        .then((res) => {
+          this.passRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
+          this.overdueRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
+          let xAxisData = [];
+          for (let month of res.data.months) {
+            xAxisData.push(month + '月');
+          }
+          this.passRateOption.xAxis.data = xAxisData;
+          this.overdueRateOption.xAxis.data = xAxisData;
+          let legendData = [];
+          for (let item of res.data.dataList){
+            legendData.push(item.productName);
+            this.passRateOption.series.push({
+              name: item.productName,
+              type: 'line',
+              symbol: 'circle',
+              symbolSize: 8,
+              data: [item.m6PassRate, item.m5PassRate, item.m4PassRate, item.m3PassRate, item.m2PassRate, item.m1PassRate]
+            });
+            this.overdueRateOption.series.push({
+              name: item.productName,
+              type: 'line',
+              symbol: 'circle',
+              symbolSize: 8,
+              data: [item.m6OvdRate, item.m5OvdRate, item.m4OvdRate, item.m3OvdRate, item.m2OvdRate, item.m1OvdRate]
+            });
+          }
+          this.passRateOption.legend.data = legendData;
+          this.overdueRateOption.legend.data = legendData;
+        });
   }
 
-  getPfmcComposition(): void {
+  getProdctComposition(): void {
     this.bdService
-        .getDataByPost(this.pfmccompositionUrl, {posId: localStorage.posId})
+        .getDataByPost(this.prodctCompositionUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
             // 产品份额
@@ -257,26 +283,6 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         });
   }
 
-  getOverdueRate(): void {
-    this.overdueRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
-    this.overdueRateOption.xAxis.data = ['1月', '2月', '3月', '4月', '5月', '6月'];
-    this.overdueRateOption.legend.data = this.products;
-    for (let item of this.products) {
-      let datas = [];
-      for (let i = 0; i < 6; i++) {
-        datas.push(Math.floor(Math.random() * 100));
-      }
-      this.overdueRateOption.series.push({
-        name: item,
-        type: 'line',
-        symbol: 'circle',
-        symbolSize: 8,
-        data: datas
-      });
-    }
-  }
-
-
   changeTab(type): void {
     if (type === this.curTab) {
       return;
@@ -289,12 +295,12 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         this.getTmComp();
         break;
       case 'produce':
-        this.getPassRate();
-        this.getPfmcComposition();
-        this.getOverdueRate();
+        this.getProdctPandO();
+        this.getProdctComposition();
         break;
       default:
         this.getPfmcTrend();
+        this.getPfmcTotal();
       }
   }
 }

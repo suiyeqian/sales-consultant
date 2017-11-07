@@ -6,9 +6,12 @@
   padding-left: 15px;
   padding-right: 15px;
 }
-.apply-chart-wrap, .loan-chart-wrap, .overdue-chart-wrap, .radar-chart-wrap, .avgAmt-chart-wrap {
+.apply-chart-wrap, .loan-chart-wrap, .overdue-chart-wrap, .avgAmt-chart-wrap {
   margin-top: -.9rem;
 }
+// .radar-chart-wrap {
+//   margin-top: -8px;
+// }
 .apply-chart, .loan-chart, .overdue-chart, .capacity-chart, .passRate-chart, .overdueRate-chart, .avgAmt-chart{
   height: 300px;
 }
@@ -53,8 +56,14 @@
 .seniority-item span:first-child{
   background-color: #d74b49;
 }
+.competitive-wrap .col-6:nth-child(odd){
+  padding-right: 5px;
+}
+.competitive-wrap .col-6:nth-child(even){
+  padding-left: 5px;
+}
 .radar-chart {
-  height: 6.8rem;
+  height: 6rem;
 }
 
 // 产品份额

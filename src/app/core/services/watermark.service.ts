@@ -62,8 +62,6 @@ export class WaterMarkService {
       this.dftSettings.wmk_x_space = Math.floor(allSpace_x / (this.dftSettings.wmk_cols - 1));
     }
     // 如果将水印行数设置为0，或水印行数设置过大，超过页面最大长度，则重新计算水印行数和水印y轴间隔
-    // let sumWidth_y = this.dftSettings.wmk_height * this.dftSettings.wmk_rows;
-    // let sumSpace_y = this.dftSettings.wmk_y_space * (this.dftSettings.wmk_rows - 1);
     // if (this.dftSettings.wmk_rows === 0 || (this.dftSettings.wmk_y + sumWidth_y + sumSpace_y > page_height)) {
       let containerHeight = page_height - this.dftSettings.wmk_y + addHeight;
       let pieceHeight = this.dftSettings.wmk_height + this.dftSettings.wmk_y_space;

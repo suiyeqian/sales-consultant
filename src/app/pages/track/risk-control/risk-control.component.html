@@ -62,11 +62,12 @@
           <td>{{member.name}}</td>
           <td>{{member.overDueNumber | number}}</td>
           <td>{{member.loanNumber | number}}</td>
-          <td>{{member.overDueAmt | number:'1.0-0'}}</td>
-          <td>{{member.loanAmt | number:'1.0-0'}}</td>
+          <td>{{posId == 2?member.overDueAmt:member.overDueAmt/10000 | number:'1.0-0'}}</td>
+          <td>{{posId == 2?member.loanAmt:member.loanAmt/10000 | number:'1.0-0'}}</td>
         </tr>
       </tbody>
     </table>
+    <p class="remark pull-right font-blue">* 金额单位：{{posId == 2?'元':'万元'}}</p>
   </div>
 
 </div>

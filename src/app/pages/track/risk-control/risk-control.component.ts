@@ -18,6 +18,7 @@ export class RiskControlComponent implements OnInit {
   cm2: number;
   private mbRiskUrl = 'performancetrack/member_risk';
   mbsRisk = [];
+  posId = localStorage.posId;
 
   constructor(
     private bdService: BackendService,
@@ -33,7 +34,7 @@ export class RiskControlComponent implements OnInit {
 
   getRiskcontrol(): void {
     this.bdService
-        .getDataByPost(this.riskcontrolUrl, {posId: localStorage.posId})
+        .getDataByPost(this.riskcontrolUrl, {posId: this.posId})
         .then((res) => {
           if ( res.code === 0) {
             let commonOption = echart.GaugeChartOptions;
@@ -57,7 +58,7 @@ export class RiskControlComponent implements OnInit {
 
   getMbRisk(): void {
     this.bdService
-        .getDataByPost(this.mbRiskUrl, {posId: localStorage.posId})
+        .getDataByPost(this.mbRiskUrl, {posId: this.posId})
         .then((res) => {
           if ( res.code === 0) {
             this.mbsRisk = res.data;

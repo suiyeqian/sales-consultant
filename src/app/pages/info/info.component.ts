@@ -2,6 +2,7 @@ import { Component, OnInit, AfterContentInit } from '@angular/core';
 
 import { BackendService } from '../../core/services/backend.service';
 import { WaterMarkService } from '../../core/services/watermark.service';
+import { CommonFnService } from '../../core/services/commonfn.service';
 
 import * as echart from '../../echarts';
 
@@ -14,13 +15,14 @@ export class InfoComponent implements OnInit, AfterContentInit {
   myInfo = Object.assign({});
   private userUrl = 'personalinfo/my_info';
   private mycompUrl = 'personalinfo/my_comp';
-  radarOption = {};
+  radarOption: any;
   private growthtrackUrl = 'personalinfo/growth_track';
   growthTrack = [];
 
   constructor(
     private bdService: BackendService,
-    private waterMark: WaterMarkService
+    private waterMark: WaterMarkService,
+    private cmnFn: CommonFnService
   ) {
   }
 
@@ -71,16 +73,16 @@ export class InfoComponent implements OnInit, AfterContentInit {
               indicator.push({text: item.name, max: 5});
               dataVals.push(item.value);
             }
-            echart.RadarChartOptions.radar[0].indicator = indicator;
-            echart.RadarChartOptions.series[0].data[0].value = dataVals;
-            echart.RadarChartOptions.tooltip.formatter = function(value) {
+            this.radarOption = this.cmnFn.deepCopy(echart.RadarChartOptions, {});
+            this.radarOption.radar[0].indicator = indicator;
+            this.radarOption.series[0].data[0].value = dataVals;
+            this.radarOption.tooltip.formatter = function(value) {
               let text = '';
               for (let item of resData) {
                 text += item.name + ': ' + item.origValue + '<br/>';
               }
               return text;
             };
-            this.radarOption = echart.RadarChartOptions;
           }
         });
   }
