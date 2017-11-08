@@ -121,7 +121,9 @@ export class ReviewComponent implements OnInit, AfterContentInit {
     this.bdService
         .getDataByPost(this.tmCapacityUrl, {posId: localStorage.posId})
         .then((res) => {
+          let chartDom = document.getElementById('capacityChart');
           if ( res.code === 0) {
+            chartDom.style['height'] = 36 * res.data.dataList.length + 'px';
             let resData = res.data;
             let xAxisData = [];
             let seriesData = [];
@@ -207,8 +209,10 @@ export class ReviewComponent implements OnInit, AfterContentInit {
                 radarChartOpt: radarChartOpt
               });
             };
-            this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number },
-            radarHeight * (Math.ceil(this.teamMbs.length / 2) + 1));
+            let waterMark = this.waterMark;
+            setTimeout(function(){
+              waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
+            }, 0);
           }
         });
   }
@@ -288,6 +292,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
       return;
     }
     this.curTab = type;
+    this.capacityOption = null;
     switch (type) {
       case 'human':
         this.getTmCapacity();

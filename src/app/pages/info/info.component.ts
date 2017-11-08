@@ -94,10 +94,11 @@ export class InfoComponent implements OnInit, AfterContentInit {
           if ( res.code === 0) {
             let resData = res.data;
             this.growthTrack = resData;
-            this.waterMark.load(
-              { wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number },
-              120 * resData.length);
           }
+          let waterMark = this.waterMark;
+          setTimeout(function(){
+            waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
+          }, 0);
         });
   }
 

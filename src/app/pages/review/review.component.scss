@@ -12,8 +12,11 @@
 // .radar-chart-wrap {
 //   margin-top: -8px;
 // }
-.apply-chart, .loan-chart, .overdue-chart, .capacity-chart, .passRate-chart, .overdueRate-chart, .avgAmt-chart{
+.apply-chart, .loan-chart, .overdue-chart, .passRate-chart, .overdueRate-chart, .avgAmt-chart{
   height: 300px;
+}
+.capacity-chart{
+  min-height: 150px;
 }
 .overdue-chart-wrap {
   margin-bottom: 1.15rem;

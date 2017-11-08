@@ -28,6 +28,7 @@ export class RiskControlComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
     this.getRiskcontrol();
     this.getMbRisk();
   }
@@ -62,8 +63,11 @@ export class RiskControlComponent implements OnInit {
         .then((res) => {
           if ( res.code === 0) {
             this.mbsRisk = res.data;
-            this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 400);
           }
+          let waterMark = this.waterMark;
+          setTimeout(function(){
+            waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
+          }, 0);
         });
   }
 }

@@ -48,7 +48,7 @@
   <div class="tab-human" *ngIf="curTab === 'human'">
     <div class="sub-title-wrap"><h4 class="sub-title">产能分析</h4></div>
     <div class="capacity-chart-wrap">
-      <div echarts [options]="capacityOption" class="capacity-chart"></div>
+      <div echarts [options]="capacityOption" class="capacity-chart" id="capacityChart"></div>
     </div>
     <div class="sub-title-wrap"><h4 class="sub-title">年资段分析</h4></div>
     <div class="seniority-wrap text-center">
