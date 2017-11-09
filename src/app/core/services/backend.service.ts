@@ -13,7 +13,7 @@ export class BackendService {
   // private apiUrl = 'https://xszs-test.niudingfeng.com';
   // private apiUrl = window.location.origin;
   // private baseUrl = this.apiUrl + '/servegateway/rest/bdsa/';
-  private refreshUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/user/access_token';
+  private refreshUrl = `${this.apiUrl}/servegateway/rest/bduser/weixin/user/access_token`;
   firstOverdue = true;
   headersObj = {
     'X-Requested-Token': localStorage.getItem('accessToken'),
@@ -35,7 +35,7 @@ export class BackendService {
     this.headersObj['X-Requested-Nonce'] = this.MathRand();
     let jsonHeaders = new Headers(this.headersObj);
     let form = this.oauth.normalizeParameters(this.headersObj);
-    let result = 'GET' + '&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
+    let result = 'GET&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
     let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
     jsonHeaders.append('X-Requested-Authorization', signature);
     return this.http.get(this.baseUrl + url, {headers: jsonHeaders})
@@ -80,20 +80,24 @@ export class BackendService {
            .catch(this.handleError);
   }
 
-  MathRand() {
-    let Num = '';
-    for (let i = 0; i < 6; i++) {
-      Num += Math.floor(Math.random() * 10);
-    }
-    return Num;
-  }
-
-  urlEncode(obj: Object): string {
-    let urlSearchParams = new URLSearchParams();
-    for (let key of Object.keys(obj)) {
-        urlSearchParams.append(key, obj[key]);
-    }
-    return urlSearchParams.toString();
+  updateByJson(url: string, params: Object): Promise<any> {
+    this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
+    this.headersObj['X-Requested-Nonce'] = this.MathRand();
+    let jsonHeaders = new Headers(this.headersObj);
+    jsonHeaders.append('Content-Type', 'application/json');
+    return this.http.post(this.baseUrl + url, params, {headers: jsonHeaders})
+           .toPromise()
+           .then(response => {
+             //  if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+             //    localStorage.clear();
+             //    window.location.reload();
+             //  }
+              if (response.json().code === 50013) {
+                this.getNewToken();
+              }
+              return response.json();
+           })
+           .catch(this.handleError);
   }
 
   getNewToken() {
@@ -134,6 +138,22 @@ export class BackendService {
              })
              .catch(this.handleError);
     }
+  }
+
+  MathRand() {
+    let Num = '';
+    for (let i = 0; i < 6; i++) {
+      Num += Math.floor(Math.random() * 10);
+    }
+    return Num;
+  }
+
+  urlEncode(obj: Object): string {
+    let urlSearchParams = new URLSearchParams();
+    for (let key of Object.keys(obj)) {
+        urlSearchParams.append(key, obj[key]);
+    }
+    return urlSearchParams.toString();
   }
 
   private handleError(error: any): Promise<any> {

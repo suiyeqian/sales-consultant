@@ -94,17 +94,18 @@ export class MonthForecastComponent implements OnInit {
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;
+            resData.sections = [0, ...resData.sections];
             // 计算提成系数和位置及预计奖金
             for (let i = resData.sections.length - 1; i >= 0; i--) {
               if (+resData.cm2Rate === +resData.sections[i]) {
                 this.myRskCfPosition = this.positionPoint[i] + '%';
                 resData.coefficient = resData.coefficients[i];
-                resData.ctrlAwd = 1500 * resData.coefficient;
+                resData.ctrlAwd = +resData.cardinality * resData.coefficient;
                 break;
               }
               if (+resData.cm2Rate > +resData.sections[i]) {
                 resData.coefficient = resData.coefficients[i];
-                resData.ctrlAwd = 1500 * resData.coefficient;
+                resData.ctrlAwd = +resData.cardinality * resData.coefficient;
                 if (i === resData.sections.length - 1) {
                   this.myRskCfPosition = '76%';
                   break;

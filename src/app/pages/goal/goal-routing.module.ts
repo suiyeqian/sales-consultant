@@ -2,11 +2,13 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { GoalComponent } from './goal.component';
+import { GoalDataResolver }   from './goal-data-resolver.service';
 
 const goalRoutes: Routes = [
   {
     path: '',
     component: GoalComponent,
+    resolve: { goalData: GoalDataResolver }
   }
 ];
 
@@ -16,6 +18,9 @@ const goalRoutes: Routes = [
   ],
   exports: [
     RouterModule
+  ],
+  providers: [
+    GoalDataResolver
   ]
 })
 export class GoalRoutingModule {}
