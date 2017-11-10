@@ -62,11 +62,12 @@ i.bonus-status.show{
   font-size: .24rem;
   text-align: center;
   border-right: 1px solid #272a39;
-  &:nth-child(1) { width: 12%; }
-  &:nth-child(2) { width: 15%; }
-  &:nth-child(3) { width: 18%; }
-  &:nth-child(4) { width: 21%; }
-  &:last-child { width: 28%; border-right-width: 0 }
+  &:nth-child(1) { width: 11%; }
+  &:nth-child(2) { width: 13%; }
+  &:nth-child(3) { width: 15%; }
+  &:nth-child(4) { width: 17%; }
+  &:nth-child(5) { width: 20%; }
+  &:last-child { width: 24%; border-right-width: 0 }
 }
 .interval-num{
   font-size: .24rem;
@@ -76,11 +77,11 @@ i.bonus-status.show{
     position: absolute;
     top:.23rem;
     left: -1%;
-    &:nth-child(2){ left: 11% }
-    &:nth-child(3){ left: 24.5% }
-    &:nth-child(4){ left: 43% }
-    &:nth-child(5){ left: 64% }
-    &:nth-child(6){ left: 95% }
+    &:nth-child(2){ left: 9.5% }
+    &:nth-child(3){ left: 22% }
+    &:nth-child(4){ left: 36.5% }
+    &:nth-child(5){ left: 54% }
+    &:nth-child(6){ left: 73% }
   }
 }
 #my-percent{

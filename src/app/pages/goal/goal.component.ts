@@ -95,15 +95,18 @@ export class GoalComponent implements OnInit, AfterContentInit {
         .then((res) => {
           if (res.code === 0) {
             console.log(res);
-            alert('保存成功');
+            alert('设定成功');
           } else {
-            alert(res.msg);
+            alert(`设定失败：${res.msg}` );
           }
         });
   }
 
   reset() {
-    this.setForm();
+    let r = confirm('确定重置吗？');
+    if (r === true) {
+      this.setForm();
+    }
   }
 
 }

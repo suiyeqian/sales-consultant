@@ -11,7 +11,7 @@ export class MonthForecastComponent implements OnInit {
   myPosId = localStorage.posId;
   private achieveforecastUrl = 'performancetrack/achievement_forecast';
   achieveforecast = Object.assign({});
-  private positionPoint = [3.6, 14.4, 28.6, 45.5, 65.2];
+  private positionPoint = [3.6, 13.4, 25.7, 39.7, 55.7, 74.3];
   myPctPosition: string;
   myRealPctPosition: string;
   bonusShow = false;
@@ -42,6 +42,7 @@ export class MonthForecastComponent implements OnInit {
           if ( res.code === 0) {
             let resData = res.data;
             // 计算提成系数和位置及预计奖金
+            // resData.expectAmt = 50000;
             let expectAmt = resData.expectAmt / 10000;
             for (let i = resData.sections.length - 1; i >= 0; i--) {
               if (+expectAmt === +resData.sections[i]) {
@@ -95,6 +96,7 @@ export class MonthForecastComponent implements OnInit {
           if ( res.code === 0) {
             let resData = res.data;
             resData.sections = [0, ...resData.sections];
+            resData.coefficients = [...resData.coefficients, 0];
             // 计算提成系数和位置及预计奖金
             for (let i = resData.sections.length - 1; i >= 0; i--) {
               if (+resData.cm2Rate === +resData.sections[i]) {
