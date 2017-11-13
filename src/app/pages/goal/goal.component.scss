@@ -91,9 +91,10 @@ select.form-control:not([size]):not([multiple]){
   vertical-align: super;
 }
 .slide-bar {
-  width: 70%;
+  width: 68%;
   display: inline-block;
   vertical-align: super;
+  margin-bottom: 0.12rem;
 }
 .slide-bar .ng2-nouislider {
   margin: 0;

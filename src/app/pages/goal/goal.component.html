@@ -23,9 +23,9 @@
             <!-- <i class="avatar"></i> -->
             <span class="member-name">{{item.name}}</span>
             <div class="slide-bar">
-              <nouislider class [connect]="[true,false]" [disabled]="goalForm.controls.goalList.controls['goal'+item.id].disabled" [formControl]="goalForm.controls.goalList.controls['goal'+item.id]" [min]="0" [max]="100" [step]="1" [tooltips]=" true" (ngModelChange)="rateChange()"></nouislider>
+              <nouislider [connect]="[true,false]" [disabled]="goalForm.controls.goalList.controls[item.id].disabled" [formControl]="goalForm.controls.goalList.controls[item.id]" [min]="0" [max]="100" [step]="1" [tooltips]=" true" (ngModelChange)="rateChange()"></nouislider>
             </div>
-            <span class="pull-right goal-val">{{formDataset.goalAmt * goalForm.controls.goalList.value['goal'+item.id]/1000000 |number}}</span>
+            <span class="pull-right goal-val">{{formDataset.goalAmt * goalForm.controls.goalList.value[item.id]/1000000 |number:'1.0-0'}}</span>
           </div>
         </div>
       </div>

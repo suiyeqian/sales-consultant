@@ -1,13 +1,15 @@
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { GoalComponent } from './goal.component';
-import { GoalDataResolver }   from './goal-data-resolver.service';
+import { CanDeactivateGuard } from './can-deactivate-guard.service';
+import { GoalDataResolver } from './goal-data-resolver.service';
 
 const goalRoutes: Routes = [
   {
     path: '',
     component: GoalComponent,
+    canDeactivate: [CanDeactivateGuard],
     resolve: { goalData: GoalDataResolver }
   }
 ];
@@ -20,7 +22,8 @@ const goalRoutes: Routes = [
     RouterModule
   ],
   providers: [
-    GoalDataResolver
+    GoalDataResolver,
+    CanDeactivateGuard
   ]
 })
 export class GoalRoutingModule {}

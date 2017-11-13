@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 
 import { BackendService } from '../../core/services/backend.service';
 import { WaterMarkService } from '../../core/services/watermark.service';
@@ -45,10 +46,20 @@ export class GoalComponent implements OnInit, AfterContentInit {
     }
   }
 
+  canDeactivate(): Observable<boolean> | boolean {
+    let editData = this.goalForm.controls.goalList.value;
+    for (let item of this.formDataset.goalList) {
+      if (item.rate !== editData[item.id]) {
+        return Observable.of(window.confirm('页面有修改尚未提交，确定离开?'));
+      }
+    }
+    return true;
+  }
+
   setForm(): void {
     let initForm = Object.assign({});
     for (let item of this.formDataset.goalList) {
-      initForm['goal' + item.id] = {value: item.rate, disabled: this.formDataset.isSet ? false : true};
+      initForm[item.id] = {value: item.rate, disabled: this.formDataset.isSet ? false : true};
     }
     this.goalForm = this.fb.group({
       month: this.formDataset.month,
@@ -73,7 +84,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
   countSum() {
     let sum = 0;
     for (let item of this.formDataset.goalList) {
-      sum += this.formDataset.goalAmt * this.goalForm.controls.goalList.value[`goal${item.id}`] / 100;
+      sum += this.formDataset.goalAmt * this.goalForm.controls.goalList.value[item.id] / 100;
     }
     this.goalSum = sum;
   }
@@ -87,7 +98,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
     for (let member of this.formDataset.goalList){
       body.goalList.push({
         id: member.id,
-        goalAmt: this.formDataset.goalAmt * this.goalForm.controls.goalList.value[`goal${member.id}`] / 100
+        goalAmt: this.formDataset.goalAmt * this.goalForm.controls.goalList.value[member.id] / 100
       });
     }
     this.bdService
