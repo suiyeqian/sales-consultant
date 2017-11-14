@@ -59,9 +59,9 @@ export class AuthGuard implements CanActivate {
         return true;
       } else {
         let user = {name: '马倩', number: 'xn087432'};
-        localStorage.setItem('accessToken', '7FXTSNFVVJ9W4tZbOjVPwMetL427JwTQRVRFOzwgg1Y7KxZwhDwAoPiWs0GLiLdNtagZuPXXBuxMjbRkFDeQ');
+        localStorage.setItem('accessToken', '7h24MxwdCNJK92XoYjDBoglUKHBS93DsdppaVx2jX20fC9MHZHlobXrPQ8iGdcTwObh4zE6wEqQYqqhNuEvH');
         localStorage.setItem('weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
-        localStorage.setItem('refreshToken', 'MfZgctiBVI3lRiEQVc7BTqPzIb5uCjTYb0SdihxJ8BFXI28izxdNSMn89062i16GGHv2LHyt6DtbfORWP5fC');
+        localStorage.setItem('refreshToken', 'DRLINGt9AznRfz1i7xsVUER5Yd3lEzMy86jDqq8x08q9DVwaZDCLAPO6E5ak2EjQAHESEQoEOi0OQjTscK53');
         localStorage.setItem('user', JSON.stringify(user));
         return true;
         // localStorage.clear();

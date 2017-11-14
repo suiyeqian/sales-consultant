@@ -8,11 +8,11 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BackendService {
-  private apiUrl = 'http://10.17.2.161:9994/bdss/rest/';
+  private apiUrl = 'http://10.17.2.161:9994/bdss/';
   private baseUrl = this.apiUrl;
   // private apiUrl = 'https://xszs-test.niudingfeng.com';
   // private apiUrl = window.location.origin;
-  // private baseUrl = this.apiUrl + '/servegateway/rest/bdsa/';
+  // private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
   private refreshUrl = `${this.apiUrl}/servegateway/rest/bduser/weixin/user/access_token`;
   firstOverdue = true;
   headersObj = {
@@ -30,7 +30,6 @@ export class BackendService {
   }
 
   getAll(url: string ): Promise<any> {
-    // console.log(Math.floor(new Date().getTime() / 1000).toString(), this.MathRand());
     this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
     this.headersObj['X-Requested-Nonce'] = this.MathRand();
     let jsonHeaders = new Headers(this.headersObj);
@@ -60,6 +59,11 @@ export class BackendService {
     this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
     this.headersObj['X-Requested-Nonce'] = this.MathRand();
     let jsonHeaders = new Headers(this.headersObj);
+    let obj = Object.assign({}, this.headersObj, params);
+    let form = this.oauth.normalizeParameters(obj);
+    let result = 'POST&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
+    let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
+    jsonHeaders.append('X-Requested-Authorization', signature);
     jsonHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
     let body = this.urlEncode(params);
     return this.http.post(this.baseUrl + url, body, {headers: jsonHeaders})
@@ -84,6 +88,11 @@ export class BackendService {
     this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
     this.headersObj['X-Requested-Nonce'] = this.MathRand();
     let jsonHeaders = new Headers(this.headersObj);
+    let obj = Object.assign({}, this.headersObj, params);
+    let form = this.oauth.normalizeParameters(obj);
+    let result = 'POST&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
+    let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
+    jsonHeaders.append('X-Requested-Authorization', signature);
     jsonHeaders.append('Content-Type', 'application/json');
     return this.http.post(this.baseUrl + url, params, {headers: jsonHeaders})
            .toPromise()
