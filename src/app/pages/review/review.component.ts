@@ -66,31 +66,34 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             }
             // 申请情况
             this.applyOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+            this.applyOption.series.splice(1, 1);
             this.applyOption.xAxis[0].data = xAxisData;
             this.applyOption.legend.data = ['申请单量', '通过率'];
-            this.applyOption.yAxis[1].name = null;
             this.applyOption.series[0].data =
               [resData.m1AppNumber, resData.m2AppNumber, resData.m3AppNumber, resData.m4AppNumber,
                  resData.m5AppNumber, resData.m6AppNumber].reverse();
-            this.applyOption.series[2].name = '通过率';
+            this.applyOption.series[1].name = '通过率';
             this.applyOption.yAxis[1].axisLabel.formatter = '{value} %';
-            this.applyOption.series[2].data =
+            this.applyOption.yAxis[1].name = null;
+            this.applyOption.series[1].data =
               [resData.m1PassRate, resData.m2PassRate, resData.m3PassRate, resData.m4PassRate,
                 resData.m5PassRate, resData.m6PassRate].reverse();
             // 放款情况
             this.loanOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+            this.loanOption.series.splice(0, 1);
             this.loanOption.xAxis[0].data = xAxisData;
             this.loanOption.legend.data = ['放款单量', '放款金额'];
-            this.loanOption.series[1].data =
+            this.loanOption.series[0].data =
               [resData.m1Number, resData.m2Number, resData.m3Number, resData.m4Number, resData.m5Number, resData.m6Number].reverse();
-            this.loanOption.series[2].name = '放款金额';
             this.loanOption.yAxis[1].axisLabel.formatter = function (value) {
                 return value / 10000;
               };
-            this.loanOption.series[2].data =
+            this.loanOption.series[1].name = '放款金额';
+            this.loanOption.series[1].data =
               [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt].reverse();
             // 逾期情况
             this.overdueOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+            this.overdueOption.series.splice(1, 1);
             this.overdueOption.xAxis[0].data = xAxisData;
             this.overdueOption.legend.data = ['逾期单量', '逾期金额'];
             this.overdueOption.series[0].name = '逾期单量';
@@ -98,11 +101,11 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             this.overdueOption.series[0].data =
               [resData.m1OvdNumber, resData.m2OvdNumber, resData.m3OvdNumber, resData.m4OvdNumber,
                  resData.m5OvdNumber, resData.m6OvdNumber].reverse();
-            this.overdueOption.series[2].name = '逾期金额';
+            this.overdueOption.series[1].name = '逾期金额';
             this.overdueOption.yAxis[1].axisLabel.formatter = function (value) {
-                return value / 10000;
-              };
-            this.overdueOption.series[2].data =
+              return value / 10000;
+            };
+            this.overdueOption.series[1].data =
               [resData.m1OvdAmt, resData.m2OvdAmt, resData.m3OvdAmt, resData.m4OvdAmt, resData.m5OvdAmt, resData.m6OvdAmt].reverse();
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });

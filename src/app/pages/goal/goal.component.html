@@ -34,13 +34,14 @@
         <p *ngIf="formDataset.goalAmt<goalSum">
           超出团队目标<span class="bold font-blue">{{goalSum - formDataset.goalAmt|number}}</span>元
         </p>
+        <p *ngIf="formDataset.goalAmt == goalSum"> 已达到目标金额 </p>
         <p *ngIf="formDataset.goalAmt>goalSum">
           低于团队目标<span class="font-red bold">{{formDataset.goalAmt - goalSum|number}}</span>元
         </p>
       </div>
       <div class="text-center">
         <button type="submit" class="btn btn-confirm" [disabled]="!formDataset.isSet">确定</button>
-        <button class="btn btn-cancel" (click)="reset()" type="button" [disabled]="!formDataset.isSet">重置</button>
+        <button class="btn btn-cancel" (click)="reset()" type="button" [disabled]="!formDataset.isSet||!formDataset.changed">重置</button>
       </div>
     </form>
   </div>

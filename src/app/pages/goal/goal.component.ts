@@ -32,6 +32,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
         .subscribe((data) => {
           this.goalData = data.goalData;
           this.formDataset = this.goalData[0];
+          this.formDataset.changed = false;
           this.setForm();
           let self = this;
           setTimeout(function(){
@@ -47,11 +48,8 @@ export class GoalComponent implements OnInit, AfterContentInit {
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    let editData = this.goalForm.controls.goalList.value;
-    for (let item of this.formDataset.goalList) {
-      if (item.rate !== editData[item.id]) {
-        return Observable.of(window.confirm('页面有修改尚未提交，确定离开?'));
-      }
+    if (this.checkDiff()) {
+      return Observable.of(window.confirm('页面有修改尚未提交，确定离开?'));
     }
     return true;
   }
@@ -65,7 +63,6 @@ export class GoalComponent implements OnInit, AfterContentInit {
       month: this.formDataset.month,
       goalList: this.fb.group(initForm)
     });
-    // console.log(this.goalForm);
     this.countSum();
   }
 
@@ -78,7 +75,17 @@ export class GoalComponent implements OnInit, AfterContentInit {
     let self = this;
     setTimeout(function(){
       self.countSum();
+      self.formDataset.changed = self.checkDiff();
     }, 0);
+  }
+
+  checkDiff(): boolean {
+    let editData = this.goalForm.controls.goalList.value;
+    for (let item of this.formDataset.goalList) {
+      if (item.rate !== editData[item.id]) {
+        return true;
+      }
+    }
   }
 
   countSum() {
@@ -105,7 +112,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
         .updateByJson(this.updateUrl, body)
         .then((res) => {
           if (res.code === 0) {
-            console.log(res);
+            this.reGetData();
             alert('设定成功');
           } else {
             alert(`设定失败：${res.msg}` );
@@ -113,9 +120,22 @@ export class GoalComponent implements OnInit, AfterContentInit {
         });
   }
 
+  reGetData() {
+    this.bdService
+        .getDataByPost(this.salegoalUrl, {posId: localStorage.posId}).then(res => {
+          if ( res.code === 0 ) {
+            this.goalData = res.data;
+            this.formDataset = this.goalData.find((item) => item.month === this.formDataset.month);
+            this.formDataset.changed = this.checkDiff();
+            this.setForm();
+          } else {
+            alert('系统错误，请刷新重试！');
+          }
+    });
+  }
+
   reset() {
-    let r = confirm('确定重置吗？');
-    if (r === true) {
+    if (window.confirm('确定重置吗?')) {
       this.setForm();
     }
   }
