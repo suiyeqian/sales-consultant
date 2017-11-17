@@ -153,6 +153,10 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             this.capacityOption.yAxis.data = yAxisData;
             this.capacityOption.series = seriesData;
           }
+          let waterMark = this.waterMark;
+          setTimeout(function(){
+            waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
+          }, 0);
         });
   }
 

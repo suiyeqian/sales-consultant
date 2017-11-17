@@ -10,11 +10,11 @@ export class AuthGuard implements CanActivate {
   private apiUrl = 'https://xszs-test.niudingfeng.com';
   // private apiUrl = window.location.origin;
   private requestUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/staff/sso';
-  private redirectUri = encodeURIComponent(this.apiUrl + '/bdsa/').toLowerCase();
+  private redirectUri = encodeURIComponent(this.apiUrl + '/bdss/').toLowerCase();
   private appId = 2;
   private redirectUrl = this.apiUrl + '/servegateway/wxgateway/oauth2/authorize?appId=' + this.appId + '&redirectUri=' + this.redirectUri;
   headerObj = {
-    'X-Requested-SystemCode' : 'neo_bdsa',
+    'X-Requested-SystemCode' : 'neo_bdss',
     'X-Requested-APICode': 'staff_weixin_sso',
     'X-Requested-Timestamp': Math.floor(new Date().getTime() / 1000),
     'X-Requested-Nonce': Math.floor(new Date().getTime() / 1000),
@@ -84,7 +84,6 @@ export class AuthGuard implements CanActivate {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log(error.json().message || error);
-    return Promise.reject(error.json().message || error);
+    return Promise.reject(error.message || error);
   }
 }

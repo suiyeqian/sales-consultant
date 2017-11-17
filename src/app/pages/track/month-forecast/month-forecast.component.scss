@@ -22,6 +22,9 @@ i.bonus-status.show{
   font-size: .4rem;
   margin-bottom: 1.52rem;
 }
+.performance-forecast.no-margin-btm{
+  margin-bottom: 0;
+}
 .forecast-list {
   margin-top: -.15rem;
 }
@@ -41,7 +44,7 @@ i.bonus-status.show{
 
 .pay-percent{
   position: relative;
-  padding: 0 .3rem;
+  padding: 0 3.6%;
   margin-bottom: 1.33rem;
   margin-top: 1.33rem;
 }
@@ -83,6 +86,22 @@ i.bonus-status.show{
     &:nth-child(5){ left: 54% }
     &:nth-child(6){ left: 73% }
   }
+}
+.eighth-bar.pay-percent{
+  margin-top: .8rem;
+  margin-bottom: 1.53rem;
+}
+.eighth-bar .royalty-coefficient{
+  width: 12.5%;
+}
+.eighth-bar .interval-num span{
+  &:nth-child(2){ left: 10% }
+  &:nth-child(3){ left: 22% }
+  &:nth-child(4){ left: 35.5% }
+  &:nth-child(5){ left: 48% }
+  &:nth-child(6){ left: 60% }
+  &:nth-child(7){ left: 71.5% }
+  &:nth-child(8){ left: 84% }
 }
 #my-percent{
   color: #fe4504;

@@ -11,7 +11,7 @@ export class MonthForecastComponent implements OnInit {
   myPosId = localStorage.posId;
   private achieveforecastUrl = 'performancetrack/achievement_forecast';
   achieveforecast = Object.assign({});
-  private positionPoint = [3.6, 13.4, 25.7, 39.7, 55.7, 74.3];
+  private positionPoint = [3.7, 15.3, 27, 38.5, 50, 61.6, 73.2, 85];
   myPctPosition: string;
   myRealPctPosition: string;
   bonusShow = false;
@@ -23,67 +23,37 @@ export class MonthForecastComponent implements OnInit {
   bonusSumShow = false;
   @Input() timeProgress: number;
 
-  constructor(
-    private bdService: BackendService
-  ) {
-  }
+  constructor( private bdService: BackendService) {}
 
   ngOnInit() {
     this.getAchieveForecast();
     if (this.myPosId === '2') {
+      this.positionPoint = [3.7, 13.4, 25.7, 39.7, 55.7, 74.3];
       this.getRiskCoff();
     }
   }
 
   getAchieveForecast(): void {
     this.bdService
-        .getDataByPost(this.achieveforecastUrl, {posId: localStorage.posId})
+        .getDataByPost(this.achieveforecastUrl, {posId: this.myPosId})
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;
             // 计算提成系数和位置及预计奖金
             // resData.expectAmt = 50000;
-            let expectAmt = resData.expectAmt / 10000;
-            for (let i = resData.sections.length - 1; i >= 0; i--) {
-              if (+expectAmt === +resData.sections[i]) {
-                this.myPctPosition = this.positionPoint[i] + '%';
-                resData.coefficient = resData.coefficients[i];
-                resData.royaltyAmt = resData.expectAmt * resData.coefficient / 100;
-                break;
-              }
-              if (+expectAmt > +resData.sections[i]) {
-                resData.coefficient = resData.coefficients[i];
-                resData.royaltyAmt = resData.expectAmt * resData.coefficient / 100;
-                if (i === resData.sections.length - 1) {
-                  this.myPctPosition = '76%';
-                  break;
-                }
-                let interval_n = +resData.sections[i + 1] - resData.sections[i];
-                let interval_p = +this.positionPoint[i + 1] - this.positionPoint[i];
-                this.myPctPosition = +this.positionPoint[i] + (expectAmt - resData.sections[i]) * interval_p / interval_n + '%';
-                break;
-              }
-            }
+            let expectAmt = this.myPosId === '2' ? (resData.expectAmt / 10000) : resData.totalScore;
+            [resData.coefficient, this.myPctPosition] =
+              this.getCoffAndPos(resData.sections, resData.coefficients, expectAmt);
+            resData.royaltyAmt = this.myPosId === '2' ?
+              resData.expectAmt * resData.coefficient / 100 : resData.cardinality * resData.coefficient;
             // 计算已完成的提成系数的位置及已完成奖金
-            let cmpeAmt = resData.cmpeAmt / 10000;
-            for (let i = resData.sections.length - 1; i >= 0; i--) {
-              if (+cmpeAmt === +resData.sections[i]) {
-                this.myRealPctPosition = this.positionPoint[i] + '%';
-                resData.cmpeBonus = resData.cmpeAmt * resData.coefficients[i] / 100;
-                break;
-              }
-              if (+cmpeAmt > +resData.sections[i]) {
-                resData.cmpeBonus = resData.cmpeAmt * resData.coefficients[i] / 100;
-                if (i === resData.sections.length - 1) {
-                  this.myRealPctPosition = '71%';
-                  break;
-                }
-                let interval_n = +resData.sections[i + 1] - resData.sections[i];
-                let interval_p = +this.positionPoint[i + 1] - this.positionPoint[i];
-                this.myRealPctPosition = +this.positionPoint[i] + (cmpeAmt - resData.sections[i]) * interval_p / interval_n + '%';
-                break;
-              }
+            if (this.myPosId === '2') {
+              let cmpeAmt = resData.cmpeAmt / 10000;
+              [resData.realCoefficient, this.myRealPctPosition] =
+                this.getCoffAndPos(resData.sections, resData.coefficients, cmpeAmt);
+              resData.cmpeBonus = resData.cmpeAmt * resData.realCoefficient / 100;
             }
+
             this.achieveforecast = resData;
           }
         });
@@ -97,30 +67,34 @@ export class MonthForecastComponent implements OnInit {
             let resData = res.data;
             resData.sections = [0, ...resData.sections];
             resData.coefficients = [...resData.coefficients, 0];
-            // 计算提成系数和位置及预计奖金
-            for (let i = resData.sections.length - 1; i >= 0; i--) {
-              if (+resData.cm2Rate === +resData.sections[i]) {
-                this.myRskCfPosition = this.positionPoint[i] + '%';
-                resData.coefficient = resData.coefficients[i];
-                resData.ctrlAwd = +resData.cardinality * resData.coefficient;
-                break;
-              }
-              if (+resData.cm2Rate > +resData.sections[i]) {
-                resData.coefficient = resData.coefficients[i];
-                resData.ctrlAwd = +resData.cardinality * resData.coefficient;
-                if (i === resData.sections.length - 1) {
-                  this.myRskCfPosition = '76%';
-                  break;
-                }
-                let interval_n = +resData.sections[i + 1] - resData.sections[i];
-                let interval_p = +this.positionPoint[i + 1] - this.positionPoint[i];
-                this.myRskCfPosition = +this.positionPoint[i] + (resData.cm2Rate - resData.sections[i]) * interval_p / interval_n + '%';
-                break;
-              }
-            }
+            [resData.coefficient, this.myRskCfPosition] =
+              this.getCoffAndPos(resData.sections, resData.coefficients, resData.cm2Rate);
+            resData.ctrlAwd = +resData.cardinality * resData.coefficient;
             this.riskCoff = resData;
           }
         });
   }
 
+  getCoffAndPos( sectionArr, coffArr,  slideNum ): Array<any> {
+    let coefficient, position;
+    for (let i = sectionArr.length - 1; i >= 0; i--) {
+      if (+slideNum === +sectionArr[i]) {
+        position = this.positionPoint[i] + '%';
+        coefficient = coffArr[i];
+        break;
+      }
+      if (+slideNum > +sectionArr[i]) {
+        coefficient = coffArr[i];
+        if (i === sectionArr.length - 1) {
+          position = 5 + sectionArr[i] + '%';
+          break;
+        }
+        let interval_n = +sectionArr[i + 1] - sectionArr[i];
+        let interval_p = +this.positionPoint[i + 1] - this.positionPoint[i];
+        position = +this.positionPoint[i] + (slideNum - sectionArr[i]) * interval_p / interval_n + '%';
+        break;
+      }
+    }
+    return [coefficient, position];
+  }
 }

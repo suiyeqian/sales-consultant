@@ -17,7 +17,7 @@ export class BackendService {
   firstOverdue = true;
   headersObj = {
     'X-Requested-Token': localStorage.getItem('accessToken'),
-    'X-Requested-SystemCode' : 'neo_bdsa',
+    'X-Requested-SystemCode' : 'neo_bdss',
     'X-Requested-DeviceId':  localStorage.getItem('weiXinDeviceId'),
     'X-Requested-APICode': 'access_token_weixin_device',
     'X-Requested-Version': '1.0'
@@ -166,7 +166,7 @@ export class BackendService {
   }
 
   private handleError(error: any): Promise<any> {
-    console.log(error.json().message || error);
-    return Promise.reject(error.json().message || error);
+    console.log(error);
+    return Promise.reject(error.message || error);
   }
 }
