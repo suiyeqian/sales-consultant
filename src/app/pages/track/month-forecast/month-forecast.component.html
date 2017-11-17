@@ -34,11 +34,11 @@
           <span *ngFor="let i of achieveforecast.sections">{{i}}</span>
         </div>
         <div id="my-real-percent" [style.left]="myRealPctPosition">
-          <div class="cursor"><img src="/assets/img/cursor-green.png" height="100%"></div>
+          <div class="cursor"><img src="assets/img/cursor-green.png" height="100%"></div>
           <span>{{achieveforecast.cmpeAmt/10000 | number:'1.0-2'}}万</span>
         </div>
         <div id="my-percent" [style.left]="myPctPosition">
-          <div class="cursor"><img src="/assets/img/cursor.png" height="100%"></div>
+          <div class="cursor"><img src="assets/img/cursor.png" height="100%"></div>
           <span>{{achieveforecast.expectAmt/10000 | number:'1.0-2'}}万</span>
         </div>
       </div>
@@ -81,7 +81,7 @@
           <span *ngFor="let i of riskCoff.sections">{{i}}%</span>
         </div>
         <div id="my-percent" [style.left]="myRskCfPosition">
-          <div class="cursor"><img src="/assets/img/cursor.png" height="100%"></div>
+          <div class="cursor"><img src="assets/img/cursor.png" height="100%"></div>
           <span>{{riskCoff.cm2Rate | number:'1.1-2'}}%</span>
         </div>
       </div>
@@ -135,7 +135,7 @@
           <span *ngFor="let i of achieveforecast.sections">{{i}}</span>
         </div>
         <div id="my-percent" [style.left]="myPctPosition">
-          <div class="cursor"><img src="/assets/img/cursor.png" height="100%"></div>
+          <div class="cursor"><img src="assets/img/cursor.png" height="100%"></div>
           <span>{{achieveforecast.totalScore}}</span>
         </div>
       </div>

@@ -40,7 +40,7 @@ select.form-control:not([size]):not([multiple]){
   padding: 0 .4rem;
   border-radius: 0;
   font-size: .45rem;
-  background: #101224 url("/assets/img/arrow.png") no-repeat scroll right center;
+  background: #101224 url("assets/img/arrow.png") no-repeat scroll right center;
   background-size: 1.4rem 1.1rem;
 }
 .goal-1 {
@@ -73,7 +73,7 @@ select.form-control:not([size]):not([multiple]){
 //   display: inline-block;
 //   // margin-left: .37rem;
 //   margin-right: .21rem;
-//   background-image: url(/assets/img/avatar.png);
+//   background-image: url(assets/img/avatar.png);
 //   background-size: 100% 100%;
 //   background-repeat: no-repeat;
 // }

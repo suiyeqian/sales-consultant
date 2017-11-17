@@ -89,10 +89,10 @@ export class RankComponent implements OnInit, AfterContentInit {
     this.curRank = type;
     if (this.myRank.rank < 4) {
       this.imgClass = 'rank-top';
-      this.imgUrl = '/assets/img/top-bg.jpg';
+      this.imgUrl = 'assets/img/top-bg.jpg';
     } else {
       this.imgClass = 'rank-other';
-      this.imgUrl = '/assets/img/rank-bg.jpg';
+      this.imgUrl = 'assets/img/rank-bg.jpg';
     }
   }
 }

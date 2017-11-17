@@ -10,6 +10,7 @@ import 'rxjs/add/operator/toPromise';
 export class BackendService {
   // private apiUrl = 'http://10.17.2.161:9994';
   // private baseUrl = this.apiUrl + '/bdss/';
+  // private apiUrl = 'http://10.17.2.110:8989';
   private apiUrl = window.location.origin;
   private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
   firstOverdue = true;
@@ -106,7 +107,7 @@ export class BackendService {
                  localStorage.setItem('refreshToken', res.json().data.refreshToken);
                  localStorage.setItem('weiXinDeviceId', res.json().data.weiXinDeviceId);
                  localStorage.setItem('user', JSON.stringify(res.json().data));
-                 localStorage.setItem('posId', res.json().data.posId ? res.json().data.posId : 2);
+                 localStorage.setItem('posId', res.json().data.posId ? res.json().data.posId : '2');
                }
                this.firstOverdue = true;
                window.location.reload();

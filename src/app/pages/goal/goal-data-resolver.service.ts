@@ -5,7 +5,7 @@ import { BackendService } from '../../core/services/backend.service';
 
 @Injectable()
 export class GoalDataResolver implements Resolve<any> {
-  private salegoalUrl = 'salegoal/member_goal ';
+  private salegoalUrl = 'salegoal/member_goal';
   constructor(private bdService: BackendService, private router: Router) {}
 
   resolve(): Promise<any> {

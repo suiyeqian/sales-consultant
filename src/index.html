@@ -10,9 +10,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
   <title><%= htmlWebpackPlugin.options.title %></title>
   <meta name="description" content="<%= htmlWebpackPlugin.options.title %>">
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/assets/css/index.css">
+  <!-- base url -->
+  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="assets/css/index.css">
   <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
   <script type="text/javascript">
     function onBridgeReady(){
@@ -35,10 +37,8 @@
       }
     },4000);
   </script>
-  <script src="/assets/js/index.min.js"></script>
+  <script src="assets/js/index.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <!-- base url -->
-  <base href="<%= htmlWebpackPlugin.options.metadata.baseUrl %>">
 
   <% if (htmlWebpackPlugin.options.metadata.isDevServer && htmlWebpackPlugin.options.metadata.HMR !== true) { %>
   <!-- Webpack Dev Server reload -->
@@ -52,10 +52,10 @@
 </head>
 <body>
   <div id="preloader">
-    <img src="/assets/img/logo.png" class="logo" alt="Logo">
+    <img src="assets/img/logo.png" class="logo" alt="Logo">
     <div class="slogan">
       <p><span class="bold">销 售 参 谋</span></p>
-      <img src="/assets/img/loading.gif" class="load-img" alt="Logo">
+      <img src="assets/img/loading.gif" class="load-img" alt="Logo">
     </div>
     <div class="wd-foot">
       <p>普惠战略及经营发展部 <span>|</span> 金服BI  <span>|</span> 牛鼎丰大数据  </p>

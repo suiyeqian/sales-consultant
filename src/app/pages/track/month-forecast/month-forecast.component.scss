@@ -8,14 +8,14 @@ i.bonus-status{
   display: inline-block;
   margin-left: .07rem;
   margin-bottom: .04rem;
-  background-image: url(/assets/img/eye-close.png);
+  background-image: url(assets/img/eye-close.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
 i.bonus-status.show{
   width: .36rem;
   height: .30rem;
-  background-image: url(/assets/img/eye.png);
+  background-image: url(assets/img/eye.png);
 }
 // 业绩预测
 .performance-forecast {

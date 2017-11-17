@@ -45,7 +45,7 @@ export class AuthGuard implements CanActivate {
             localStorage.setItem('user', JSON.stringify(res.data));
             localStorage.setItem('refreshToken', res.data.refreshToken);
             localStorage.setItem('weiXinDeviceId', res.data.weiXinDeviceId);
-            localStorage.setItem('posId', res.data.posId ? res.data.posId : 2);
+            localStorage.setItem('posId', res.data.posId ? res.data.posId : '2');
             this.router.navigate(['/pages/track']);
             return true;
           } else {
@@ -58,11 +58,11 @@ export class AuthGuard implements CanActivate {
         return true;
       } else {
         // let user = {name: '马倩', number: 'xn087432'};
-        // localStorage.setItem('accessToken', '7h24MxwdCNJK92XoYjDBoglUKHBS93DsdppaVx2jX20fC9MHZHlobXrPQ8iGdcTwObh4zE6wEqQYqqhNuEvH');
+        // localStorage.setItem('accessToken', 'MplpVZpuuqjQ0kD62e5cBGupjJaIVRwpF8h9qiU22NKiiUP2yxoENUsImPdOw2SuXTH2INvXYn82HP0TARGk');
         // localStorage.setItem('weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
-        // localStorage.setItem('refreshToken', 'DRLINGt9AznRfz1i7xsVUER5Yd3lEzMy86jDqq8x08q9DVwaZDCLAPO6E5ak2EjQAHESEQoEOi0OQjTscK53');
+        // localStorage.setItem('refreshToken', 'VV0na5FZ7wqfNNUkyAGKghwmiyf1UXi4w0FXEm9GNHjqG4Dolbz3Bpbc6i1RXd7czaoe3FDZjKgaHxBF3dYE');
         // localStorage.setItem('user', JSON.stringify(user));
-        // return true;
+        // localStorage.setItem('posId', '2');
         localStorage.clear();
         window.location.href = this.redirectUrl;
       }

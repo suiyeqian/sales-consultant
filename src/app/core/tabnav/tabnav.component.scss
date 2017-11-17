@@ -18,7 +18,7 @@ a.tab-button{
     display: block;
     margin: auto;
     margin-bottom: .07rem;
-    background-image: url(/assets/img/tab-icon.png);
+    background-image: url(assets/img/tab-icon.png);
     background-size: cover;
     background-repeat: no-repeat;
   }
@@ -41,6 +41,6 @@ a.tab-button{
 a.tab-button.active{
   color: #05e8e9;
   i{
-    background-image: url(/assets/img/tab-active-icon.png);
+    background-image: url(assets/img/tab-active-icon.png);
   }
 }
