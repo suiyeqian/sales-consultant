@@ -6,7 +6,6 @@ import { AuthorizeService } from './authorize.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  // private apiUrl = 'http://10.17.2.177:8886';
   private apiUrl = 'https://xszs-test.niudingfeng.com';
   // private apiUrl = window.location.origin;
   private requestUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/staff/sso';
@@ -21,7 +20,6 @@ export class AuthGuard implements CanActivate {
     'X-Requested-Version': '1.0'
   };
   private headers = new Headers(this.headerObj);
-  // private options = new RequestOptions({ headers: this.headers});
 
   constructor(
     private http: Http,
@@ -69,10 +67,6 @@ export class AuthGuard implements CanActivate {
       }
     }
   }
-
-  // canActivateChild() {
-  //   return this.canActivate();
-  // }
 
   getTicket(): Promise<any> {
     return this.http.post(this.requestUrl, 'appId=' + this.appId, { headers: this.headers })

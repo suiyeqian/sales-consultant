@@ -10,10 +10,8 @@ import 'rxjs/add/operator/toPromise';
 export class BackendService {
   private apiUrl = 'http://10.17.2.161:9994/bdss/';
   private baseUrl = this.apiUrl;
-  // private apiUrl = 'https://xszs-test.niudingfeng.com';
   // private apiUrl = window.location.origin;
   // private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
-  private refreshUrl = `${this.apiUrl}/servegateway/rest/bduser/weixin/user/access_token`;
   firstOverdue = true;
   headersObj = {
     'X-Requested-Token': localStorage.getItem('accessToken'),
@@ -22,91 +20,58 @@ export class BackendService {
     'X-Requested-APICode': 'access_token_weixin_device',
     'X-Requested-Version': '1.0'
   };
+  private refreshUrl = `${this.apiUrl}/servegateway/rest/bduser/weixin/user/access_token`;
 
   constructor(
     private http: Http,
     private router: Router,
-    private oauth: AuthorizeService) {
-  }
+    private oauth: AuthorizeService) { }
 
   getAll(url: string ): Promise<any> {
-    this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
-    this.headersObj['X-Requested-Nonce'] = this.MathRand();
-    let jsonHeaders = new Headers(this.headersObj);
-    let form = this.oauth.normalizeParameters(this.headersObj);
-    let result = 'GET&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
-    let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
-    jsonHeaders.append('X-Requested-Authorization', signature);
+    let jsonHeaders = this.setHeader('GET', url, {});
     return this.http.get(this.baseUrl + url, {headers: jsonHeaders})
                .toPromise()
-               .then(response => {
-                //  if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
-                //    localStorage.clear();
-                //    window.location.reload();
-                //  }
-                 if (response.json().code === 50013) {
-                   this.getNewToken();
-                 }
-                 if (!response.json().data) {
-                   return [];
-                 }
-                 return response.json();
-               })
+               .then(this.handleData)
                .catch(this.handleError);
   }
 
   getDataByPost(url: string, params: Object): Promise<any> {
-    this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
-    this.headersObj['X-Requested-Nonce'] = this.MathRand();
-    let jsonHeaders = new Headers(this.headersObj);
-    let obj = Object.assign({}, this.headersObj, params);
-    let form = this.oauth.normalizeParameters(obj);
-    let result = 'POST&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
-    let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
-    jsonHeaders.append('X-Requested-Authorization', signature);
+    // this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
+    // this.headersObj['X-Requested-Nonce'] = this.MathRand();
+    // let jsonHeaders = new Headers(this.headersObj);
+    // let obj = Object.assign({}, this.headersObj, params);
+    // let form = this.oauth.normalizeParameters(obj);
+    // let result = 'POST&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
+    // let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
+    // jsonHeaders.append('X-Requested-Authorization', signature);
+    let jsonHeaders = this.setHeader('POST', url, params);
     jsonHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
     let body = this.urlEncode(params);
     return this.http.post(this.baseUrl + url, body, {headers: jsonHeaders})
            .toPromise()
-           .then(response => {
-             //  if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
-             //    localStorage.clear();
-             //    window.location.reload();
-             //  }
-              if (response.json().code === 50013) {
-                this.getNewToken();
-              }
-              if (!response.json().data) {
-                return [];
-              }
-              return response.json();
-           })
+           .then(this.handleData)
            .catch(this.handleError);
   }
 
   updateByJson(url: string, params: Object): Promise<any> {
-    this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
-    this.headersObj['X-Requested-Nonce'] = this.MathRand();
-    let jsonHeaders = new Headers(this.headersObj);
-    let obj = Object.assign({}, this.headersObj, params);
-    let form = this.oauth.normalizeParameters(obj);
-    let result = 'POST&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
-    let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
-    jsonHeaders.append('X-Requested-Authorization', signature);
+    let jsonHeaders = this.setHeader('POST', url, params);
     jsonHeaders.append('Content-Type', 'application/json');
     return this.http.post(this.baseUrl + url, params, {headers: jsonHeaders})
            .toPromise()
-           .then(response => {
-             //  if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
-             //    localStorage.clear();
-             //    window.location.reload();
-             //  }
-              if (response.json().code === 50013) {
-                this.getNewToken();
-              }
-              return response.json();
-           })
+           .then(this.handleData)
            .catch(this.handleError);
+  }
+
+  setHeader( type, url, params) {
+    this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
+    this.headersObj['X-Requested-Nonce'] = this.MathRand();
+    let headers = new Headers(this.headersObj);
+    let obj = Object.assign({}, this.headersObj, params);
+    let form = this.oauth.normalizeParameters(obj);
+    let result = type + '&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
+    let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
+    headers.append('X-Requested-Authorization', signature);
+    return headers;
   }
 
   getNewToken() {
@@ -116,7 +81,7 @@ export class BackendService {
       const snapshot: RouterStateSnapshot = state.snapshot;
       let url = snapshot.url;
       let headersObj = {
-        'X-Requested-SystemCode' : 'neo_bdsa',
+        'X-Requested-SystemCode' : 'neo_bdss',
         'X-Requested-APICode': 'app_api',
         'X-Requested-Timestamp': Math.floor(new Date().getTime() / 1000),
         'X-Requested-Nonce': this.MathRand(),
@@ -165,8 +130,17 @@ export class BackendService {
     return urlSearchParams.toString();
   }
 
+  private handleData(response: any) {
+    if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+       localStorage.clear();
+       window.location.reload();
+     }
+     if (response.json().code === 50013) { this.getNewToken(); }
+     if (!response.json().data) { return {}; }
+     return response.json();
+  }
+
   private handleError(error: any): Promise<any> {
-    console.log(error);
     return Promise.reject(error.message || error);
   }
 }

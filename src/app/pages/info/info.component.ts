@@ -66,9 +66,7 @@ export class InfoComponent implements OnInit, AfterContentInit {
         .getDataByPost(this.mycompUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
-            let resData = res.data;
-            let indicator = [];
-            let dataVals = [];
+            let resData = res.data, indicator = [], dataVals = [];
             for (let item of resData) {
               indicator.push({text: item.name, max: 5});
               dataVals.push(item.value);
