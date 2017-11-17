@@ -5,14 +5,14 @@ import { PagesComponent } from './pages.component';
 import { TrackComponent } from './track/track.component';
 
 import { AuthGuard } from '../core/services/auth-guard.service';
-import { UserInfoResolver }   from './user-info-resolver.service';
+// import { UserInfoResolver }   from './user-info-resolver.service';
 
 const pagesRoutes: Routes = [
   {
     path: 'pages',
     component: PagesComponent,
-    // canActivate: [ AuthGuard ],
-    resolve: { userInfo: UserInfoResolver },
+    canActivate: [ AuthGuard ],
+    // resolve: { userInfo: UserInfoResolver },
     children: [
       {
         path: '',
@@ -38,7 +38,7 @@ const pagesRoutes: Routes = [
     RouterModule
   ],
   providers: [
-    UserInfoResolver
+    // UserInfoResolver
   ]
 })
 export class PagesRoutingModule {}

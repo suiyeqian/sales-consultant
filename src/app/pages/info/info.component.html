@@ -42,7 +42,7 @@
         </p>
         <p class="info-item">
           <span class="item-name text-center font-blue">团队</span>
-          <span class="item-value text-left">{{myInfo.store + '-' + myInfo.team}}</span>
+          <span class="item-value text-left">{{myInfo.store}}<span *ngIf="myInfo.team">-{{myInfo.team}}</span></span>
         </p>
       </div>
     <!-- </div> -->

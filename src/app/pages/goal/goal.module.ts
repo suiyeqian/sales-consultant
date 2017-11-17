@@ -7,7 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { RibbonModule } from '../../my-components/ribbon/ribbon.module';
 import { GoalRoutingModule } from './goal-routing.module';
 
-import { NouisliderModule } from 'ng2-nouislider';
+import { NouisliderModule } from 'ng2-nouislider/src/nouislider';
 
 @NgModule({
   imports: [

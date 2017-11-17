@@ -31,7 +31,7 @@ const HMR = helpers.hasProcessFlag('hot');
 const AOT = process.env.BUILD_AOT || helpers.hasNpmFlag('aot');
 const METADATA = {
   title: '销售参谋',
-  baseUrl: '/',
+  baseUrl: '/bdss/',
   isDevServer: helpers.isWebpackDevServer(),
   HMR: HMR,
   AOT: AOT

@@ -8,10 +8,10 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BackendService {
-  private apiUrl = 'http://10.17.2.161:9994/bdss/';
-  private baseUrl = this.apiUrl;
-  // private apiUrl = window.location.origin;
-  // private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
+  // private apiUrl = 'http://10.17.2.161:9994';
+  // private baseUrl = this.apiUrl + '/bdss/';
+  private apiUrl = window.location.origin;
+  private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
   firstOverdue = true;
   headersObj = {
     'X-Requested-Token': localStorage.getItem('accessToken'),
@@ -98,14 +98,15 @@ export class BackendService {
       let body = 'refreshToken=' + refreshToken;
       this.http.post(this.refreshUrl, body, { headers: headers })
              .toPromise()
-             .then(response => {
-               if (response.json().code === 50012 || response.json().code === 60000) {
+             .then(res => {
+               if (res.json().code === 50012 || res.json().code === 60000) {
                  localStorage.clear();
                } else {
-                 localStorage.setItem('accessToken', response.json().data.accessToken);
-                 localStorage.setItem('refreshToken', response.json().data.refreshToken);
-                 localStorage.setItem('weiXinDeviceId', response.json().data.weiXinDeviceId);
-                 localStorage.setItem('user', JSON.stringify(response.json().data));
+                 localStorage.setItem('accessToken', res.json().data.accessToken);
+                 localStorage.setItem('refreshToken', res.json().data.refreshToken);
+                 localStorage.setItem('weiXinDeviceId', res.json().data.weiXinDeviceId);
+                 localStorage.setItem('user', JSON.stringify(res.json().data));
+                 localStorage.setItem('posId', res.json().data.posId ? res.json().data.posId : 2);
                }
                this.firstOverdue = true;
                window.location.reload();
