@@ -29,7 +29,7 @@ export class BackendService {
     private oauth: AuthorizeService) { }
 
   getAll(url: string ): Promise<any> {
-    let jsonHeaders = this.setHeader('GET', url, {});
+    let jsonHeaders = this.setHeader('GET', url);
     return this.http.get(this.baseUrl + url, {headers: jsonHeaders})
                .toPromise()
                .then(this.handleData)
@@ -63,7 +63,7 @@ export class BackendService {
            .catch(this.handleError);
   }
 
-  setHeader( type, url, params) {
+  setHeader( type, url, params = {}) {
     this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
     this.headersObj['X-Requested-Nonce'] = this.MathRand();
     let headers = new Headers(this.headersObj);
