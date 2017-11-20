@@ -12,6 +12,7 @@ import * as echart from '../../echarts';
   styleUrls: ['./info.component.scss']
 })
 export class InfoComponent implements OnInit, AfterContentInit {
+  posId = localStorage.posId;
   myInfo = Object.assign({});
   private userUrl = 'personalinfo/my_info';
   private mycompUrl = 'personalinfo/my_comp';

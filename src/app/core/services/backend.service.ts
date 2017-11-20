@@ -8,8 +8,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BackendService {
-  // private apiUrl = 'http://10.17.2.161:9994';
-  // private baseUrl = this.apiUrl + '/bdss/';
   // private apiUrl = 'http://10.17.2.110:8989';
   private apiUrl = window.location.origin;
   private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
@@ -37,14 +35,6 @@ export class BackendService {
   }
 
   getDataByPost(url: string, params: Object): Promise<any> {
-    // this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
-    // this.headersObj['X-Requested-Nonce'] = this.MathRand();
-    // let jsonHeaders = new Headers(this.headersObj);
-    // let obj = Object.assign({}, this.headersObj, params);
-    // let form = this.oauth.normalizeParameters(obj);
-    // let result = 'POST&' + this.oauth.percentEncode(this.baseUrl + url) + '&' + form;
-    // let signature = CryptoJS.HmacSHA1(result, result).toString(CryptoJS.enc.Base64);
-    // jsonHeaders.append('X-Requested-Authorization', signature);
     let jsonHeaders = this.setHeader('POST', url, params);
     jsonHeaders.append('Content-Type', 'application/x-www-form-urlencoded');
     let body = this.urlEncode(params);

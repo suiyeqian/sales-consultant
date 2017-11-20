@@ -37,7 +37,7 @@ export class RankComponent implements OnInit, AfterContentInit {
 
   getMyRank(): void {
     this.bdService
-        .getAll(this.myrankUrl)
+        .getDataByPost(this.myrankUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;

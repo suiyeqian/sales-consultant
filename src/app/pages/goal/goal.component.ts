@@ -12,12 +12,14 @@ import { WaterMarkService } from '../../core/services/watermark.service';
   styleUrls: ['./goal.component.scss']
 })
 export class GoalComponent implements OnInit, AfterContentInit {
-  private salegoalUrl = 'salegoal/member_goal ';
+  private salegoalUrl = 'salegoal/member_goal';
   goalData = [];
   formDataset = Object.assign({});
   goalForm = new FormGroup ({});
   goalSum: Number;
-  private updateUrl = 'salegoal/update_goal ';
+  private updateUrl = 'salegoal/update_goal';
+  supGoalname: string;
+  myGoalName: string;
 
   constructor(
     private bdService: BackendService,
@@ -25,6 +27,19 @@ export class GoalComponent implements OnInit, AfterContentInit {
     private waterMark: WaterMarkService,
     private fb: FormBuilder
   ) {
+    switch (localStorage.posId) {
+      case '3':
+        [this.supGoalname, this.myGoalName] = ['小区目标', '营业部目标'];
+        break;
+      case '4':
+        [this.supGoalname, this.myGoalName] = ['大区目标', '小区目标'];
+        break;
+      case '5':
+        this.myGoalName = '大区目标';
+        break;
+      default:
+        [this.supGoalname, this.myGoalName] = ['营业部目标', '团队目标'];
+    }
   }
 
   ngOnInit() {
