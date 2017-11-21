@@ -47,6 +47,7 @@ export class InfoComponent implements OnInit, AfterContentInit {
     .then(res => {
       if ( res.code === 0 && res.data) {
         localStorage.setItem('user', JSON.stringify(res.data));
+        localStorage.setItem('posId', res.data.posId ? res.data.posId : '2');
         this.setMyInfo();
       }
     });

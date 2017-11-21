@@ -49,7 +49,7 @@ export class RankComponent implements OnInit, AfterContentInit {
 
   getLoanTopTen(): void {
     this.bdService
-        .getAll(this.loantoptenUrl)
+        .getDataByPost(this.loantoptenUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
             this.loanTopTen = res.data;
@@ -63,7 +63,7 @@ export class RankComponent implements OnInit, AfterContentInit {
 
   getCm2TopTen(): void {
     this.bdService
-        .getAll(this.cm2toptenUrl)
+        .getDataByPost(this.cm2toptenUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
             this.cm2TopTen = res.data;

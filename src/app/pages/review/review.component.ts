@@ -127,7 +127,6 @@ export class ReviewComponent implements OnInit, AfterContentInit {
           let chartDom = document.getElementById('capacityChart');
           if ( res.code === 0) {
             chartDom.style['height'] = 24 * res.data.dataList.length + 142 + 'px';
-            console.log(chartDom.style['height'] ,res.data.dataList.length * 36);
             let resData = res.data;
             let xAxisData = [];
             let seriesData = [];

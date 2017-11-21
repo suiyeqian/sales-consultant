@@ -44,15 +44,6 @@ export class BackendService {
            .catch(this.handleError);
   }
 
-  updateByJson(url: string, params: Object): Promise<any> {
-    let jsonHeaders = this.setHeader('POST', url, params);
-    jsonHeaders.append('Content-Type', 'application/json');
-    return this.http.post(this.baseUrl + url, params, {headers: jsonHeaders})
-           .toPromise()
-           .then(this.handleData)
-           .catch(this.handleError);
-  }
-
   setHeader( type, url, params = {}) {
     this.headersObj['X-Requested-Timestamp'] = Math.floor(new Date().getTime() / 1000).toString();
     this.headersObj['X-Requested-Nonce'] = this.MathRand();

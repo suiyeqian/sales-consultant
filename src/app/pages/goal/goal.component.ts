@@ -112,19 +112,20 @@ export class GoalComponent implements OnInit, AfterContentInit {
   }
 
   onSubmit() {
-    let body = {
-      posId: localStorage.posId,
-      month: this.goalForm.value.month,
-      goalList: []
-    };
+    let goalArr = [];
     for (let member of this.formDataset.goalList){
-      body.goalList.push({
+      goalArr.push({
         id: member.id,
         goalAmt: this.formDataset.goalAmt * this.goalForm.controls.goalList.value[member.id] / 100
       });
     }
+    let body = {
+      posId: localStorage.posId,
+      month: this.goalForm.value.month,
+      goalList: JSON.stringify(goalArr)
+    };
     this.bdService
-        .updateByJson(this.updateUrl, body)
+        .getDataByPost(this.updateUrl, body)
         .then((res) => {
           if (res.code === 0) {
             this.reGetData();

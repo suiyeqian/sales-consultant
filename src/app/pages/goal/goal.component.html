@@ -10,8 +10,8 @@
             <option *ngFor="let date of goalData">{{date.month}}</option>
           </select>
         </div>
-        <p class="row goal-1" ><span class="col-5">营业部目标</span> <span class="col-6">{{formDataset.superiorGoal | number}}元</span></p>
-        <p class="row" ><span class="col-5">团队目标</span> <span class="col-6">{{formDataset.goalAmt | number}}元</span></p>
+        <p class="row goal-1" ><span class="col-5">{{supGoalname}}</span> <span class="col-6">{{formDataset.superiorGoal | number}}元</span></p>
+        <p class="row" ><span class="col-5">{{myGoalName}}</span> <span class="col-6">{{formDataset.goalAmt | number}}元</span></p>
       </div>
       <div class="member-goal">
         <h5>任务分配</h5>
