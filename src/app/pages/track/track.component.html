@@ -48,7 +48,7 @@
         <div echarts [options]="saleProgressOption"  class="sale-progress-chart"></div>
       </div>
       <div class="text-center amt-info">
-        <p class="font-red amount-value">¥ {{ achievement.monAmt | number}}</p>
+        <p class="font-red amount-value">¥ {{ achievement.monAmt/10000 | number:'1.0-0'}}万</p>
         <span>合同金额</span>
       </div>
     </div>
@@ -87,12 +87,7 @@
   <my-month-forecast></my-month-forecast>
 </div>
 
-<my-ribbon ribbonNum="4" contentTxt="本月考核预警"></my-ribbon>
-<div class="month-assessment">
-  <my-assessment-warning></my-assessment-warning>
-</div>
-
-<my-ribbon ribbonNum="5" contentTxt="风控情况"></my-ribbon>
+<my-ribbon ribbonNum="4" contentTxt="风控情况"></my-ribbon>
 <div class="risk-overview">
   <my-risk-control></my-risk-control>
 </div>

@@ -138,7 +138,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
 
   reGetData() {
     this.bdService
-        .getDataByPost(this.salegoalUrl, {posId: localStorage.posId}).then(res => {
+        .getDataByPost(this.salegoalUrl, {posId: localStorage.posId, reload: '1'}).then(res => {
           if ( res.code === 0 ) {
             this.goalData = res.data;
             this.formDataset = this.goalData.find((item) => item.month === this.formDataset.month);

@@ -8,8 +8,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BackendService {
-  // private apiUrl = 'http://10.17.2.110:8989';
-  private apiUrl = window.location.origin;
+  private apiUrl = 'http://10.17.2.110:8989';
+  // private apiUrl = window.location.origin;
   private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
   firstOverdue = true;
   headersObj = {
@@ -30,7 +30,17 @@ export class BackendService {
     let jsonHeaders = this.setHeader('GET', url);
     return this.http.get(this.baseUrl + url, {headers: jsonHeaders})
                .toPromise()
-               .then(this.handleData)
+               .then(response => {
+                 if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+                    localStorage.clear();
+                    window.location.reload();
+                  }
+                  if (response.json().code === 50013) {
+                    this.getNewToken();
+                  }
+                  if (!response.json().data) { return {}; }
+                  return response.json();
+               })
                .catch(this.handleError);
   }
 
@@ -40,7 +50,17 @@ export class BackendService {
     let body = this.urlEncode(params);
     return this.http.post(this.baseUrl + url, body, {headers: jsonHeaders})
            .toPromise()
-           .then(this.handleData)
+           .then(response => {
+             if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+                localStorage.clear();
+                window.location.reload();
+              }
+              if (response.json().code === 50013) {
+                this.getNewToken();
+              }
+              if (!response.json().data) { return {}; }
+              return response.json();
+           })
            .catch(this.handleError);
   }
 
@@ -111,16 +131,6 @@ export class BackendService {
         urlSearchParams.append(key, obj[key]);
     }
     return urlSearchParams.toString();
-  }
-
-  private handleData(response: any) {
-    if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
-       localStorage.clear();
-       window.location.reload();
-     }
-     if (response.json().code === 50013) { this.getNewToken(); }
-     if (!response.json().data) { return {}; }
-     return response.json();
   }
 
   private handleError(error: any): Promise<any> {
