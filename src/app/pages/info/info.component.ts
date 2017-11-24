@@ -70,7 +70,7 @@ export class InfoComponent implements OnInit, AfterContentInit {
           if ( res.code === 0) {
             let resData = res.data, indicator = [], dataVals = [];
             for (let item of resData) {
-              indicator.push({text: item.name, max: 5});
+              indicator.push({text: item.name, max: 10});
               dataVals.push(item.value);
             }
             this.radarOption = this.cmnFn.deepCopy(echart.RadarChartOptions, {});

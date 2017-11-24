@@ -32,11 +32,11 @@
       <div class="result text-center">
         <p class="bold">总计：{{goalSum|number}}元</p>
         <p *ngIf="formDataset.goalAmt<goalSum">
-          超出团队目标<span class="bold font-blue">{{goalSum - formDataset.goalAmt|number}}</span>元
+          超出目标<span class="bold font-blue">{{goalSum - formDataset.goalAmt|number}}</span>元
         </p>
         <p *ngIf="formDataset.goalAmt == goalSum"> 已达到目标金额 </p>
         <p *ngIf="formDataset.goalAmt>goalSum">
-          低于团队目标<span class="font-red bold">{{formDataset.goalAmt - goalSum|number}}</span>元
+          低于目标<span class="font-red bold">{{formDataset.goalAmt - goalSum|number}}</span>元
         </p>
       </div>
       <div class="text-center">

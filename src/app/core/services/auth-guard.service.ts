@@ -41,10 +41,10 @@ export class AuthGuard implements CanActivate {
       this.headers.append('X-Requested-Authorization', signature);
       return this.getTicket().then(res => {
           if (res.success) {
-            localStorage.setItem('accessToken', res.data.accessToken);
+            localStorage.setItem('bdss_accessToken', res.data.accessToken);
             localStorage.setItem('user', JSON.stringify(res.data));
-            localStorage.setItem('refreshToken', res.data.refreshToken);
-            localStorage.setItem('weiXinDeviceId', res.data.weiXinDeviceId);
+            localStorage.setItem('bdss_refreshToken', res.data.refreshToken);
+            localStorage.setItem('bdss_weiXinDeviceId', res.data.weiXinDeviceId);
             localStorage.setItem('posId', res.data.posId ? res.data.posId : '2');
             this.router.navigate(['/pages/track']);
             return true;
@@ -54,13 +54,16 @@ export class AuthGuard implements CanActivate {
           }
        });
     } else {
-      if (localStorage.getItem('accessToken')) {
+      // localStorage.clear();
+      if (localStorage.getItem('bdss_accessToken')) {
         return true;
       } else {
         // let user = {name: '马倩', number: 'xn087432'};
-        // localStorage.setItem('accessToken', 'nDhHveX2VQnD2rtsy6owfgUtkcbx4LieCWwBPZBhxhsVJZlrijhLyet8R5YFGREv8FInP6hffWvO09JP6IGg');
-        // localStorage.setItem('weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
-        // localStorage.setItem('refreshToken', 'c7fbVfT5U5aC9VWTXTL87vZ5p0lpbaedZsfnEqyqY8W6XESMdFhrpQE331HZ1LUs4HLnHDMAr8q22StgZw7p');
+        // localStorage.setItem('bdss_accessToken',
+        // 'Yj3HtjYEqvOq1Xpkm3BMwNXSUjM9nvHp5aiu3JSyWywDBoHjxqubD9Ia0XozhQy525AJnEHYTj2BjwYb2cFo');
+        // localStorage.setItem('bdss_weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
+        // localStorage.setItem('bdss_refreshToken',
+        // 'SPC4Wt9CmD2Am7b8PGgTPF6QWg69u4ZKBswA36rlgV8dcEFEUGGhR4aszUPPJ0fTdxDCRrV3zkZDEFufEUam');
         // localStorage.setItem('user', JSON.stringify(user));
         // localStorage.setItem('posId', '2');
         // return true;

@@ -75,8 +75,11 @@ export class MonthForecastComponent implements OnInit {
         });
   }
 
-  getCoffAndPos( sectionArr, coffArr,  slideNum ): Array<any> {
+  getCoffAndPos( sectionArr, coffArr,  slideNum = 0): Array<any> {
     let coefficient, position;
+    if (!sectionArr || !coffArr) {
+      return [0, this.positionPoint[0]];
+    }
     for (let i = sectionArr.length - 1; i >= 0; i--) {
       if (+slideNum === +sectionArr[i]) {
         position = this.positionPoint[i] + '%';

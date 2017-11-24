@@ -170,19 +170,31 @@ export class ReviewComponent implements OnInit, AfterContentInit {
 
   getTmComp(): void {
     this.teamMbs = [];
-    let radius = Math.floor((this.deviceWidth - 120) / 4);
+    let radius = Math.floor((this.deviceWidth - 150) / 4);
     let radarHeight = 6 * 75 * (this.deviceWidth / 750);
     this.bdService
         .getDataByPost(this.tmCompUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
-            let codeArray = [
-              {name: '合同金额', code: 'S'},
-              {name: '申请单量', code: 'N'},
-              {name: '件均金额', code: 'A'},
-              {name: '通过率', code: 'P'},
-              {name: 'C-M2', code: 'C-M2'}
-            ];
+            let codeArray = [];
+            if (localStorage.posId === '2') {
+              codeArray = [
+                {name: '合同金额', code: 'S'},
+                {name: '申请单量', code: 'N'},
+                {name: '件均金额', code: 'A'},
+                {name: '通过率', code: 'P'},
+                {name: 'C-M2', code: 'C-M2'}
+              ];
+            } else {
+              codeArray = [
+                {name: '人均产能', code: 'AP'},
+                {name: '活动率', code: 'AR'},
+                {name: '达成率', code: 'CR'},
+                {name: '满编率', code: 'FR'},
+                {name: 'C-M2', code: 'C-M2'},
+                {name: '开单率', code: 'SR'}
+              ];
+            }
             let resData = res.data;
             for (let item of resData){
               let indicator = [];
@@ -199,7 +211,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
                     data.code = codeItem.code;
                   }
                 }
-                indicator.push({text: data.code, max: 5});
+                indicator.push({text: data.code, max: localStorage.posId === '2' ? 5 : 10});
                 radarChartOpt.series[0].data[0].value.push(data.value);
                 if (data.name === 'C-M2') {
                   tooltipText += `${data.name}: ${data.origValue}<br/>`;

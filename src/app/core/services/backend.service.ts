@@ -10,12 +10,12 @@ import 'rxjs/add/operator/toPromise';
 export class BackendService {
   private apiUrl = 'http://10.17.2.110:8989';
   // private apiUrl = window.location.origin;
-  private baseUrl = this.apiUrl + '/servegateway/rest/bdss/';
+  private baseUrl = `${this.apiUrl}/servegateway/rest/bdss/`;
   firstOverdue = true;
   headersObj = {
-    'X-Requested-Token': localStorage.getItem('accessToken'),
+    'X-Requested-Token': localStorage.getItem('bdss_accessToken'),
     'X-Requested-SystemCode' : 'neo_bdss',
-    'X-Requested-DeviceId':  localStorage.getItem('weiXinDeviceId'),
+    'X-Requested-DeviceId':  localStorage.getItem('bdss_weiXinDeviceId'),
     'X-Requested-APICode': 'access_token_weixin_device',
     'X-Requested-Version': '1.0'
   };
@@ -31,7 +31,7 @@ export class BackendService {
     return this.http.get(this.baseUrl + url, {headers: jsonHeaders})
                .toPromise()
                .then(response => {
-                 if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+                 if (!localStorage.getItem('bdss_weiXinDeviceId') || response.json().code === 60000) {
                     localStorage.clear();
                     window.location.reload();
                   }
@@ -51,7 +51,7 @@ export class BackendService {
     return this.http.post(this.baseUrl + url, body, {headers: jsonHeaders})
            .toPromise()
            .then(response => {
-             if (!localStorage.getItem('weiXinDeviceId') || response.json().code === 60000) {
+             if (!localStorage.getItem('bdss_weiXinDeviceId') || response.json().code === 60000) {
                 localStorage.clear();
                 window.location.reload();
               }
@@ -90,7 +90,7 @@ export class BackendService {
         'X-Requested-Version': '1.0'
       };
       let headers = new Headers(headersObj);
-      let refreshToken = localStorage.getItem('refreshToken');
+      let refreshToken = localStorage.getItem('bdss_refreshToken');
       let obj = Object.assign({}, headersObj, {'refreshToken': refreshToken});
       let form = this.oauth.normalizeParameters(obj);
       let result = 'POST' + '&' + this.oauth.percentEncode(this.refreshUrl) + '&' + form;
@@ -104,9 +104,9 @@ export class BackendService {
                if (res.json().code === 50012 || res.json().code === 60000) {
                  localStorage.clear();
                } else {
-                 localStorage.setItem('accessToken', res.json().data.accessToken);
-                 localStorage.setItem('refreshToken', res.json().data.refreshToken);
-                 localStorage.setItem('weiXinDeviceId', res.json().data.weiXinDeviceId);
+                 localStorage.setItem('bdss_accessToken', res.json().data.accessToken);
+                 localStorage.setItem('bdss_refreshToken', res.json().data.refreshToken);
+                 localStorage.setItem('bdss_weiXinDeviceId', res.json().data.weiXinDeviceId);
                  localStorage.setItem('user', JSON.stringify(res.json().data));
                  localStorage.setItem('posId', res.json().data.posId ? res.json().data.posId : '2');
                }
