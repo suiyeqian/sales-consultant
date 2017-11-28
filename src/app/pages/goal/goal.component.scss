@@ -48,7 +48,7 @@ select.form-control:not([size]):not([multiple]){
 }
 // 目标分配
 .member-goal {
-  padding: 0 .14rem;
+  padding: 0;
 }
 .member-goal h5{
   font-size: .45rem;
@@ -66,17 +66,6 @@ select.form-control:not([size]):not([multiple]){
   line-height: .53rem;
   margin-bottom: .8rem;
 }
-// i.avatar {
-//   height: .53rem;
-//   width: .47rem;
-//   position: relative;
-//   display: inline-block;
-//   // margin-left: .37rem;
-//   margin-right: .21rem;
-//   background-image: url(assets/img/avatar.png);
-//   background-size: 100% 100%;
-//   background-repeat: no-repeat;
-// }
 .member-name{
   width: 19%;
   display: inline-block;
@@ -86,22 +75,22 @@ select.form-control:not([size]):not([multiple]){
   white-space: nowrap;
 }
 .goal-val{
-  width: 9%;
+  width: 12%;
   display: inline-block;
+  line-height: .53rem;
+  text-align: right;
   vertical-align: super;
+  text-overflow: clip;
+  overflow: hidden;
 }
 .slide-bar {
-  width: 68%;
+  width: 66%;
   display: inline-block;
   vertical-align: super;
   margin-bottom: 0.12rem;
 }
 .slide-bar .ng2-nouislider {
   margin: 0;
-}
-.goal-val {
-  line-height: .53rem;
-  text-align: right;
 }
 .result {
   margin-bottom: .8rem;

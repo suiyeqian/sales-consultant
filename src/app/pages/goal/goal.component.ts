@@ -12,6 +12,7 @@ import { WaterMarkService } from '../../core/services/watermark.service';
   styleUrls: ['./goal.component.scss']
 })
 export class GoalComponent implements OnInit, AfterContentInit {
+  posId = localStorage.posId;
   private salegoalUrl = 'salegoal/member_goal';
   goalData = [];
   formDataset = Object.assign({});
@@ -27,7 +28,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
     private waterMark: WaterMarkService,
     private fb: FormBuilder
   ) {
-    switch (localStorage.posId) {
+    switch (this.posId) {
       case '3':
         [this.supGoalname, this.myGoalName] = ['小区目标', '营业部目标'];
         break;
@@ -106,7 +107,8 @@ export class GoalComponent implements OnInit, AfterContentInit {
   countSum() {
     let sum = 0;
     for (let item of this.formDataset.goalList) {
-      sum += this.formDataset.goalAmt * this.goalForm.controls.goalList.value[item.id] / 100;
+      item.countAmt = Math.ceil(this.formDataset.goalAmt * this.goalForm.controls.goalList.value[item.id] / 100);
+      sum += item.countAmt;
     }
     this.goalSum = sum;
   }
@@ -116,11 +118,12 @@ export class GoalComponent implements OnInit, AfterContentInit {
     for (let member of this.formDataset.goalList){
       goalArr.push({
         id: member.id,
-        goalAmt: this.formDataset.goalAmt * this.goalForm.controls.goalList.value[member.id] / 100
+        goalAmt: member.countAmt * 10000,
+        rate: this.goalForm.controls.goalList.value[member.id]
       });
     }
     let body = {
-      posId: localStorage.posId,
+      posId: this.posId,
       month: this.goalForm.value.month,
       goalList: JSON.stringify(goalArr)
     };
@@ -138,7 +141,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
 
   reGetData() {
     this.bdService
-        .getDataByPost(this.salegoalUrl, {posId: localStorage.posId, reload: '1'}).then(res => {
+        .getDataByPost(this.salegoalUrl, {posId: this.posId, reload: '1'}).then(res => {
           if ( res.code === 0 ) {
             this.goalData = res.data;
             this.formDataset = this.goalData.find((item) => item.month === this.formDataset.month);
