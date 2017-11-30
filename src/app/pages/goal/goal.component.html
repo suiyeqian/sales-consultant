@@ -39,7 +39,7 @@
           低于目标<span class="font-red bold">{{ formDataset.goalAmt - goalSum | number:'1.0-0'}}</span>万元
         </p>
       </div>
-      <div class="text-center">
+      <div class="text-center" *ngIf = "formDataset.isSet">
         <button type="submit" class="btn btn-confirm" [disabled]="!formDataset.isSet">确定</button>
         <button class="btn btn-cancel" (click)="reset()" type="button" [disabled]="!formDataset.isSet||!formDataset.changed">重置</button>
       </div>

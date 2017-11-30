@@ -7,7 +7,7 @@
       <span class="tab-title" [class.selected]="curRank === 'overdue'" (click)="changeTab('overdue')">逾期控制排行榜</span>
     </div>
   </div>
-  <div class="sub-title-wrap"><h4 class="sub-title">团队排名</h4></div>
+  <div class="sub-title-wrap"><h4 class="sub-title">{{teamName}}排名</h4></div>
   <div class="my-rank" [ngClass]="imgClass">
     <img [src]="imgUrl" alt="">
     <!-- <span class="percent-num font-yellow" *ngIf="myRank.rank < 4" [class.rankOne]="myRank.percent == 0">{{100 - myRank.percent}}<span class="percent-symble">%</span></span> -->
@@ -19,7 +19,7 @@
       <thead>
         <tr>
           <th>排名</th>
-          <th>团队名称</th>
+          <th>{{teamName}}名称</th>
           <th>放款金额(万元)</th>
         </tr>
       </thead>
@@ -35,7 +35,7 @@
       <thead>
         <tr>
           <th>排名</th>
-          <th>团队名称</th>
+          <th>{{teamName}}名称</th>
           <th>C-M2</th>
         </tr>
       </thead>

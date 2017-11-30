@@ -7,7 +7,7 @@ export const RadarChartOptions = {
   radar: [
     {
       indicator: [],
-      radius: 80,
+      radius: 70,
       name: {
         textStyle: {
           color: '#fff',
