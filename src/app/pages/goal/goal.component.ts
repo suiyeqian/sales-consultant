@@ -114,6 +114,10 @@ export class GoalComponent implements OnInit, AfterContentInit {
   }
 
   onSubmit() {
+    if (this.goalSum === 0) {
+      alert('目标分配不可以全部为0');
+      return ;
+    }
     let goalArr = [];
     for (let member of this.formDataset.goalList){
       goalArr.push({
