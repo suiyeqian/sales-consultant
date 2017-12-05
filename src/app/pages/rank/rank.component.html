@@ -1,7 +1,7 @@
 <div class="rank">
   <div class="tabset row text-center">
     <div class="col-6">
-      <span class="tab-title" [class.selected]="curRank === 'loan'" (click)="changeTab('loan')">放款金额排行榜</span>
+      <span class="tab-title" [class.selected]="curRank === 'loan'" (click)="changeTab('loan')">合同金额排行榜</span>
     </div>
     <div class="col-6">
       <span class="tab-title" [class.selected]="curRank === 'overdue'" (click)="changeTab('overdue')">逾期控制排行榜</span>
@@ -20,7 +20,7 @@
         <tr>
           <th>排名</th>
           <th>{{teamName}}名称</th>
-          <th>放款金额(万元)</th>
+          <th>合同金额(万元)</th>
         </tr>
       </thead>
       <tbody>
