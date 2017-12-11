@@ -6,8 +6,8 @@ import { AuthorizeService } from './authorize.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  // private apiUrl = 'https://xszs-test.niudingfeng.com';
-  private apiUrl = window.location.origin;
+  private apiUrl = 'https://xszs-test.niudingfeng.com';
+  // private apiUrl = window.location.origin;
   private requestUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/staff/sso';
   private redirectUri = encodeURIComponent(this.apiUrl + '/bdss/').toLowerCase();
   private appId = 2;
@@ -54,21 +54,21 @@ export class AuthGuard implements CanActivate {
           }
        });
     } else {
-      // localStorage.clear();
+      localStorage.clear();
       if (localStorage.getItem('bdss_accessToken')) {
         return true;
       } else {
-        // let user = {name: '马倩', number: 'xn087432'};
-        // localStorage.setItem('bdss_accessToken',
-        // 'rU2Q2FvUznnNzlbi2P9KPsaIiySlH312hSc5cEAL1uUPy75Cp1um1bCKdZrTcsWEwdyJYbXk7nF96U9sdRZn');
-        // localStorage.setItem('bdss_weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
-        // localStorage.setItem('bdss_refreshToken',
-        // 'h9Mct2rnwiDjpKaHhcSrdkrH9HOKUypC1X00prlYiNruOkOR1vyL0U8vU1HqzfpuF9AAuNKsyK3I3P2A6AUN');
-        // localStorage.setItem('user', JSON.stringify(user));
-        // localStorage.setItem('posId', '2');
-        // return true;
-        localStorage.clear();
-        window.location.href = this.redirectUrl;
+        let user = {name: '马倩', number: 'xn087432'};
+        localStorage.setItem('bdss_accessToken',
+        'CoNYdRGzphzxCfBVvR8f8MlHghEVBlZlOYj5C2Vl0FKNWdmYUjdoiip3PwvRk59zFc8wMW3W9m5F1LYqAd4y');
+        localStorage.setItem('bdss_weiXinDeviceId', 'b7824b6d2aff1e789f86457f3ef8239f');
+        localStorage.setItem('bdss_refreshToken',
+        'IrrjVrDOe8qtk8QPf1Sb3A6sC9mMTqyFQKrMLm3i3FHZlGjs6gZ1Kt3MJsAcs2Ac32gI9BMOeL7PHP7l9EW1');
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('posId', '2');
+        return true;
+        // localStorage.clear();
+        // window.location.href = this.redirectUrl;
       }
     }
   }

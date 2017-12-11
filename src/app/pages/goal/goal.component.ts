@@ -48,7 +48,6 @@ export class GoalComponent implements OnInit, AfterContentInit {
         .subscribe((data) => {
           this.goalData = data.goalData;
           this.formDataset = this.goalData[0];
-          this.formDataset.changed = false;
           this.setForm();
           let self = this;
           setTimeout(function(){
@@ -71,9 +70,11 @@ export class GoalComponent implements OnInit, AfterContentInit {
   }
 
   setForm(): void {
+    this.formDataset.changed = false;
     let initForm = Object.assign({});
     for (let item of this.formDataset.goalList) {
-      initForm[item.id] = {value: item.rate, disabled: this.formDataset.isSet ? false : true};
+      item.isValid = false;
+      initForm[item.id] = {value: item.goalAmt, disabled: this.formDataset.isSet ? false : true};
     }
     this.goalForm = this.fb.group({
       month: this.formDataset.month,
@@ -87,18 +88,66 @@ export class GoalComponent implements OnInit, AfterContentInit {
     this.setForm();
   }
 
-  rateChange() {
-    let self = this;
-    setTimeout(function(){
-      self.countSum();
-      self.formDataset.changed = self.checkDiff();
-    }, 0);
+  minus(mbId) {
+    if (!this.formDataset.isSet) {
+      return;
+    }
+    let curVal = + this.goalForm.controls.goalList.value[mbId];
+    if (Number.isInteger(curVal) && curVal > 0) {
+      this.goalForm.controls.goalList.patchValue({
+        [mbId]: curVal - 1
+      });
+      this.formDataset.changed = this.checkDiff();
+      this.countSum();
+    }
   }
+
+  plus(mbId) {
+    if (!this.formDataset.isSet) {
+      return;
+    }
+    let curVal = + this.goalForm.controls.goalList.value[mbId];
+    if (Number.isInteger(curVal) && curVal < this.formDataset.goalAmt) {
+      this.goalForm.controls.goalList.patchValue({
+        [mbId]: 1 + curVal
+      });
+      this.formDataset.changed = this.checkDiff();
+      this.countSum();
+    }
+  }
+
+  onKey(mbId) {
+    let curVal = + this.goalForm.controls.goalList.value[mbId];
+    if (!Number.isInteger(curVal)) {
+      this.formDataset.goalList.find((item) => item.id === mbId).isValid = true;
+    } else {
+      this.formDataset.goalList.find((item) => item.id === mbId).isValid = false;
+      if (curVal > this.formDataset.goalAmt) {
+        this.goalForm.controls.goalList.patchValue({
+          [mbId]: this.formDataset.goalAmt
+        });
+      }
+      if (curVal < 0) {
+        this.goalForm.controls.goalList.patchValue({
+          [mbId]: 0
+        });
+      }
+    }
+    this.countSum();
+  }
+
+  // rateChange() {
+  //   let self = this;
+  //   setTimeout(function(){
+  //     self.countSum();
+  //     self.formDataset.changed = self.checkDiff();
+  //   }, 0);
+  // }
 
   checkDiff(): boolean {
     let editData = this.goalForm.controls.goalList.value;
     for (let item of this.formDataset.goalList) {
-      if (item.rate !== editData[item.id]) {
+      if (+ item.goalAmt !== + editData[item.id]) {
         return true;
       }
     }
@@ -107,24 +156,31 @@ export class GoalComponent implements OnInit, AfterContentInit {
   countSum() {
     let sum = 0;
     for (let item of this.formDataset.goalList) {
-      item.countAmt = Math.ceil(this.formDataset.goalAmt * this.goalForm.controls.goalList.value[item.id] / 100);
-      sum += item.countAmt;
+      // item.countAmt = Math.ceil(this.formDataset.goalAmt * this.goalForm.controls.goalList.value[item.id] / 100);
+      // sum += item.countAmt;
+      sum += + this.goalForm.controls.goalList.value[item.id];
     }
-    this.goalSum = sum;
+    this.goalSum = Number.isInteger(sum) ? sum : 0 ;
   }
 
   onSubmit() {
+    let goalArr = [];
+    for (let member of this.formDataset.goalList){
+      let amtVal = + this.goalForm.controls.goalList.value[member.id];
+      if (!Number.isInteger(amtVal)) {
+        alert('目标金额设定必须为整数!');
+        return;
+      }
+      goalArr.push({
+        id: member.id,
+        name: member.name,
+        goalAmt: Number.isNaN(amtVal) ? 0 : amtVal * 10000,
+        // rate: this.goalForm.controls.goalList.value[member.id]
+      });
+    }
     if (this.goalSum === 0) {
       alert('目标分配不可以全部为0');
       return ;
-    }
-    let goalArr = [];
-    for (let member of this.formDataset.goalList){
-      goalArr.push({
-        id: member.id,
-        goalAmt: member.countAmt * 10000,
-        rate: this.goalForm.controls.goalList.value[member.id]
-      });
     }
     let body = {
       posId: this.posId,

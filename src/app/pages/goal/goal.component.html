@@ -19,14 +19,23 @@
           <div class="unit">
               <span class="pull-right">（单位：万元）</span>
           </div>
-          <div class="setting-item" *ngFor="let item of formDataset.goalList">
-            <!-- <i class="avatar"></i> -->
+          <!-- <div class="setting-item" *ngFor="let item of formDataset.goalList">
             <span class="member-name">{{item.name}}</span>
             <div class="slide-bar">
               <nouislider [connect]="[true,false]" [disabled]="goalForm.controls.goalList.controls[item.id].disabled" [formControl]="goalForm.controls.goalList.controls[item.id]" [min]="0" [max]="100" [step]="1" [tooltips]=" true" (ngModelChange)="rateChange()"></nouislider>
             </div>
             <span class="pull-right goal-val">{{ item.countAmt | number:'1.0-0'}}</span>
-          </div>
+          </div> -->
+          <form class="form-horizontal" *ngFor="let item of formDataset.goalList">
+            <div class="form-group row">
+              <label class="col-5 control-label">{{item.name}}</label>
+              <div class="col-7">
+                <button type="button" name="button" class="minus-btn" (click)="minus(item.id)" [disabled]="!this.formDataset.isSet || goalForm.controls.goalList.controls[item.id].value==0">-</button>
+                <input type="tel" placeholder="0" [formControl]="goalForm.controls.goalList.controls[item.id]" (keyup)="onKey(item.id)" [ngClass]="{'highlight': item.isValid}" [disabled]>
+                <button type="button" name="button" class="plus-btn" (click)="plus(item.id)" [disabled]="!this.formDataset.isSet || goalForm.controls.goalList.controls[item.id].value==formDataset.goalAmt">+</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
       <div class="result text-center">

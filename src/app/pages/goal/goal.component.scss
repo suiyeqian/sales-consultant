@@ -4,12 +4,6 @@
   margin-bottom: 1.16rem;
 }
 
-// .time-progress {
-//   padding: .53rem 6px 0 6px;
-//   margin-bottom: .64rem;
-//   font-size: .35rem;
-// }
-
 // goal
 .team-goal {
   margin: -.5rem .36rem .84rem .36rem;
@@ -61,42 +55,88 @@ select.form-control:not([size]):not([multiple]){
   margin-bottom: 5px;
   font-size: .28rem;
 }
-.setting-item {
-  height: .53rem;
-  line-height: .53rem;
-  margin-bottom: .8rem;
-}
-.member-name{
-  width: 19%;
-  display: inline-block;
-  vertical-align: super;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.goal-val{
-  width: 12%;
-  display: inline-block;
-  line-height: .53rem;
-  text-align: right;
-  vertical-align: super;
-  text-overflow: clip;
-  overflow: hidden;
-}
-.slide-bar {
-  width: 66%;
-  display: inline-block;
-  vertical-align: super;
-  margin-bottom: 0.12rem;
-}
-.slide-bar .ng2-nouislider {
-  margin: 0;
-}
+// .setting-item {
+//   height: .53rem;
+//   line-height: .53rem;
+//   margin-bottom: .8rem;
+// }
+// .member-name{
+//   width: 19%;
+//   display: inline-block;
+//   vertical-align: super;
+//   text-overflow: ellipsis;
+//   overflow: hidden;
+//   white-space: nowrap;
+// }
+// .goal-val{
+//   width: 12%;
+//   display: inline-block;
+//   line-height: .53rem;
+//   text-align: right;
+//   vertical-align: super;
+//   text-overflow: clip;
+//   overflow: hidden;
+// }
+// .slide-bar {
+//   width: 66%;
+//   display: inline-block;
+//   vertical-align: super;
+//   margin-bottom: 0.12rem;
+// }
+// .slide-bar .ng2-nouislider {
+//   margin: 0;
+// }
 .result {
   margin-bottom: .8rem;
 }
 .result p:first-child{
   margin-bottom: .2rem;
+}
+.member-goal .form-group {
+  padding-left: .7rem;
+}
+.member-goal .control-label{
+  text-align: left;
+  padding-right: 0;
+}
+.member-goal input {
+  height: .76rem;
+  width: 2.5rem;
+  background-color: #0e1026;
+  text-align: center;
+  color: #fff;
+  border-width: 0;
+  // border-color: #0e1026;
+  // border-style: double;
+  z-index: 1;
+  border-radius: 0;
+}
+.member-goal button{
+  height: .76rem;
+  width: .76rem;
+  vertical-align: top;
+  text-align: center;
+  font-weight: bold;
+  padding: 0;
+  border-width: 0;
+  color: #00e9e9;
+  background-color: #1d1d32;
+  z-index: 10
+}
+.member-goal input.highlight {
+  color: #d74a48;
+}
+.member-goal input:disabled {
+  opacity: 1;
+}
+.member-goal button:disabled {
+  opacity: 0.4;
+}
+.minus-btn {
+  margin-right: -.15rem;
+}
+.plus-btn {
+  margin-left: -.15rem;
 }
 
 .goal .btn {
