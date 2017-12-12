@@ -1,7 +1,7 @@
 export const LineBarChartOptions = {
   tooltip: {
     trigger: 'axis',
-    axisPointer: { type : 'shadow' }
+    axisPointer: { type : 'shadow' },
   },
   calculable : true,
   legend: {
@@ -37,7 +37,9 @@ export const LineBarChartOptions = {
       nameTextStyle: { color: '#fff' },
       axisTick: { show: false },
       axisLabel: {
-        textStyle: { color: '#fff' }
+        textStyle: { color: '#fff' },
+        margin: 4,
+        fontSize: 9,
       },
       axisLine: { show: false },
       splitLine: {
@@ -55,7 +57,9 @@ export const LineBarChartOptions = {
       axisTick: { show: false },
       axisLabel: {
         formatter: '{value}',
-        textStyle: { color: '#fff' }
+        textStyle: { color: '#fff' },
+        margin: 0,
+        fontSize: 9,
       },
       axisLine: {  show: false },
       splitLine: {

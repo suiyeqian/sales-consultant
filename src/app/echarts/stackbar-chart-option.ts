@@ -26,9 +26,9 @@ export const StackBarChartOptions = {
     axisLine: { show: false },
     axisLabel: {
       textStyle: { color: '#fff' },
-      formatter:  function (value) {
-        return value / 10000;
-      },
+      // formatter:  function (value) {
+      //   return value / 10000;
+      // },
     },
     splitLine: {
       show: true,

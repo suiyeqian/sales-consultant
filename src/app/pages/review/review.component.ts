@@ -78,6 +78,19 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             this.applyOption.series[1].data =
               [resData.m1PassRate, resData.m2PassRate, resData.m3PassRate, resData.m4PassRate,
                 resData.m5PassRate, resData.m6PassRate].reverse();
+            this.applyOption.tooltip.formatter = function(params) {
+              let relVal = params[0].name;
+              for (let i = 0, l = params.length; i < l; i++) {
+                relVal += `<br/>
+                           <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
+                           background-color:${params[i].color}"></span>
+                           ${params[i].seriesName} : ${params[i].value}`;
+                if (params[i].seriesName === '通过率') {
+                  relVal += '%';
+                }
+               }
+              return relVal;
+            };
             // 放款情况
             this.loanOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
             this.loanOption.series.splice(0, 1);
@@ -85,12 +98,14 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             this.loanOption.legend.data = ['放款单量', '放款金额'];
             this.loanOption.series[0].data =
               [resData.m1Number, resData.m2Number, resData.m3Number, resData.m4Number, resData.m5Number, resData.m6Number].reverse();
-            this.loanOption.yAxis[1].axisLabel.formatter = function (value) {
-                return value / 10000;
-              };
+            // this.loanOption.yAxis[1].axisLabel.formatter = function (value) {
+            //     return value / 10000;
+            //   };
             this.loanOption.series[1].name = '放款金额';
             this.loanOption.series[1].data =
-              [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt].reverse();
+              [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt]
+              .map(item => (item / 10000).toFixed(2))
+              .reverse();
             // 逾期情况
             this.overdueOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
             this.overdueOption.series.splice(1, 1);
@@ -102,11 +117,13 @@ export class ReviewComponent implements OnInit, AfterContentInit {
               [resData.m1OvdNumber, resData.m2OvdNumber, resData.m3OvdNumber, resData.m4OvdNumber,
                  resData.m5OvdNumber, resData.m6OvdNumber].reverse();
             this.overdueOption.series[1].name = '逾期金额';
-            this.overdueOption.yAxis[1].axisLabel.formatter = function (value) {
-              return value / 10000;
-            };
+            // this.overdueOption.yAxis[1].axisLabel.formatter = function (value) {
+            //   return value / 10000;
+            // };
             this.overdueOption.series[1].data =
-              [resData.m1OvdAmt, resData.m2OvdAmt, resData.m3OvdAmt, resData.m4OvdAmt, resData.m5OvdAmt, resData.m6OvdAmt].reverse();
+              [resData.m1OvdAmt, resData.m2OvdAmt, resData.m3OvdAmt, resData.m4OvdAmt, resData.m5OvdAmt, resData.m6OvdAmt]
+              .map(item => (item / 10000).toFixed(2))
+              .reverse();
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });
@@ -134,7 +151,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
               xAxisData.push(resData.months[i] + '月');
               let dataset = [];
               for (let item of resData.dataList) {
-                dataset.push(item['m' + (i + 1) + 'Amt']);
+                dataset.push((item['m' + (i + 1) + 'Amt']/10000).toFixed(2));
               }
               seriesData.push({
                 name: resData.months[i] + '月',
@@ -296,11 +313,11 @@ export class ReviewComponent implements OnInit, AfterContentInit {
             // 件均金额
             this.avgAmtOption = this.cmnFn.deepCopy(echart.BarChartOptions, {});
             this.avgAmtOption.xAxis[0].data = legendList;
-            this.avgAmtOption.yAxis[0].axisLabel.formatter = function (value) {
-                return value / 10000;
-              };
+            // this.avgAmtOption.yAxis[0].axisLabel.formatter = function (value) {
+            //     return value / 10000;
+            //   };
             this.avgAmtOption.series[0].name = '件均金额';
-            this.avgAmtOption.series[0].data = avgAmtArrays;
+            this.avgAmtOption.series[0].data = avgAmtArrays.map(item => (item / 10000).toFixed(2));
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 100);
         });

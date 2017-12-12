@@ -1,7 +1,16 @@
 export const LineChartOptions = {
   tooltip: {
     trigger: 'axis',
-    // formatter: '{a0}: {c0}<br />{a1}: {c1}'
+    formatter: function(params) {
+      let relVal = params[0].name;
+      for (let i = 0, l = params.length; i < l; i++) {
+           relVal += `<br/>
+                      <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
+                      background-color:${params[i].color}"></span>
+                      ${params[i].seriesName} : ${params[i].value}%`;
+       }
+      return relVal;
+     }
   },
   legend: {
     data: [],
