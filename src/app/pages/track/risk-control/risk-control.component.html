@@ -62,8 +62,14 @@
           <td>{{member.name}}</td>
           <td>{{member.overDueNumber | number}}</td>
           <td>{{member.loanNumber | number}}</td>
-          <td>{{posId == 2?member.overDueAmt:member.overDueAmt/10000 | number:'1.0-0'}}</td>
-          <td>{{posId == 2?member.loanAmt:member.loanAmt/10000 | number:'1.0-0'}}</td>
+          <ng-container *ngIf="posId == 2">
+            <td>{{member.overDueAmt | number}}</td>
+            <td>{{member.loanAmt | number}}</td>
+          </ng-container>
+          <ng-container *ngIf="posId != 2">
+            <td>{{member.overDueAmt/10000 | number:'1.0-0'}}</td>
+            <td>{{member.loanAmt/10000 | number:'1.0-0'}}</td>
+          </ng-container>
         </tr>
       </tbody>
     </table>

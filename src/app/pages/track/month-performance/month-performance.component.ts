@@ -14,6 +14,7 @@ export class MonthPerformanceComponent implements OnInit {
   mbsPerformance = [];
   private weeklytrendUrl = 'performancetrack/weekly_trend';
   trendOption = Object.assign({});
+  hasOther = false;
   @Input() timeProgress: number;
 
   constructor(
@@ -32,7 +33,14 @@ export class MonthPerformanceComponent implements OnInit {
         .getDataByPost(this.mbScheduleUrl, {posId: localStorage.posId})
         .then((res) => {
           if ( res.code === 0) {
+            let idx = res.data.findIndex((item) => {
+              return item.name === '其他' && item.amt === 0;
+            });
+            this.hasOther = res.data.findIndex((item) => item.name === '其他' && item.amt > 0) !== -1;
             this.mbsPerformance = res.data;
+            if (idx !== -1) {
+              this.mbsPerformance.splice(idx, 1);
+            }
           }
         });
   }

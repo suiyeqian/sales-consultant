@@ -14,8 +14,8 @@ export class GoalDataResolver implements Resolve<any> {
       if ( res.code === 0 && res.data.length) {
         return res.data;
       } else {
-        this.router.navigate(['/track']);
         alert('无目标设定数据');
+        this.router.navigate(['/track']);
         return null;
       }
     });

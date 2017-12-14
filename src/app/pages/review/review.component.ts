@@ -151,7 +151,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
               xAxisData.push(resData.months[i] + '月');
               let dataset = [];
               for (let item of resData.dataList) {
-                dataset.push((item['m' + (i + 1) + 'Amt']/10000).toFixed(2));
+                dataset.push((item['m' + (i + 1) + 'Amt'] / 10000).toFixed(2));
               }
               seriesData.push({
                 name: resData.months[i] + '月',
