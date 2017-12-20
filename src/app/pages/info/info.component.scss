@@ -129,7 +129,8 @@
 .timeline-content{
   background-color: #101225;
   width: 6.6rem;
-  height: .8rem;
+  // height: .8rem;
+  max-height: 1.6rem;
   line-height: .8rem;
   padding-left: .16rem;
 }
@@ -146,5 +147,5 @@
 .timeline .timeline-body-content p:last-child{
   text-overflow:ellipsis;
   overflow:hidden;
-  white-space:nowrap;
+  // white-space:nowrap;
 }

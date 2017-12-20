@@ -24,7 +24,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center" *ngFor="let item of loanTopTen" [class.font-yellow]="item.rank === myRank.rank">
+        <tr class="text-center" *ngFor="let item of loanTopTen" [class.font-blue]="item.name === myRank.name">
           <td class="font-yellow">{{item.loanRank}}</td>
           <td>{{item.name}}</td>
           <td>{{item.loanAmt | number}}</td>
@@ -40,7 +40,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr class="text-center" *ngFor="let item of cm2TopTen" [class.font-yellow]="item.rank === myRank.rank">
+        <tr class="text-center" *ngFor="let item of cm2TopTen" [class.font-blue]="item.name === myRank.name">
           <td class="font-yellow">{{item.cm2Rank}}</td>
           <td>{{item.name}}</td>
           <td>{{item.cM2Rate}}%</td>

@@ -21,6 +21,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
   private updateUrl = 'salegoal/update_goal';
   supGoalname: string;
   myGoalName: string;
+  remind: string;
 
   constructor(
     private bdService: BackendService,
@@ -30,16 +31,17 @@ export class GoalComponent implements OnInit, AfterContentInit {
   ) {
     switch (this.posId) {
       case '3':
-        [this.supGoalname, this.myGoalName] = ['小区目标', '营业部目标'];
+        [this.supGoalname, this.myGoalName, this.remind] =
+        ['小区目标', '营业部目标', '每月第四个工作日之后目标自动锁定，不可更改'];
         break;
       case '4':
-        [this.supGoalname, this.myGoalName] = ['大区目标', '小区目标'];
+        [this.supGoalname, this.myGoalName, this.remind] = ['大区目标', '小区目标', '下级目标由系统后台上传，不可更改'];
         break;
       case '5':
-        this.myGoalName = '大区目标';
+        [this.myGoalName, this.remind] = ['大区目标', '下级目标由系统后台上传，不可更改'];
         break;
       default:
-        [this.supGoalname, this.myGoalName] = ['营业部目标', '团队目标'];
+        [this.supGoalname, this.myGoalName, this.remind] = ['营业部目标', '团队目标', '每月15日之后目标自动锁定，不可更改'];
     }
   }
 
@@ -135,14 +137,6 @@ export class GoalComponent implements OnInit, AfterContentInit {
     }
     this.countSum();
   }
-
-  // rateChange() {
-  //   let self = this;
-  //   setTimeout(function(){
-  //     self.countSum();
-  //     self.formDataset.changed = self.checkDiff();
-  //   }, 0);
-  // }
 
   checkDiff(): boolean {
     let editData = this.goalForm.controls.goalList.value;

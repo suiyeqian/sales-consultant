@@ -14,7 +14,7 @@
         <span class="text-right risk-val">{{+riskControl.overDueNumber | number}}</span>
       </p>
       <p class="risk-item">
-        <span class="text-left risk-name">待收笔数：</span>
+        <span class="text-left risk-name">放款笔数：</span>
         <span class="text-right risk-val">{{+riskControl.loanNumber | number}}</span>
       </p>
     </div>
@@ -47,12 +47,13 @@
     <h4 class="sub-title">团队成员风控详情</h4>
   </div>
   <div class="table-wrap">
+    <p class="remark pull-right font-blue">* 金额单位:{{posId == 2?'元':'万元'}}</p>
     <table class="table">
       <thead>
         <tr>
           <th>姓名</th>
           <th>逾期笔数</th>
-          <th>待收笔数</th>
+          <th>放款笔数</th>
           <th>逾期金额</th>
           <th>待收余额</th>
         </tr>
@@ -73,7 +74,7 @@
         </tr>
       </tbody>
     </table>
-    <p class="remark pull-right font-blue">* 金额单位：{{posId == 2?'元':'万元'}}</p>
+    <p class="remark pull-left" *ngIf="hasOther">* 其他: 包括历史离职或异动成员</p>
   </div>
 
 </div>

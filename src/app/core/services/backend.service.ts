@@ -8,8 +8,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BackendService {
-  private apiUrl = 'http://10.17.2.110:8989';
-  // private apiUrl = window.location.origin;
+  // private apiUrl = 'http://10.17.2.110:8989';
+  private apiUrl = window.location.origin;
   private baseUrl = `${this.apiUrl}/servegateway/rest/bdss/`;
   firstOverdue = true;
   headersObj = {
@@ -134,6 +134,12 @@ export class BackendService {
   }
 
   private handleError(error: any): Promise<any> {
+    // if(error && error.status){
+    //   alert("后台接口异常，错误码："+error.status);
+    //   console.warn("接口异常，错误码："+error.status);
+    // }else{
+    //   console.error(error);
+    // }
     return Promise.reject(error.message || error);
   }
 }

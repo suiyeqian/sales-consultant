@@ -18,6 +18,7 @@ export class RiskControlComponent implements OnInit {
   cm2: number;
   private mbRiskUrl = 'performancetrack/member_risk';
   mbsRisk = [];
+  hasOther = false;
   posId = localStorage.posId;
 
   constructor(
@@ -63,6 +64,7 @@ export class RiskControlComponent implements OnInit {
         .then((res) => {
           if ( res.code === 0) {
             this.mbsRisk = res.data;
+            this.hasOther = res.data.findIndex((item) => item.name === '其他') !== -1;
           }
           let waterMark = this.waterMark;
           setTimeout(function(){

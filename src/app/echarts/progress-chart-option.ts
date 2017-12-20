@@ -3,6 +3,7 @@ export const ProgressChartOptions = {
     {
       type : 'pie',
       radius : [40, 60],
+      silent: true,
       itemStyle : {
         normal : {
           label : {
@@ -23,14 +24,14 @@ export const ProgressChartOptions = {
               color: '#d74b49',
               label : {
                 show : true,
-                position : 'center',
-                formatter : '{c}%',
                 textStyle: {
                   color: '#d74b49',
                   fontSize : 24,
                   fontWeight : 'bold',
                   baseline : 'bottom'
-                }
+                },
+                position : 'center',
+                formatter : '{c}%',
               },
               labelLine : {
                 show : false
@@ -45,7 +46,10 @@ export const ProgressChartOptions = {
               color: '#29293b',
               label: {
                 show: true,
-                position: 'center'
+                position: 'center',
+                textStyle: {
+                  color: '#fff'
+                }
               },
               labelLine: { show : false }
             },

@@ -24,6 +24,8 @@ i.avatar-icon {
   padding: 0 .12rem;
   width: 18%;
   display: inline-block;
+  line-height: 0.4rem;
+  vertical-align: middle;
 }
 .member-progress .volume-val{
   width: auto;
@@ -35,7 +37,7 @@ i.avatar-icon {
 .member-progress-bar {
   display: inline-block;
   width: 57%;
-  vertical-align: bottom;
+  vertical-align: middle;
 }
 // 团队销售情况
 .performance-trend{
