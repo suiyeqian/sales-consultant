@@ -74,7 +74,8 @@
         </tr>
       </tbody>
     </table>
-    <p class="remark pull-left" *ngIf="hasOther">* 其他: 包括历史离职或异动成员</p>
+    <p class="remark pull-left" *ngIf="hasOther&&posId==2">* 其他: 包括历史离职或异动成员</p>
+    <p class="remark pull-left" *ngIf="hasOther&&posId==3">* 其他: 包括电销业绩数据</p>
   </div>
 
 </div>

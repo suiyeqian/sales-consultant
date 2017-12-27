@@ -60,12 +60,12 @@ export class AuthGuard implements CanActivate {
       } else {
         // let user = {name: '马倩', number: 'xn087432'};
         // localStorage.setItem('bdss_accessToken',
-        // 'pcqLZ6WNuGnKDWruZkDd7gPl9EPxkk40j9rlZPUuojJP4NUA1EtxqjH9uAA818RdXmQQVGk6anVTquLHWD2G');
-        // localStorage.setItem('bdss_weiXinDeviceId', 'f0a9b0f3c7429c01d54ca10674c6451c');
+        // '2sOKzrjvvzJDV6sLiB8MRNAkQmPYRdW2el7tT1HgIoI34d983uHeLviU21eTR2GnbAvd2c5das9pVC4nY6mr');
+        // localStorage.setItem('bdss_weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
         // localStorage.setItem('bdss_refreshToken',
-        // '0J6NTOXpJDdQzIUhG1vYW9wssoXZdwKLOs3A0DFcuVceA1dmxVVl8wOl1votNQoNuCRDzP77CtXxO3rnvrBf');
+        // 'Zw13URw0wfXNej0V8WQakTys442tszC6qYb6Nh2Hd1Su8X152fSliwehpWPgVRJzXglNEeJFdRmmyjSiKPEK');
         // localStorage.setItem('user', JSON.stringify(user));
-        // localStorage.setItem('posId', '3');
+        // localStorage.setItem('posId', '2');
         // return true;
         localStorage.clear();
         window.location.href = this.redirectUrl;
