@@ -167,6 +167,7 @@ export class GoalComponent implements OnInit, AfterContentInit {
       }
       goalArr.push({
         id: member.id,
+        userId: member.userId,
         name: member.name,
         goalAmt: Number.isNaN(amtVal) ? 0 : amtVal * 10000,
         // rate: this.goalForm.controls.goalList.value[member.id]
