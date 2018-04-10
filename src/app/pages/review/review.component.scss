@@ -59,6 +59,11 @@
 .seniority-item span:first-child{
   background-color: #d74b49;
 }
+.competitive-wrap {
+  position: relative;
+  padding-top: .8rem;
+  margin-top: -.5rem;
+}
 .competitive-wrap .col-6:nth-child(odd){
   padding-right: 5px;
 }
@@ -71,6 +76,17 @@
 .remark{
   padding-left: .27rem;
   font-size: .28rem;
+}
+// help
+.help-icon{
+  width: .51rem;
+  height: .51rem;
+  position: absolute;
+  right: .2rem;
+  top: 0;
+  background-image: url(assets/img/help.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 // 产品份额

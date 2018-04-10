@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { InfoComponent } from './info.component';
 
 import { SharedModule } from '../../shared/shared.module';
-import { RibbonModule } from '../../my-components/ribbon/ribbon.module';
 import { InfoRoutingModule } from './info-routing.module';
 
 import { AngularEchartsModule } from 'ngx-echarts';
@@ -12,7 +11,6 @@ import { AngularEchartsModule } from 'ngx-echarts';
   imports: [
     SharedModule,
     AngularEchartsModule,
-    RibbonModule,
     InfoRoutingModule
   ],
   declarations: [

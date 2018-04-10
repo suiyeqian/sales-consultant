@@ -221,3 +221,77 @@ p {
 .col-11 {
   -webkit-flex: 0 0 91.666667%;
 }
+
+// modal
+.fs-modal.modal {
+  background-color: rgba(16,17,37,0.85);
+  z-index: 10000001;
+
+  .modal-dialog {
+    margin: 0;
+  }
+  .modal-content{
+    background-color: transparent;
+    border-width: 0;
+  }
+  .modal-header {
+    border-width: 0;
+    padding: 0;
+  }
+  .modal-header .close {
+    padding-top: .6rem;
+    padding-right: .6rem;
+    color: #fff;
+    font-size: .5rem;
+    opacity: .9;
+  }
+  .modal-body{
+    padding: 15px 0;
+  }
+  h5.title {
+    font-size: 16px;
+    color: #191C2A;
+    width: 2.83rem;
+    height: .59rem;
+    line-height: .59rem;
+    text-align: center;
+    background-color: #06E7E9;
+    border-radius: 0 .3rem .3rem 0;
+    margin-bottom: .45rem;
+  }
+  p.formula {
+    font-size: 12px;
+    color: #06E7E9;
+    padding-left: .59rem;
+  }
+  .modal-table-wrap {
+    padding: 0 .17rem;
+  }
+  .modal-table {
+    font-size: 14px;
+    font-weight: normal;
+    margin-bottom: .45rem;
+    border: 1px solid #6E707D
+  }
+  .modal-table thead {
+    background-color: transparent;
+    border-bottom: 1px solid #6E707D;
+  }
+  .modal-table  thead th, .modal-table td {
+    color: #fff;
+    font-weight: normal;
+    height: .69rem;
+    line-height: .69rem;
+    padding: 0;
+
+  }
+  .modal-table  thead th{
+    border-right-width: 0;
+  }
+  .modal-table tbody {
+    border-bottom: 1px solid #6E707D;
+  }
+  .modal-table tbody td {
+    border-right: 1px solid #6E707D;
+  }
+}

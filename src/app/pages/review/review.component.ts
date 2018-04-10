@@ -1,8 +1,10 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { BackendService } from '../../core/services/backend.service';
 import { WaterMarkService } from '../../core/services/watermark.service';
 import { CommonFnService } from '../../core/services/commonfn.service';
+import { NgbdModalComponent } from '../../my-components/modal/modal.component';
 
 import * as echart from '../../echarts';
 
@@ -42,6 +44,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
     private bdService: BackendService,
     private waterMark: WaterMarkService,
     private cmnFn: CommonFnService,
+    private modalService: NgbModal,
   ) {}
 
   ngOnInit() {
@@ -343,5 +346,12 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         this.getPfmcTrend();
         this.getPfmcTotal();
       }
+  }
+
+  open(): void {
+    const modalRef = this.modalService.open(NgbdModalComponent, { windowClass: 'fs-modal' });
+    if (localStorage.posId === '2') {
+      modalRef.componentInstance.isTeamLeader = true;
+    }
   }
 }

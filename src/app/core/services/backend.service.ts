@@ -8,8 +8,8 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BackendService {
-  // private apiUrl = 'http://10.17.2.110:8989';
-  private apiUrl = window.location.origin;
+  private apiUrl = 'http://10.17.2.110:8989';
+  // private apiUrl = window.location.origin;
   private baseUrl = `${this.apiUrl}/servegateway/rest/bdss/`;
   firstOverdue = true;
   headersObj = {
