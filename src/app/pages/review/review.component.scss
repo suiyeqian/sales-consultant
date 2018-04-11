@@ -5,6 +5,14 @@
 .review .tabset{
   padding-left: 15px;
   padding-right: 15px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 10000;
+  background-color: #03031a;
+}
+.tab-track, .tab-human, .tab-produce {
+  margin-top: 1.9rem;
 }
 .apply-chart-wrap, .loan-chart-wrap, .overdue-chart-wrap, .avgAmt-chart-wrap {
   margin-top: -.9rem;

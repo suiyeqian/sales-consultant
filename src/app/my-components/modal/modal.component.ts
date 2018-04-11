@@ -21,6 +21,12 @@ export class NgbdModalComponent implements OnInit {
     } else {
       this.contentObj = TEAMSCORE;
     }
-
   }
+   closeModal() {
+     let ele = document.querySelector('.modal');
+     ele.className = ele.className + ' close';
+     setTimeout(() => {
+       this.activeModal.close();
+     }, 300);
+   }
 }

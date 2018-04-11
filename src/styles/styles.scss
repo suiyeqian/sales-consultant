@@ -145,7 +145,6 @@ p {
   line-height: 1.27rem;
   font-size: .4rem;
   border-bottom: 2px solid #191b2f;
-  margin-bottom: .75rem;
 }
 .tab-title {
   height: 1.27rem;
@@ -294,4 +293,42 @@ p {
   .modal-table tbody td {
     border-right: 1px solid #6E707D;
   }
+}
+// modal-annimation
+.modal.show {
+    animation:modalIn .3s ease-out;
+    -moz-animation:modalIn .3s ease-out;
+    -webkit-animation:modalIn .3s ease-out;
+    -o-animation:modalIn .3s ease-out;
+}
+@keyframes modalIn {
+  from {top: -25%; opacity: 0}
+  to {top: 0; opacity: .9}
+}
+@-moz-keyframes modalIn {
+  from {top:-25%; opacity: 0}
+  to {top: 0; opacity: .9}
+}
+@-webkit-keyframes modalIn {
+  from {top:-25%; opacity: 0}
+  to {top: 0; opacity: .9}
+}
+
+.modal.close {
+  animation:modalOut .3s ease-out forwards;
+  -moz-animation:modalOut .3s ease-out forwards;
+  -webkit-animation:modalOut .3s ease-out forwards;
+  -o-animation:modalOut .3s ease-out forwards;
+}
+@keyframes modalOut {
+  0% {top: 0;}
+  100% {top: -25%; opacity: 0}
+}
+@-moz-keyframes modalOut {
+  0% {top: 0;}
+  100% {top: -25%; opacity: 0}
+}
+@-webkit-keyframes modalOut {
+  0% {top: 0;}
+  100% {top: -25%; opacity: 0}
 }
