@@ -11,6 +11,9 @@
     </div>
   </div>
   <div class="tab-track" *ngIf="curTab === 'track'">
+    <div class="track-sel">
+      <my-select-box [seledItem]="curLevel" [selItems]="subLevels" (getSelItems)="getSelItems()" (onSelChanged)="getPfmcData($event)"></my-select-box>
+    </div>
     <div class="sub-title-wrap"><h4 class="sub-title">申请情况</h4></div>
     <div class="apply-chart-wrap">
       <div echarts [options]="applyOption" class="apply-chart"></div>
@@ -20,10 +23,10 @@
         <span>本年累计申请单量</span>
         <span class="pull-right">{{pfmcTotal.appNumber|number}}</span>
       </p>
-      <p>
+      <!-- <p>
         <span>本年平均通过率</span>
         <span class="pull-right">{{pfmcTotal.passRate}}%</span>
-      </p>
+      </p> -->
     </div>
     <div class="sub-title-wrap"><h4 class="sub-title">放款情况</h4></div>
     <div class="loan-chart-wrap">
@@ -84,6 +87,15 @@
   </div>
 
   <div class="tab-produce" *ngIf="curTab === 'produce'">
+    <div class="sub-title-wrap"><h4 class="sub-title">产品申请分析</h4></div>
+    <div class="sub-tabset row text-center">
+      <div class="col">
+        <span class="tab-title" [class.selected]="curTab === 'track'" (click)="changeTab('track')">近6个月</span>
+      </div>
+      <div class="col">
+        <span class="tab-title" [class.selected]="curTab === 'track'" (click)="changeTab('track')">本月</span>
+      </div>
+    </div>
     <div class="sub-title-wrap"><h4 class="sub-title">产品通过率</h4></div>
     <div class="passRate-chart-wrap">
       <div echarts [options]="passRateOption" class="passRate-chart"></div>

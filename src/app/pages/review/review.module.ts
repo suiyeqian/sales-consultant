@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReviewComponent } from './review.component';
 
 import { SharedModule } from '../../shared/shared.module';
-// import { RibbonModule } from '../../my-components/ribbon/ribbon.module';
+import { SelBoxModule } from '../../my-components/select-box/select-box.module';
 import { ReViewRoutingModule } from './review-routing.module';
 
 import { AngularEchartsModule } from 'ngx-echarts';
@@ -12,7 +12,7 @@ import { AngularEchartsModule } from 'ngx-echarts';
   imports: [
     SharedModule,
     AngularEchartsModule,
-    // RibbonModule,
+    SelBoxModule,
     ReViewRoutingModule
   ],
   declarations: [

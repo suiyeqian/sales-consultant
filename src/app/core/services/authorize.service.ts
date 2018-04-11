@@ -9,8 +9,10 @@ export class AuthorizeService {
   public normalizeParameters(parameters) {
     let sortable = [];
     for (let p of Object.keys(parameters)) {
-      let nvp = parameters[p];
-      sortable.push([ p + ' ' + nvp, [p, nvp]]);
+      if (parameters[p]) {
+        let nvp = parameters[p];
+        sortable.push([ p + ' ' + nvp, [p, nvp]]);
+      }
     }
     sortable.sort(function(a, b) {
         if (a[0] < b[0]) { return -1; }

@@ -40,6 +40,10 @@ export class ReviewComponent implements OnInit, AfterContentInit {
   loanAmtOption: any;
   avgAmtOption: any;
 
+  private subNameUrl = 'achievementanls/sub_name';
+  subLevels = [];
+  curLevel = {value: '', text: '全部'};
+
   constructor(
     private bdService: BackendService,
     private waterMark: WaterMarkService,
@@ -57,9 +61,10 @@ export class ReviewComponent implements OnInit, AfterContentInit {
     }
   }
 
-  getPfmcTrend(): void {
+  getPfmcData(level): void {
+    this.curLevel = level;
     this.bdService
-        .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId})
+        .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId, subName: level.value})
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;
@@ -130,13 +135,13 @@ export class ReviewComponent implements OnInit, AfterContentInit {
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });
-  }
 
-  getPfmcTotal(): void {
     this.bdService
-        .getDataByPost(this.pfmcTotalUrl, {posId: localStorage.posId})
+        .getDataByPost(this.pfmcTotalUrl, {posId: localStorage.posId, subName: level.value})
         .then((res) => {
-          this.pfmcTotal = res.data;
+          if ( res.code === 0) {
+            this.pfmcTotal = res.data;
+          }
         });
   }
 
@@ -343,8 +348,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
         this.getProdctComposition();
         break;
       default:
-        this.getPfmcTrend();
-        this.getPfmcTotal();
+        this.getPfmcData(this.curLevel);
       }
   }
 
@@ -353,5 +357,16 @@ export class ReviewComponent implements OnInit, AfterContentInit {
     if (localStorage.posId === '2') {
       modalRef.componentInstance.isTeamLeader = true;
     }
+  }
+
+  getSelItems(): void {
+    this.bdService
+        .getDataByPost(this.subNameUrl, {posId: localStorage.posId})
+        .then((res) => {
+          if ( res.code === 0) {
+            this.subLevels = res.data;
+            this.subLevels.unshift({value: '', text: '全部'});
+          }
+        });
   }
 }
