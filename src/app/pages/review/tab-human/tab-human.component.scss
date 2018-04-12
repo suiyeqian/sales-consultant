@@ -1,0 +1,57 @@
+.capacity-chart-wrap, .passRate-chart-wrap, .overdueRate-chart-wrap {
+  margin-top: -1.2rem;
+  margin-bottom: 1.15rem;
+}
+.seniority-wrap {
+  margin-bottom: 1.64rem;
+}
+.seniority-wrap .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+.seniority-wrap .col, .seniority-wrap .col-2, .seniority-wrap .col-3{
+  padding-left: 0;
+  padding-right: 0;
+}
+.seniority-hd {
+  margin-bottom: .29rem;
+  font-size: .37rem;
+}
+.seniority-item {
+  background-color: #101225;
+  height: .99rem;
+  line-height: .99rem;
+  margin-bottom: .23rem;
+}
+.seniority-item span:first-child{
+  background-color: #d74b49;
+}
+.competitive-wrap {
+  position: relative;
+  padding-top: .8rem;
+  margin-top: -.5rem;
+}
+.competitive-wrap .col-6:nth-child(odd){
+  padding-right: 5px;
+}
+.competitive-wrap .col-6:nth-child(even){
+  padding-left: 5px;
+}
+.radar-chart {
+  height: 6rem;
+}
+.remark{
+  padding-left: .27rem;
+  font-size: .28rem;
+}
+// help
+.help-icon{
+  width: .51rem;
+  height: .51rem;
+  position: absolute;
+  right: .2rem;
+  top: 0;
+  background-image: url(assets/img/help.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}

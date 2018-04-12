@@ -1,0 +1,37 @@
+<div class="tab-human">
+  <div class="sub-title-wrap"><h4 class="sub-title">产能分析</h4></div>
+  <div class="capacity-chart-wrap">
+    <div echarts [options]="capacityOption" class="capacity-chart" id="capacityChart"></div>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">年资段分析</h4></div>
+  <div class="seniority-wrap text-center">
+    <div class="row font-blue seniority-hd">
+      <span class="col-2">MOB</span>
+      <span class="col-2">总人力</span>
+      <span class="col-2">开单人力</span>
+      <span class="col-3">总销售金额</span>
+      <span class="col-3">销售占比</span>
+    </div>
+    <div class="row seniority-item" *ngFor="let item of tmSeniority">
+      <span class="col-2">{{item.mobRng}}</span>
+      <span class="col-2">{{item.totNum}}</span>
+      <span class="col-2">{{item.billingNum}}</span>
+      <span class="col-3">{{item.saleAmt | number}}</span>
+      <span class="col-3">{{item.salePct}}%</span>
+    </div>
+    <p class="remark pull-right font-blue">* 金额单位：万元</p>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">综合竞争力对比</h4></div>
+  <div class="competitive-wrap">
+    <div class="row">
+      <i class="help-icon" (click)="open()"></i>
+      <div class="col-6" *ngFor="let item of teamMbs">
+        <p class="text-center">{{item.name}}</p>
+        <div class="radar-chart-wrap">
+          <div echarts [options]="item.radarChartOpt" class="radar-chart"></div>
+        </div>
+      </div>
+      <p class="remark">* 数据统计范围为近三个月（包括本月）</p>
+    </div>
+  </div>
+</div>

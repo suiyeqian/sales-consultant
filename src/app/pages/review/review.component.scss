@@ -11,131 +11,127 @@
   z-index: 10000;
   background-color: #03031a;
 }
-.tab-track, .tab-human, .tab-produce {
+.tab-container {
   margin-top: 1.9rem;
 }
-.apply-chart-wrap, .loan-chart-wrap, .overdue-chart-wrap, .avgAmt-chart-wrap {
-  margin-top: -.9rem;
-}
-// .radar-chart-wrap {
-//   margin-top: -8px;
+// .apply-chart-wrap, .loan-chart-wrap, .overdue-chart-wrap, .avgAmt-chart-wrap {
+//   margin-top: -.9rem;
 // }
-.apply-chart, .loan-chart, .overdue-chart, .passRate-chart, .overdueRate-chart, .avgAmt-chart{
-  height: 300px;
-}
-.capacity-chart{
-  min-height: 150px;
-}
-.overdue-chart-wrap {
-  margin-bottom: 1.15rem;
-}
-.count-info {
-  margin-top: .4rem;
-  margin-bottom: 1.51rem;
-}
-.count-info p {
-  padding: .4rem;
-  background-color: #101225;
-  margin-bottom: .05rem;
-}
+// // .radar-chart-wrap {
+// //   margin-top: -8px;
+// // }
+// .apply-chart, .loan-chart, .overdue-chart, .passRate-chart, .overdueRate-chart, .avgAmt-chart{
+//   height: 300px;
+// }
+// .capacity-chart{
+//   min-height: 150px;
+// }
+// .overdue-chart-wrap {
+//   margin-bottom: 1.15rem;
+// }
+// .count-info {
+//   margin-top: .4rem;
+//   margin-bottom: 1.51rem;
+// }
+// .count-info p {
+//   padding: .4rem;
+//   background-color: #101225;
+//   margin-bottom: .05rem;
+// }
+
 // human
-.capacity-chart-wrap, .passRate-chart-wrap, .overdueRate-chart-wrap {
-  margin-top: -1.2rem;
-  margin-bottom: 1.15rem;
-}
-.seniority-wrap {
-  margin-bottom: 1.64rem;
-}
-.seniority-wrap .row {
-  margin-left: 0;
-  margin-right: 0;
-}
-.seniority-wrap .col, .seniority-wrap .col-2, .seniority-wrap .col-3{
-  padding-left: 0;
-  padding-right: 0;
-}
-.seniority-hd {
-  margin-bottom: .29rem;
-  font-size: .37rem;
-}
-.seniority-item {
-  background-color: #101225;
-  height: .99rem;
-  line-height: .99rem;
-  margin-bottom: .23rem;
-}
-.seniority-item span:first-child{
-  background-color: #d74b49;
-}
-.competitive-wrap {
-  position: relative;
-  padding-top: .8rem;
-  margin-top: -.5rem;
-}
-.competitive-wrap .col-6:nth-child(odd){
-  padding-right: 5px;
-}
-.competitive-wrap .col-6:nth-child(even){
-  padding-left: 5px;
-}
-.radar-chart {
-  height: 6rem;
-}
-.remark{
-  padding-left: .27rem;
-  font-size: .28rem;
-}
+// .capacity-chart-wrap, .passRate-chart-wrap, .overdueRate-chart-wrap {
+//   margin-top: -1.2rem;
+//   margin-bottom: 1.15rem;
+// }
+// .seniority-wrap {
+//   margin-bottom: 1.64rem;
+// }
+// .seniority-wrap .row {
+//   margin-left: 0;
+//   margin-right: 0;
+// }
+// .seniority-wrap .col, .seniority-wrap .col-2, .seniority-wrap .col-3{
+//   padding-left: 0;
+//   padding-right: 0;
+// }
+// .seniority-hd {
+//   margin-bottom: .29rem;
+//   font-size: .37rem;
+// }
+// .seniority-item {
+//   background-color: #101225;
+//   height: .99rem;
+//   line-height: .99rem;
+//   margin-bottom: .23rem;
+// }
+// .seniority-item span:first-child{
+//   background-color: #d74b49;
+// }
+// .competitive-wrap {
+//   position: relative;
+//   padding-top: .8rem;
+//   margin-top: -.5rem;
+// }
+// .competitive-wrap .col-6:nth-child(odd){
+//   padding-right: 5px;
+// }
+// .competitive-wrap .col-6:nth-child(even){
+//   padding-left: 5px;
+// }
+// .radar-chart {
+//   height: 6rem;
+// }
+// .remark{
+//   padding-left: .27rem;
+//   font-size: .28rem;
+// }
 // help
-.help-icon{
-  width: .51rem;
-  height: .51rem;
-  position: absolute;
-  right: .2rem;
-  top: 0;
-  background-image: url(assets/img/help.png);
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
+// .help-icon{
+//   width: .51rem;
+//   height: .51rem;
+//   position: absolute;
+//   right: .2rem;
+//   top: 0;
+//   background-image: url(assets/img/help.png);
+//   background-size: 100% 100%;
+//   background-repeat: no-repeat;
+// }
 
-// 产品份额
-.pie-chart{
-  height: 4.53rem;
-}
-.chart-title {
-  font-size: .32rem;
-  color: #f2f2f3;
-}
-
-// 图例
-.legendlist{
-margin: auto;
-padding-bottom: .64rem;
-}
-.legend{
-display: inline-block;
-margin-right: 5px;
-font-size: 10px;
-height: .16rem;
-line-height: .16rem;
-position: relative;
-}
-.legend-box {
-display: inline-block;
-width: 10px;
-height: 5px;
-line-height: .16rem;
-border-radius: 2px;
-position: absolute;
-top: 0;
-bottom: 0;
-}
-.legend span {
-margin-left: 17px;
-}
-
-// 选择框
-.track-sel {
-  margin-top: -.1rem;
-  margin-bottom: .4rem;
-  padding-left: .91rem;
-}
+// .passRate-chart, .overdueRate-chart, .avgAmt-chart{
+//   height: 300px;
+// }
+// // 产品份额
+// .pie-chart{
+//   height: 4.53rem;
+// }
+// .chart-title {
+//   font-size: .32rem;
+//   color: #f2f2f3;
+// }
+// // 图例
+// .legendlist{
+// margin: auto;
+// padding-bottom: .64rem;
+// }
+// .legend{
+// display: inline-block;
+// margin-right: 5px;
+// font-size: 10px;
+// height: .16rem;
+// line-height: .16rem;
+// position: relative;
+// }
+// .legend-box {
+// display: inline-block;
+// width: 10px;
+// height: 5px;
+// line-height: .16rem;
+// border-radius: 2px;
+// position: absolute;
+// top: 0;
+// bottom: 0;
+// }
+// .legend span {
+// margin-left: 17px;
+// }

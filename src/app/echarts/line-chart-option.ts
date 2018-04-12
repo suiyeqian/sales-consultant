@@ -7,7 +7,7 @@ export const LineChartOptions = {
            relVal += `<br/>
                       <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
                       background-color:${params[i].color}"></span>
-                      ${params[i].seriesName} : ${params[i].value}%`;
+                      ${params[i].seriesName} : ${params[i].value}`;
        }
       return relVal;
      }
@@ -20,8 +20,9 @@ export const LineChartOptions = {
     itemHeight: 10
   },
   grid: {
-    left: '0%',
-    // bottom: '11%',
+    left: '2%',
+    top: '6%',
+    right: '2%',
     containLabel: true
   },
   xAxis:  {
@@ -49,7 +50,7 @@ export const LineChartOptions = {
     // nameTextStyle: { color: '#fff' },
     axisTick: { show: false },
     axisLabel: {
-      formatter: '{value} %'
+      formatter: '{value}'
     },
     axisLine: { show: false },
     splitLine: {

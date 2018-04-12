@@ -1,0 +1,76 @@
+.tab-produce .sub-title-wrap {
+  margin-bottom: 0;
+}
+.sub-tabset-wrap {
+  margin-bottom: .23rem;
+}
+// 选择框
+.tab-produce .track-sel {
+  margin-bottom: .17rem;
+  padding-left: .6rem;
+}
+.hidden {
+  visibility: hidden;
+}
+.tab-produce .sub-tabset-container {
+  margin-bottom: 1.07rem;
+}
+.tab-produce .chart{
+  height: 7rem;
+}
+
+// 产品份额
+.pie-chart{
+  height: 4.53rem;
+}
+.chart-title {
+  font-size: .32rem;
+  color: #f2f2f3;
+}
+// 图例
+.legendlist{
+margin: auto;
+padding-bottom: .64rem;
+}
+.legend{
+display: inline-block;
+margin-right: 5px;
+font-size: 10px;
+height: .16rem;
+line-height: .16rem;
+position: relative;
+}
+.legend-box {
+display: inline-block;
+width: 10px;
+height: 5px;
+line-height: .16rem;
+border-radius: 2px;
+position: absolute;
+top: 0;
+bottom: 0;
+}
+.legend span {
+margin-left: 17px;
+}
+
+
+
+// 子tabset
+.sub-tabset {
+  border-bottom: 1px solid #6E707D;
+  margin-left: 0;
+  margin-right: 0;
+
+}
+.sub-tabset .tab-title {
+  height: 1.07rem;
+  line-height: 1.07rem;
+  width: 2.77rem;
+  display: inline-block;
+  margin-bottom: -2px;
+}
+.sub-tabset .tab-title.selected {
+  border-bottom: 3px solid #06E7E9;
+  color: #06E7E9;
+}

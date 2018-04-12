@@ -1,0 +1,33 @@
+<div class="tab-track">
+  <div class="track-sel">
+    <my-select-box [seledItem]="curLevel" [dataUrl]="subNameUrl" (onSelChanged)="getPfmcData($event)"></my-select-box>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">申请情况</h4></div>
+  <div class="apply-chart-wrap">
+    <div echarts [options]="applyOption" class="apply-chart"></div>
+  </div>
+  <div class="count-info">
+    <p>
+      <span>本年累计申请单量</span>
+      <span class="pull-right">{{pfmcTotal.appNumber|number}}</span>
+    </p>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">放款情况</h4></div>
+  <div class="loan-chart-wrap">
+    <div echarts [options]="loanOption" class="loan-chart"></div>
+  </div>
+  <div class="count-info">
+    <p>
+      <span>本年累计放款单量</span>
+      <span class="pull-right">{{pfmcTotal.number|number}}</span>
+    </p>
+    <p>
+      <span>本年累计放款金额(万元)</span>
+      <span class="pull-right">{{pfmcTotal.amt|number}}</span>
+    </p>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">逾期情况</h4></div>
+  <div class="overdue-chart-wrap">
+    <div echarts [options]="overdueOption" class="overdue-chart"></div>
+  </div>
+</div>

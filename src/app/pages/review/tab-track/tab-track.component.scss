@@ -1,0 +1,31 @@
+.apply-chart-wrap, .loan-chart-wrap, .overdue-chart-wrap, .avgAmt-chart-wrap {
+  margin-top: -.9rem;
+}
+// .radar-chart-wrap {
+//   margin-top: -8px;
+// }
+.apply-chart, .loan-chart, .overdue-chart{
+  height: 300px;
+}
+.capacity-chart{
+  min-height: 150px;
+}
+.overdue-chart-wrap {
+  margin-bottom: 1.15rem;
+}
+.count-info {
+  margin-top: .4rem;
+  margin-bottom: 1.51rem;
+}
+.count-info p {
+  padding: .4rem;
+  background-color: #101225;
+  margin-bottom: .05rem;
+}
+
+// 选择框
+.track-sel {
+  margin-top: -.1rem;
+  margin-bottom: .4rem;
+  padding-left: .91rem;
+}

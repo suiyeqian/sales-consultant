@@ -1,0 +1,58 @@
+<div class="tab-produce">
+  <ng-container *ngFor="let item of list">
+    <div class="sub-title-wrap"><h4 class="sub-title">{{item.title}}</h4></div>
+    <div class="sub-tabset-wrap">
+      <div class="sub-tabset row text-center">
+        <div class="col">
+          <span class="tab-title" [class.selected]="item.curSubTab === 'trend'" (click)="switchChart('trend', item.type)">近6个月</span>
+        </div>
+        <div class="col">
+          <span class="tab-title" [class.selected]="item.curSubTab === 'curMonth'" (click)="switchChart('curMonth', item.type)">本月</span>
+        </div>
+      </div>
+    </div>
+    <div class="sub-tabset-container">
+      <div class="track-sel" [class.hidden]="item.curSubTab === 'curMonth'">
+        <my-select-box  [seledItem]="item.curLevel" [dataUrl]="subNameUrl" (onSelChanged)="getTrend($event, item.type)"></my-select-box>
+      </div>
+      <div class="chart-wrap">
+        <div echarts [options]="item.chartOption" class="chart"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- <div class="sub-title-wrap"><h4 class="sub-title">产品通过率</h4></div>
+  <div class="passRate-chart-wrap">
+    <div echarts [options]="passRateOption" class="passRate-chart"></div>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">产品份额</h4></div>
+  <div class="row">
+    <div class="col-6">
+      <div class="pie-chart-wrap">
+        <div echarts [options]="applyOrderOption" class="pie-chart"></div>
+        <h4 class="text-center chart-title">申请单量构成</h4>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="pie-chart-wrap">
+        <div echarts [options]="loanAmtOption" class="pie-chart"></div>
+        <h4 class="text-center chart-title">放款金额构成</h4>
+      </div>
+    </div>
+    <div class="legendlist">
+      <div class="legend" *ngFor="let item of legendList;let i=index">
+        <div [style.backgroundColor]="legendColorList[i]" class="legend-box">
+        </div>
+        <span>{{item}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">产品逾期率(金额)</h4></div>
+  <div class="overdueRate-chart-wrap">
+    <div echarts [options]="overdueRateOption" class="overdueRate-chart"></div>
+  </div>
+  <div class="sub-title-wrap"><h4 class="sub-title">产品件均金额</h4></div>
+  <div class="avgAmt-chart-wrap">
+    <div echarts [options]="avgAmtOption" class="avgAmt-chart"></div>
+  </div> -->
+</div>
