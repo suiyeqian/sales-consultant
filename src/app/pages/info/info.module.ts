@@ -5,12 +5,12 @@ import { InfoComponent } from './info.component';
 import { SharedModule } from '../../shared/shared.module';
 import { InfoRoutingModule } from './info-routing.module';
 
-import { AngularEchartsModule } from 'ngx-echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   imports: [
     SharedModule,
-    AngularEchartsModule,
+    NgxEchartsModule,
     InfoRoutingModule
   ],
   declarations: [

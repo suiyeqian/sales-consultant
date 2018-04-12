@@ -8,12 +8,12 @@ import { RiskControlComponent } from './risk-control/risk-control.component';
 import { SharedModule } from '../../shared/shared.module';
 import { RibbonModule } from '../../my-components/ribbon/ribbon.module';
 
-import { AngularEchartsModule } from 'ngx-echarts';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   imports: [
     SharedModule,
-    AngularEchartsModule,
+    NgxEchartsModule,
     RibbonModule
   ],
   declarations: [
