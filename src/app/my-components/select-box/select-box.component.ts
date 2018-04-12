@@ -1,5 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 
+import { BackendService } from '../../core/services/backend.service';
+
 @Component({
   selector: 'my-select-box',
   templateUrl: './select-box.component.html',
@@ -7,12 +9,15 @@ import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core
 })
 export class SelBoxComponent implements OnChanges {
   ifShowSelBox: boolean;
+  selItems = [];
   @Input() seledItem: any;
-  @Input() selItems = [];
-  @Output() getSelItems = new EventEmitter<number>();
+  @Input() dataUrl: string;
+  // @Output() getSelItems = new EventEmitter<number>();
   @Output() onSelChanged = new EventEmitter<number>();
 
-  constructor() {
+  constructor(
+    private bdService: BackendService
+  ) {
   }
 
   ngOnChanges() {
@@ -20,7 +25,15 @@ export class SelBoxComponent implements OnChanges {
 
   showSelBox(): void {
     this.ifShowSelBox = !this.ifShowSelBox;
-    this.getSelItems.emit();
+    this.bdService
+        .getDataByPost(this.dataUrl, {posId: localStorage.posId})
+        .then((res) => {
+          if ( res.code === 0) {
+            this.selItems = res.data;
+            this.selItems.unshift({value: '', text: '全部'});
+          }
+        });
+    // this.getSelItems.emit();
   }
   switchSel(selected): void {
     this.seledItem = selected;
