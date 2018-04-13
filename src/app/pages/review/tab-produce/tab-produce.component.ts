@@ -116,18 +116,32 @@ export class TabProduceComponent implements OnInit {
             curItem.chartOption.dataZoom = [{
               type: 'inside',
               startValue: 0,
-              endValue: 4,
+              endValue: 5,
               zoomLock: true
             }];
-            for (let i = 0; i < res.data.yAxis.length; i++) {
-              legendData.push(res.data.yAxis[i].name);
-              curItem.chartOption.series.push({
-                name: res.data.yAxis[i].name,
-                type: 'scatter',
-                symbol: symbols[i],
-                symbolSize: 12,
-                data: res.data.yAxis[i].list
-              });
+            if (curItem.type === 'sqdl' || curItem.type === 'fkje') {
+              curItem.chartOption.tooltip.axisPointer.type = 'shadow';
+              for (let i = 0; i < res.data.yAxis.length; i++) {
+                legendData.push(res.data.yAxis[i].name);
+                curItem.chartOption.series.push({
+                  name: res.data.yAxis[i].name,
+                  type: 'bar',
+                  stack: '总量',
+                  barWidth: '30%',
+                  data: res.data.yAxis[i].list
+                });
+              }
+            } else {
+              for (let i = 0; i < res.data.yAxis.length; i++) {
+                legendData.push(res.data.yAxis[i].name);
+                curItem.chartOption.series.push({
+                  name: res.data.yAxis[i].name,
+                  type: 'scatter',
+                  symbol: symbols[i],
+                  symbolSize: 12,
+                  data: res.data.yAxis[i].list
+                });
+              }
             }
             curItem.chartOption.legend.data = legendData;
             if (curItem.type === 'tgl' || curItem.type === 'cm2') {
@@ -159,75 +173,5 @@ export class TabProduceComponent implements OnInit {
       this.getScatterChart(itemType);
     }
   }
-
-  // getProdctPandO(): void {
-  //   this.bdService
-  //       .getDataByPost(this.prodctPandOUrl, {posId: localStorage.posId})
-  //       .then((res) => {
-  //         this.passRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
-  //         this.overdueRateOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
-  //         let xAxisData = [];
-  //         for (let month of res.data.months) {
-  //           xAxisData.push(month + '月');
-  //         }
-  //         this.passRateOption.xAxis.data = xAxisData;
-  //         this.overdueRateOption.xAxis.data = xAxisData;
-  //         let legendData = [];
-  //         for (let item of res.data.dataList){
-  //           legendData.push(item.productName);
-  //           this.passRateOption.series.push({
-  //             name: item.productName,
-  //             type: 'line',
-  //             symbol: 'circle',
-  //             symbolSize: 8,
-  //             data: [item.m6PassRate, item.m5PassRate, item.m4PassRate, item.m3PassRate, item.m2PassRate, item.m1PassRate]
-  //           });
-  //           this.overdueRateOption.series.push({
-  //             name: item.productName,
-  //             type: 'line',
-  //             symbol: 'circle',
-  //             symbolSize: 8,
-  //             data: [item.m6OvdRate, item.m5OvdRate, item.m4OvdRate, item.m3OvdRate, item.m2OvdRate, item.m1OvdRate]
-  //           });
-  //         }
-  //         this.passRateOption.legend.data = legendData;
-  //         this.overdueRateOption.legend.data = legendData;
-  //       });
-  // }
-  //
-  // getProdctComposition(): void {
-  //   this.bdService
-  //       .getDataByPost(this.prodctCompositionUrl, {posId: localStorage.posId})
-  //       .then((res) => {
-  //         if ( res.code === 0) {
-  //           // 产品份额
-  //           echart.PieChartOptions.color = this.legendColorList;
-  //           let loanOrderChartData = [];
-  //           let cntAmtChartData = [];
-  //           let legendList = [];
-  //           let avgAmtArrays = [];
-  //           for (let item of res.data) {
-  //             legendList.push(item.productName);
-  //             loanOrderChartData.push({value: item.appNum, name: item.productName});
-  //             cntAmtChartData.push({value: item.loanAmt, name: item.productName});
-  //             avgAmtArrays.push(item.avgAmt);
-  //           }
-  //           this.legendList = legendList;
-  //           this.applyOrderOption = this.cmnFn.deepCopy(echart.PieChartOptions, {});
-  //           this.applyOrderOption.series[0].data = loanOrderChartData;
-  //           this.loanAmtOption = this.cmnFn.deepCopy(echart.PieChartOptions, {});
-  //           this.loanAmtOption.series[0].data = cntAmtChartData;
-  //           // 件均金额
-  //           this.avgAmtOption = this.cmnFn.deepCopy(echart.BarChartOptions, {});
-  //           this.avgAmtOption.xAxis[0].data = legendList;
-  //           // this.avgAmtOption.yAxis[0].axisLabel.formatter = function (value) {
-  //           //     return value / 10000;
-  //           //   };
-  //           this.avgAmtOption.series[0].name = '件均金额';
-  //           this.avgAmtOption.series[0].data = avgAmtArrays.map(item => (item / 10000).toFixed(2));
-  //         }
-  //         this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number }, 100);
-  //       });
-  // }
 
 }

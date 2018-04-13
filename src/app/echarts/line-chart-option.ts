@@ -1,6 +1,9 @@
 export const LineChartOptions = {
   tooltip: {
     trigger: 'axis',
+    axisPointer: {
+      type : 'line'
+    },
     formatter: function(params) {
       let relVal = params[0].name;
       for (let i = 0, l = params.length; i < l; i++) {
