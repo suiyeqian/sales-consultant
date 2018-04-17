@@ -38,8 +38,18 @@
   margin-top: -.11rem;
   margin-bottom: 1.5rem;
 }
+// help
+.help-icon{
+  width: .51rem;
+  height: .51rem;
+  display: inline-block;
+  background-image: url(assets/img/help.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 .c-m2-key{
   color: #05e8e9;
+  line-height: .51rem;
 }
 .c-m2-val {
   float: right;

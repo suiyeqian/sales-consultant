@@ -10,8 +10,8 @@
     时间进度：{{achievement.dateRate ? achievement.dateRate : 0}}%
   </div>
 </div>
-<my-ribbon ribbonNum="1" contentTxt="当日团队销售进度"></my-ribbon>
-<div class="overview">
+<my-ribbon ribbonNum="1" contentTxt="销售进度"></my-ribbon>
+<!-- <div class="overview">
   <div>
     <div class="index-item">
       <span class="text-left">申请单量</span>
@@ -38,56 +38,48 @@
       <span class="text-center pull-right bg-red">¥ {{ achievement.amt | number}}</span>
     </div>
   </div>
-</div>
+</div> -->
 
-<my-ribbon ribbonNum="2" contentTxt="本月团队销售进度"></my-ribbon>
+<!-- <my-ribbon ribbonNum="2" contentTxt="本月团队销售进度"></my-ribbon> -->
 <div class="month-overview">
   <div class="row">
     <div class="col-6">
       <div class="chart-wrap">
         <div echarts [options]="saleProgressOption"  class="sale-progress-chart"></div>
       </div>
-      <div class="text-center amt-info">
+      <!-- <div class="text-center amt-info">
         <p class="amount-value font-blue" [ngClass]="{'font-red': achievement.monSaleRate < achievement.dateRate}">¥ {{ achievement.monAmt | number}}</p>
         <span>合同金额</span>
-      </div>
+      </div> -->
     </div>
     <div class="col-6 right-list">
       <div class="index-item row bold font-blue">
-        <span class="col-5 text-left">本月目标</span>
-        <span class="col-7 text-right index-value target-val">¥ {{ achievement.monGoalAmt/10000 | number:'1.0-0'}}万</span>
+        <span class="col-6 text-left">本月目标</span>
+        <span class="col-6 text-right index-value target-val">¥ {{ achievement.monGoalAmt/10000 | number:'1.0-0'}}万</span>
       </div>
       <div class="index-item row">
-        <span class="col-5 text-left">申请单量</span>
-        <span class="col-7 text-right index-value">{{ achievement.monAppNum | number}}</span>
-      </div>
-      <div class="index-item row">
-        <span class="col-5 text-left">通过单量</span>
-        <span class="col-7 text-right index-value">{{ achievement.monPassNum | number}}</span>
-      </div>
-      <div class="index-item row">
-        <span class="col-5 text-left">拒绝单量</span>
-        <span class="col-7 text-right index-value">{{ achievement.monRefuseNum | number}}</span>
-      </div>
-      <div class="index-item row">
-        <span class="col-5 text-left">放款单量</span>
-        <span class="col-7 text-right index-value">{{ achievement.monLoanNum | number}}</span>
-      </div>
-      <div class="index-item row">
-        <span class="col-5 text-left">通过率</span>
-        <span class="col-7 text-right index-value">{{ achievement.monPassRate }}%</span>
+        <span class="col-6 text-left">预计达成率</span>
+        <span class="col-6 text-right index-value">{{ achievement.expReachRt | number}}</span>
       </div>
     </div>
+  </div>
+  <div class="index-item row">
+    <span class="col-5 text-left">今日新增金额</span>
+    <span class="col-7 text-right index-value">¥{{ achievement.newAmt | number}}  ></span>
+  </div>
+  <div class="index-item row">
+    <span class="col-5 text-left">本月累计金额</span>
+    <span class="col-7 text-right index-value">¥{{ achievement.monAmt | number}}  ></span>
   </div>
   <my-month-performance [timeProgress]="achievement.dateRate"></my-month-performance>
 </div>
 
-<my-ribbon ribbonNum="3" contentTxt="本月业绩预测"></my-ribbon>
+<my-ribbon ribbonNum="2" contentTxt="本月业绩预测"></my-ribbon>
 <div class="forecast-overview">
   <my-month-forecast></my-month-forecast>
 </div>
 
-<my-ribbon ribbonNum="4" contentTxt="风控情况"></my-ribbon>
+<my-ribbon ribbonNum="3" contentTxt="风控情况"></my-ribbon>
 <div class="risk-overview">
   <my-risk-control></my-risk-control>
 </div>

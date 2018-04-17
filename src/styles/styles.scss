@@ -15,57 +15,60 @@ body {
 }
 
 // slide
-.noUi-horizontal {
-  height: .2rem;
-  background: $grey-color!important;
-}
-.noUi-target {
-  box-shadow: none;
-  border-width: 0;
-  border-radius: 8px;
-}
-.noUi-horizontal .noUi-handle {
-  width: .43rem;
-  height: .43rem;
-  border-radius: 50%;
-  left: -.23rem;
-  top: -.15rem;
-}
-.noUi-handle:before, .noUi-handle:after{
-  display: none
-}
-.noUi-connect {
-  background: $main-color !important;
-  box-shadow: none;
-  border-radius: 8px;
-}
-.noUi-tooltip {
-  display: block;
-  position: absolute;
-  border-width: 0;
-  background: rgba(255, 255, 255, 0);
-  color: $main-color;
-  padding: 0;
-  margin-bottom: -.05rem;
-  text-align: center;
-  white-space: nowrap;
-}
-.noUi-tooltip::after{
-  content: '%';
-}
-// 滑动条禁用状态
-div[disabled="true"] .noUi-connect{
-  background: #6b6b6b!important;
-}
-div[disabled="true"] .noUi-handle {
-  background: transparent;
-  border-width: 0;
-  box-shadow: none;
-}
+// .noUi-horizontal {
+//   height: .2rem;
+//   background: $grey-color!important;
+// }
+// .noUi-target {
+//   box-shadow: none;
+//   border-width: 0;
+//   border-radius: 8px;
+// }
+// .noUi-horizontal .noUi-handle {
+//   width: .43rem;
+//   height: .43rem;
+//   border-radius: 50%;
+//   left: -.23rem;
+//   top: -.15rem;
+// }
+// .noUi-handle:before, .noUi-handle:after{
+//   display: none
+// }
+// .noUi-connect {
+//   background: $main-color !important;
+//   box-shadow: none;
+//   border-radius: 8px;
+// }
+// .noUi-tooltip {
+//   display: block;
+//   position: absolute;
+//   border-width: 0;
+//   background: rgba(255, 255, 255, 0);
+//   color: $main-color;
+//   padding: 0;
+//   margin-bottom: -.05rem;
+//   text-align: center;
+//   white-space: nowrap;
+// }
+// .noUi-tooltip::after{
+//   content: '%';
+// }
+// // 滑动条禁用状态
+// div[disabled="true"] .noUi-connect{
+//   background: #6b6b6b!important;
+// }
+// div[disabled="true"] .noUi-handle {
+//   background: transparent;
+//   border-width: 0;
+//   box-shadow: none;
+// }
 
 // 修改bootstrap进度条
 .bg-customized {
   background-color: $main-color !important;
+}
+.bg-new {
+  background-color: #FAD972;
 }
 .member-progress.warn-red .bg-customized {
   background-color: $red-color !important;
@@ -331,4 +334,16 @@ p {
 @-webkit-keyframes modalOut {
   0% {top: 0;}
   100% {top: -25%; opacity: 0}
+}
+
+// tooltip
+.tooltip-inner {
+  background-color: rgba(42, 41, 59, .9);
+  font-size: 14px;
+}
+.tooltip.bs-tooltip-top .arrow::before {
+  border-top-color: rgba(42, 41, 59, .9);
+}
+.tooltip.bs-tooltip-right .arrow::before {
+  border-right-color: rgba(42, 41, 59, .9);
 }

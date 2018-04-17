@@ -25,7 +25,7 @@ export const ProgressChartOptions = {
               label : {
                 show : true,
                 textStyle: {
-                  color: '#d74b49',
+                  color: '#fff',
                   fontSize : 24,
                   fontWeight : 'bold',
                   baseline : 'bottom'

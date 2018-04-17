@@ -13,9 +13,12 @@ export class MonthPerformanceComponent implements OnInit {
   private mbScheduleUrl = 'performancetrack/member_schedule';
   mbsPerformance = [];
   private weeklytrendUrl = 'performancetrack/weekly_trend';
-  trendOption = Object.assign({});
+  trendOption: any;
   hasOther = false;
   @Input() timeProgress: number;
+
+  private subNameUrl = 'performancetrack/sub_name';
+  curLevel = {value: '', text: '全部'};
 
   constructor(
     private bdService: BackendService,
@@ -25,7 +28,7 @@ export class MonthPerformanceComponent implements OnInit {
 
   ngOnInit() {
     this.getMbSchedule();
-    this.getWeeklyTrend();
+    this.getWeeklyTrend(this.curLevel);
   }
 
   getMbSchedule(): void {
@@ -45,9 +48,10 @@ export class MonthPerformanceComponent implements OnInit {
         });
   }
 
-  getWeeklyTrend(): void {
+  getWeeklyTrend(level): void {
+    this.curLevel = level;
     this.bdService
-        .getDataByPost(this.weeklytrendUrl, {posId: localStorage.posId})
+        .getDataByPost(this.weeklytrendUrl, {posId: localStorage.posId, subName: level.value})
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;

@@ -9,6 +9,12 @@ export const LineBarChartOptions = {
     bottom: 0,
     textStyle: { color: '#fff' },
   },
+  grid: {
+    left: '4%',
+    top: '14%',
+    right: '4%',
+    containLabel: true
+  },
   xAxis : [
     {
       type: 'category',

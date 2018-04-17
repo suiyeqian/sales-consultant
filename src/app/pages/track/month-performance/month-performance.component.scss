@@ -35,13 +35,16 @@ i.avatar-icon {
   color: #d74b49;
 }
 .member-progress-bar {
-  display: inline-block;
+  display: inline-flex;
   width: 57%;
   vertical-align: middle;
 }
 // 团队销售情况
 .performance-trend{
-  margin-top: -.9rem;
+  margin-top: -.5rem;
+}
+.performance-trend .track-sel {
+  padding: 0 .91rem;
 }
 .trend-chart{
   height: 300px;
