@@ -100,6 +100,7 @@ export class TabProduceComponent implements OnInit {
               curItem.chartOption.yAxis.axisLabel.formatter = '{value} %';
             }
           }
+          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });
   }
 
