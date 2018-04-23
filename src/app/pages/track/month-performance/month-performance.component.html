@@ -16,8 +16,8 @@
         <p>预计达成率：{{member.expReachRt}}%</p>
       </ng-template>
       <div class="progress member-progress-bar" [ngbTooltip]="tipContent" triggers="click">
-        <div class="progress-bar bg-customized progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{'width':member.rate+'%'}"><i>{{member.amt | number}}</i></div>
-        <div class="progress-bar bg-new progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{'width':'5%'}"></div>
+        <div class="progress-bar bg-customized progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{'width':member.yDayTotRt+'%'}"><i>{{member.amt | number}}</i></div>
+        <div class="progress-bar bg-new progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{'width':member.newRt+'%'}"></div>
       </div>
       <span class="volume-val text-center pull-right">{{member.rate}}%</span>
     </div>

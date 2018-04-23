@@ -63,11 +63,11 @@
       </div>
     </div>
   </div>
-  <div class="index-item row">
+  <div class="index-item row" (click)="goToDetail('day')">
     <span class="col-5 text-left">今日新增金额</span>
     <span class="col-7 text-right index-value">¥{{ achievement.newAmt | number}}  ></span>
   </div>
-  <div class="index-item row">
+  <div class="index-item row" (click)="goToDetail('month')">
     <span class="col-5 text-left">本月累计金额</span>
     <span class="col-7 text-right index-value">¥{{ achievement.monAmt | number}}  ></span>
   </div>

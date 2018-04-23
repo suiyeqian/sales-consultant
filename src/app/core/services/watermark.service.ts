@@ -18,6 +18,7 @@ export class WaterMarkService {
     wmk_width: Math.max(document.body.scrollWidth, document.body.clientWidth) > 450 ? 200 : 120, // 水印宽
     wmk_height: 60, // 水印高
     wmk_angle: 36, // 水印倾斜度数
+    wmk_z_index: '',
   };
 
   constructor() {
@@ -32,7 +33,9 @@ export class WaterMarkService {
         this.dftSettings[key] = src[key];
       }
     }
-
+    if (!src.hasOwnProperty('wmk_z_index')) {
+      this.dftSettings.wmk_z_index = '9999';
+    }
     // 创建文档碎片
     let oTemp = document.createDocumentFragment();
     // 创建水印外壳div
@@ -104,7 +107,7 @@ export class WaterMarkService {
         mask_div.style.left = x + 'px';
         mask_div.style.top = y + 'px';
         mask_div.style.overflow = 'hidden';
-        mask_div.style.zIndex = '9999';
+        mask_div.style.zIndex = this.dftSettings.wmk_z_index;
 
         mask_div.style.opacity = this.dftSettings.wmk_alpha.toString();
         mask_div.style.fontSize = this.dftSettings.wmk_fontsize;

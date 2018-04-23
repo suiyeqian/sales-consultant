@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 
 import { BackendService } from '../../core/services/backend.service';
+import { Router } from '@angular/router';
 
 import * as echart from '../../echarts';
 
@@ -15,7 +16,8 @@ export class TrackComponent implements OnInit, AfterContentInit {
   saleProgressOption: any;
 
   constructor(
-    private bdService: BackendService
+    private bdService: BackendService,
+    private router: Router
   ) {
   }
 
@@ -41,6 +43,11 @@ export class TrackComponent implements OnInit, AfterContentInit {
             this.saleProgressOption.series[0].data[1].value = (100 - res.data.monSaleRate < 0) ? 0 : (100 - res.data.monSaleRate);
           }
         });
+  }
+
+  goToDetail(type): void {
+    console.log(type);
+    this.router.navigate(['/pages/track-detail/' + type]);
   }
 
 }
