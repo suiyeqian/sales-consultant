@@ -5,7 +5,8 @@ export class CommonFnService {
 
   constructor() {}
 
-  public deepCopy(parent, child = {}) {
+  public deepCopy(parent, clone) {
+    let child = clone || {};
     for (let i in parent) {
       if (!parent.hasOwnProperty(i)) {
         continue;

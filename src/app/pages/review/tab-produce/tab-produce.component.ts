@@ -164,11 +164,12 @@ export class TabProduceComponent implements OnInit {
 
   switchChart(tabName, itemType): void {
     let curItem = this.list.find((item) => item.type === itemType);
-    if (curItem.curSubTab === tabName) {
+    let curTabCode = tabName === '本月' ? 'curMonth' : 'trend';
+    if (curItem.curSubTab === curTabCode) {
       return;
     }
-    curItem.curSubTab = tabName;
-    if (tabName === 'trend') {
+    curItem.curSubTab = curTabCode;
+    if (curItem.curSubTab === 'trend') {
       this.getTrend(curItem.curLevel, itemType);
     } else {
       this.getScatterChart(itemType);

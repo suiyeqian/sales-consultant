@@ -1,0 +1,17 @@
+.sub-tabset {
+  border-bottom: 1px solid #6E707D;
+  margin-left: 0;
+  margin-right: 0;
+
+}
+.sub-tabset .tab-title {
+  height: 1.07rem;
+  line-height: 1.07rem;
+  width: 2.77rem;
+  display: inline-block;
+  margin-bottom: -2px;
+}
+.sub-tabset .tab-title.selected {
+  border-bottom: 3px solid #06E7E9;
+  color: #06E7E9;
+}

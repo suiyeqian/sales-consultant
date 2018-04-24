@@ -15,9 +15,10 @@ import { WaterMarkService } from '../../../core/services/watermark.service';
 })
 export class TabHumanComponent implements OnInit {
   @Input() isActive: boolean;
+  posId = localStorage.posId;
   deviceWidth = document.body.clientWidth;
-  private tmCapacityUrl = 'humananls/capacity_anls';
-  capacityOption: any;
+  // private tmCapacityUrl = 'humananls/capacity_anls';
+  // capacityOption: any;
   private tmSeniorityUrl = 'humananls/seniority_anls';
   tmSeniority = [];
   private tmCompUrl = 'humananls/member_comp';
@@ -37,51 +38,49 @@ export class TabHumanComponent implements OnInit {
 
   ngOnInit() {
     if (this.isActive) {
-      this.getTmCapacity();
+      // this.getTmCapacity();
       this.getTmSeniority();
       this.getTmComp();
     }
   }
 
-  getTmCapacity(): void {
-    this.bdService
-        .getDataByPost(this.tmCapacityUrl, {posId: localStorage.posId})
-        .then((res) => {
-          let chartDom = document.getElementById('capacityChart');
-          if ( res.code === 0) {
-            chartDom.style['height'] = 24 * res.data.dataList.length + 142 + 'px';
-            let resData = res.data;
-            let xAxisData = [];
-            let seriesData = [];
-            for (let i = 0; i < resData.months.length; i ++) {
-              xAxisData.push(resData.months[i] + '月');
-              let dataset = [];
-              for (let item of resData.dataList) {
-                dataset.push((item['m' + (i + 1) + 'Amt'] / 10000).toFixed(2));
-              }
-              seriesData.push({
-                name: resData.months[i] + '月',
-                type: 'bar',
-                stack: '总量',
-                barWidth: 14,
-                data: dataset
-              });
-            }
-            let yAxisData = [];
-            for (let item of resData.dataList) {
-              yAxisData.push(item.name);
-            }
-            this.capacityOption = echart.StackBarChartOptions;
-            this.capacityOption.legend.data = xAxisData;
-            this.capacityOption.yAxis.data = yAxisData;
-            this.capacityOption.series = seriesData;
-          }
-          let waterMark = this.waterMark;
-          setTimeout(function(){
-            waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
-          }, 0);
-        });
-  }
+  // getTmCapacity(): void {
+  //   this.bdService
+  //       .getDataByPost(this.tmCapacityUrl, {posId: localStorage.posId})
+  //       .then((res) => {
+  //         let chartDom = document.getElementById('capacityChart');
+  //         if ( res.code === 0) {
+  //           chartDom.style['height'] = 24 * res.data.dataList.length + 142 + 'px';
+  //           let resData = res.data;
+  //           let xAxisData = [];
+  //           let seriesData = [];
+  //           for (let i = 0; i < resData.months.length; i ++) {
+  //             xAxisData.push(resData.months[i] + '月');
+  //             let dataset = [];
+  //             for (let item of resData.dataList) {
+  //               dataset.push((item['m' + (i + 1) + 'Amt'] / 10000).toFixed(2));
+  //             }
+  //             seriesData.push({
+  //               name: resData.months[i] + '月',
+  //               type: 'bar',
+  //               stack: '总量',
+  //               barWidth: 14,
+  //               data: dataset
+  //             });
+  //           }
+  //           let yAxisData = [];
+  //           for (let item of resData.dataList) {
+  //             yAxisData.push(item.name);
+  //           }
+  //           this.capacityOption = echart.StackBarChartOptions;
+  //           this.capacityOption.legend.data = xAxisData;
+  //           this.capacityOption.yAxis.data = yAxisData;
+  //           this.capacityOption.series = seriesData;
+  //         }
+  //         let waterMark = ;
+  //
+  //       });
+  // }
 
   getTmSeniority(): void {
     this.bdService
@@ -151,9 +150,8 @@ export class TabHumanComponent implements OnInit {
                 radarChartOpt: radarChartOpt
               });
             };
-            let waterMark = this.waterMark;
-            setTimeout(function(){
-              waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
+            setTimeout(() => {
+              this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
             }, 0);
           }
         });

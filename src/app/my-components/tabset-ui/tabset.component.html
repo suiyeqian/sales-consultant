@@ -1,0 +1,5 @@
+<div class="sub-tabset row text-center">
+  <div class="col" *ngFor="let tab of tabList">
+    <span class="tab-title" [class.selected]="curTab === tab" (click)="switchTab(tab)">{{tab}}</span>
+  </div>
+</div>

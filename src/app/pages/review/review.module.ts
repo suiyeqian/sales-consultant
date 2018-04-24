@@ -7,6 +7,7 @@ import { TabProduceComponent } from './tab-produce/tab-produce.component';
 
 import { SharedModule } from '../../shared/shared.module';
 import { SelBoxModule } from '../../my-components/select-box/select-box.module';
+import { TabsetUiModule } from '../../my-components/tabset-ui/tabset.module';
 import { ReViewRoutingModule } from './review-routing.module';
 
 import { NgxEchartsModule } from 'ngx-echarts';
@@ -16,6 +17,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
     SharedModule,
     NgxEchartsModule,
     SelBoxModule,
+    TabsetUiModule,
     ReViewRoutingModule
   ],
   declarations: [

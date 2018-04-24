@@ -12,7 +12,6 @@ export class SelBoxComponent implements OnChanges {
   selItems = [];
   @Input() seledItem: any;
   @Input() dataUrl: string;
-  // @Output() getSelItems = new EventEmitter<number>();
   @Output() onSelChanged = new EventEmitter<number>();
 
   constructor(

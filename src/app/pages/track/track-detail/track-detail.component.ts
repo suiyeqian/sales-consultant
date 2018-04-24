@@ -75,10 +75,10 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
           if ( res.code === 0) {
             let legends = [];
             if (this.curIndex.datas.length === 1) {
-              this.chartOption = this.cmnFn.deepCopy(echart.BarChartOptions);
+              this.chartOption = this.cmnFn.deepCopy(echart.BarChartOptions, {});
               this.chartOption.yAxis[0].name = `单位(${this.curIndex.datas[0].unit})`;
             } else {
-              this.chartOption = this.cmnFn.deepCopy(echart.LineBarChartOptions);
+              this.chartOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
               this.chartOption.series.splice(1, 1);
               this.chartOption.legend.data = legends;
               this.chartOption.yAxis[0].name = `单位(${this.curIndex.datas[1].unit})`;
