@@ -5,14 +5,18 @@
     </nav>
     <img src="assets/img/next.png" class="next-btn" (click)="nextPage()">
   </header>
-  <content class="content">
+  <content class="content-wrap">
     <div class="left-nav">
       <nav class="left-btn" (click)="dateType='day';getSaleDetail(dateType, curIndex.code);" [class.active]="dateType === 'day'">当<br>日</nav>
       <nav class="left-btn" (click)="dateType='month';getSaleDetail(dateType, curIndex.code);" [class.active]="dateType === 'month'">本<br>月</nav>
     </div>
-    <div class="chart-wrap">
-      
-
+    <div class="content">
+        <div class="index-val">
+          <span *ngFor="let curItem of curIndex.datas">
+            {{curItem.idxName}}: {{curItem.value}}{{curItem.unit}}
+          </span>
+        </div>
+        <div class="chart-wrap" echarts [options]="chartOption"></div>
     </div>
   </content>
 </div>

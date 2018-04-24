@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterContentInit } from '@angular/core';
 
 import { BackendService } from '../../core/services/backend.service';
+import { WaterMarkService } from '../../core/services/watermark.service';
 import { Router } from '@angular/router';
 
 import * as echart from '../../echarts';
@@ -17,8 +18,15 @@ export class TrackComponent implements OnInit, AfterContentInit {
 
   constructor(
     private bdService: BackendService,
-    private router: Router
+    private router: Router,
+    private waterMark: WaterMarkService
   ) {
+    window.onorientationchange = () => {
+      this.backToTop();
+      setTimeout(() => {
+        this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).userIdentify}, 0);
+      }, 800);
+    };
   }
 
   ngOnInit() {
@@ -46,8 +54,15 @@ export class TrackComponent implements OnInit, AfterContentInit {
   }
 
   goToDetail(type): void {
-    console.log(type);
     this.router.navigate(['/pages/track-detail/' + type]);
+  }
+
+  backToTop(): void {
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop > 0) {
+      window.requestAnimationFrame(this.backToTop);
+      window.scrollTo(0, 0);
+    }
   }
 
 }

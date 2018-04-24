@@ -35,7 +35,7 @@
   margin: .15rem .2rem .15rem .05rem;
   // transform: rotate(180deg);
 }
-.detail-wrap .content {
+.detail-wrap .content-wrap {
   flex: 1;
   display: -webkit-flex;
   display: flex;
@@ -59,8 +59,25 @@
   border-left: 3px solid #06E7E9;
   color: #06E7E9;
 }
-.chart-wrap {
+.content {
   flex-grow: 1;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+}
+.content .index-val {
+  height: .8rem;
+  line-height: .8rem;
+  display: -webkit-flex;
+  display: flex;
+  text-align: center;
+  margin-left: .8rem;
+  span {
+    margin-right: .53rem;
+  }
+}
+.content .chart-wrap {
+  flex: 1;
 }
 // 竖屏
 @media screen and (orientation: portrait) {

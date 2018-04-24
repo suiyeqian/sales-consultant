@@ -4,8 +4,9 @@ import { Observable } from 'rxjs';
 
 import { BackendService } from '../../../core/services/backend.service';
 import { WaterMarkService } from '../../../core/services/watermark.service';
-
+import { CommonFnService } from '../../../core/services/commonfn.service';
 import * as echart from '../../../echarts';
+import { NavList } from './constant';
 
 @Component({
   selector: 'my-track-detail',
@@ -15,18 +16,7 @@ import * as echart from '../../../echarts';
 export class TrackdetailComponent implements OnInit, AfterContentInit {
   private saledetailUrl = 'performancetrack/sale_detail';
   dateType = this.route.snapshot.params['type'] || 'day';
-  navList = [
-    {name: '合同金额', code: 'htje', datas: [{idxName: '合同金额', type: 'bar'}]},
-    {name: '申请单量', code: 'sqdl', datas: [{idxName: '申请单量', type: 'bar'}]},
-    {name: '通过单量', code: 'tgdl', datas: [{idxName: '通过单量', type: 'bar'}]},
-    {name: '拒绝单量', code: 'jjdl', datas: [{idxName: '拒绝单量', type: 'bar'}]},
-    {name: '放款单量', code: 'fkdl', datas: [{idxName: '放款单量', type: 'bar'}]},
-    {name: '通过率', code: 'tgl', datas: [{idxName: '通过率', type: 'bar'}]},
-    {name: '合同件均', code: 'htjj', datas: [{idxName: '合同件均', type: 'bar'}]},
-    {name: '批核情况', code: 'phqk', datas: [{idxName: '批核金额', type: 'bar'}, {idxName: '批核件均', type: 'line'}]},
-    {name: '签约情况', code: 'qyqk', datas: [{idxName: '签约金额', type: 'bar'}, {idxName: '签约件数', type: 'line'}]},
-    {name: '待签情况', code: 'dqqk', datas: [{idxName: '待签金额', type: 'bar'}, {idxName: '待签件数', type: 'line'}]},
-  ];
+  navList = NavList;
   curIndex = this.navList[0];
   isFirstPage = true;
   curPageList = this.navList.slice(0, 5);
@@ -36,7 +26,8 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
   constructor(
     private bdService: BackendService,
     private route: ActivatedRoute,
-    private waterMark: WaterMarkService
+    private waterMark: WaterMarkService,
+    private cmnFn: CommonFnService
   ) {
     let self = this;
     window.onorientationchange = function(){
@@ -82,8 +73,31 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
         .getDataByPost(this.saledetailUrl, {posId: localStorage.posId, dateType: dateType, index: index})
         .then((res) => {
           if ( res.code === 0) {
-            console.log(res.data);
-            // this.chartOption = echart.ProgressChartOptions;
+            let legends = [];
+            if (this.curIndex.datas.length === 1) {
+              this.chartOption = this.cmnFn.deepCopy(echart.BarChartOptions);
+              this.chartOption.yAxis[0].name = `单位(${this.curIndex.datas[0].unit})`;
+            } else {
+              this.chartOption = this.cmnFn.deepCopy(echart.LineBarChartOptions);
+              this.chartOption.series.splice(1, 1);
+              this.chartOption.legend.data = legends;
+              this.chartOption.yAxis[0].name = `单位(${this.curIndex.datas[1].unit})`;
+            }
+            this.curIndex.datas.map((dataItem, idx) => {
+              dataItem.value = res.data[dataItem.type];
+              legends.push(dataItem.idxName);
+              this.chartOption.series[idx].data = res.data.yAxis[dataItem.type];
+              this.chartOption.series[idx].name = dataItem.idxName;
+            });
+
+            this.chartOption.grid = {
+              left: '5%',
+              right: '5%',
+              top: '12%',
+              bottom: '11%',
+              containLabel: true
+            };
+            this.chartOption.xAxis[0].data = res.data.xAxis;
           }
         });
   }
