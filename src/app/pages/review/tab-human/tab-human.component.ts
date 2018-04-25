@@ -24,6 +24,21 @@ export class TabHumanComponent implements OnInit {
   private tmCompUrl = 'humananls/member_comp';
   teamMbs = [];
 
+  private tmCapanlsUrl = 'humananls/cap_anls';
+  capType = 'sixMonth';
+  curCapLevel: any;
+  capanlsOption: any;
+
+  private tmBillinganlsUrl = 'humananls/billing_anls';
+  billingType = 'sixMonth';
+  curBillingLevel: any;
+  billingAnlsOption: any;
+
+  private tmLossanlsUrl = 'humananls/loss_anls';
+  lossType = 'sixMonth';
+  curLossLevel: any;
+  lossAnlsOption: any;
+
   private subNameUrl = 'achievementanls/sub_name';
   subLevels = [];
   curLevel = {value: '', text: '全部'};
@@ -41,6 +56,9 @@ export class TabHumanComponent implements OnInit {
       // this.getTmCapacity();
       this.getTmSeniority();
       this.getTmComp();
+      this.getTmCapanls({value: '', text: '全部'}, this.capType);
+      this.getTmBillinganls({value: '', text: '全部'}, this.billingType);
+      this.getTmLossanls({value: '', text: '全部'}, this.lossType);
     }
   }
 
@@ -155,6 +173,117 @@ export class TabHumanComponent implements OnInit {
             }, 0);
           }
         });
+  }
+
+  // 产能分析
+  getTmCapanls(level, type): void {
+    this.curCapLevel = level;
+    this.bdService
+        .getDataByPost(this.tmCapanlsUrl, {posId: this.posId, subName: level.value, type: type})
+        .then((res) => {
+          if ( res.code === 0) {
+            this.capanlsOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+            this.capanlsOption.xAxis[0].data = res.data.xAxis;
+            this.capanlsOption.legend.data = ['人均产能', '有效人均产能'];
+            this.capanlsOption.yAxis.splice(0, 1);
+            this.capanlsOption.series.splice(2, 1);
+            this.capanlsOption.series[0].name = this.capanlsOption.legend.data[0];
+            this.capanlsOption.series[0].data = res.data.yAxis.bar;
+            this.capanlsOption.series[1].name = this.capanlsOption.legend.data[1];
+            this.capanlsOption.series[1].data = res.data.yAxis.bar2;
+          }
+        });
+  }
+
+  // switchCapTab(tabName): void {
+  //   let curTabCode = tabName === '本月' ? 'curMonth' : 'sixMonth';
+  //   if (this.capType === curTabCode) {
+  //     return;
+  //   }
+  //   this.capType = curTabCode;
+  //   this.getTmCapanls(this.curCapLevel, this.capType);
+  // }
+
+  // 开单分析
+  getTmBillinganls(level, type): void {
+    this.curBillingLevel = level;
+    this.bdService
+        .getDataByPost(this.tmBillinganlsUrl, {posId: this.posId, subName: level.value, type: type})
+        .then((res) => {
+          if ( res.code === 0) {
+            this.billingAnlsOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+            this.billingAnlsOption.xAxis[0].data = res.data.xAxis;
+            this.billingAnlsOption.yAxis[0].name = '单位(人)';
+            this.billingAnlsOption.yAxis[1].name = '';
+            this.billingAnlsOption.legend.data = ['开单人力', '无效人力', '开单率'];
+            this.billingAnlsOption.color = ['#05e8e9', '#d74b49', '#fad972'];
+            this.billingAnlsOption.series[0] = {
+              name: '开单人力',
+              type: 'bar',
+              stack: '总人力',
+              barWidth: '30%',
+              data: res.data.yAxis.bar
+            };
+            this.billingAnlsOption.series[1] = {
+              name: '无效人力',
+              type: 'bar',
+              stack: '总人力',
+              barWidth: '30%',
+              data: res.data.yAxis.bar2
+            };
+            this.billingAnlsOption.series[2].name = this.billingAnlsOption.legend.data[2];
+            this.billingAnlsOption.series[2].data = res.data.yAxis.line;
+          }
+        });
+  }
+
+  // switchBillingTab(tabName): void {
+  //   let curTabCode = tabName === '本月' ? 'curMonth' : 'sixMonth';
+  //   if (this.billingType === curTabCode) {
+  //     return;
+  //   }
+  //   this.billingType = curTabCode;
+  //   this.getTmBillinganls(this.curBillingLevel, this.billingType);
+  // }
+
+  // 流失分析
+  getTmLossanls(level, type): void {
+    this.curLossLevel = level;
+    this.bdService
+        .getDataByPost(this.tmLossanlsUrl, {posId: this.posId, subName: level.value, type: type})
+        .then((res) => {
+          if ( res.code === 0) {
+            this.lossAnlsOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+            this.lossAnlsOption.xAxis[0].data = res.data.xAxis;
+            this.lossAnlsOption.yAxis[0].name = '单位(人)';
+            this.lossAnlsOption.yAxis[1].name = '';
+            this.lossAnlsOption.legend.data = ['入职人力', '离职人力', '流失率'];
+            this.lossAnlsOption.series[0].name = this.lossAnlsOption.legend.data[0];
+            this.lossAnlsOption.series[0].data = res.data.yAxis.bar;
+            this.lossAnlsOption.series[1].name = this.lossAnlsOption.legend.data[1];
+            this.lossAnlsOption.series[1].data = res.data.yAxis.bar2;
+            this.lossAnlsOption.series[2].name = this.lossAnlsOption.legend.data[2];
+            this.lossAnlsOption.series[2].data = res.data.yAxis.line;
+          }
+        });
+  }
+
+  switchTab(type, tabName): void {
+    let curTabCode = tabName === '本月' ? 'curMonth' : 'sixMonth';
+    if (this[type + 'Type'] === curTabCode) {
+      return;
+    }
+    this[type + 'Type'] = curTabCode;
+    switch (type) {
+      case 'cap':
+        this.getTmCapanls(this.curCapLevel, this.capType);
+        break;
+      case 'billing':
+        this.getTmBillinganls(this.curBillingLevel, this.billingType);
+        break;
+      default:
+        this.getTmCapanls(this.curLossLevel, this.lossType);
+    }
   }
 
   getSelItems(): void {

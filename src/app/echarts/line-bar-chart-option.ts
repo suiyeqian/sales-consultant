@@ -11,8 +11,9 @@ export const LineBarChartOptions = {
   },
   grid: {
     left: '4%',
-    top: '14%',
+    top: '16%',
     right: '4%',
+    bottom: '12%',
     containLabel: true
   },
   xAxis : [
@@ -64,7 +65,7 @@ export const LineBarChartOptions = {
       axisLabel: {
         formatter: '{value}',
         textStyle: { color: '#fff' },
-        margin: 0,
+        margin: 4,
         fontSize: 9,
       },
       axisLine: {  show: false },

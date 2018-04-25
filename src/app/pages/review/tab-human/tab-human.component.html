@@ -1,10 +1,52 @@
 <div class="tab-human">
   <div class="sub-title-wrap"><h4 class="sub-title">产能分析</h4></div>
+  <ng-container *ngIf="posId === '2'">
+    <div class="sub-tabset-wrap">
+      <my-tabset-ui [tabList]="['近6个月', '本月']" [curTab]="'近6个月'" (onTabChanged)="switchTab('cap', $event)"></my-tabset-ui>
+    </div>
+    <div class="track-sel" [class.hidden]="capType === 'curMonth'">
+      <my-select-box  [seledItem]="curCapLevel" [dataUrl]="subNameUrl" (onSelChanged)="getTmCapanls($event, 'sixMonth')"></my-select-box>
+    </div>
+  </ng-container>
+  <div class="sub-tabset-container">
+    <div class="chart-wrap">
+      <div echarts [options]="capanlsOption" class="capanls-chart"></div>
+    </div>
+  </div>
+
+  <div class="sub-title-wrap"><h4 class="sub-title">开单分析</h4></div>
+  <ng-container *ngIf="posId === '2'">
+    <div class="sub-tabset-wrap">
+      <my-tabset-ui [tabList]="['近6个月', '本月']" [curTab]="'近6个月'" (onTabChanged)="switchTab('billing', $event)"></my-tabset-ui>
+    </div>
+    <div class="track-sel" [class.hidden]="billingType === 'curMonth'">
+      <my-select-box  [seledItem]="curLevel" [dataUrl]="subNameUrl" (onSelChanged)="getTmBillinganls($event, 'sixMonth')"></my-select-box>
+    </div>
+  </ng-container>
+  <div class="sub-tabset-container">
+    <div class="chart-wrap">
+      <div echarts [options]="billingAnlsOption" class="billinganls-chart"></div>
+    </div>
+  </div>
+
+  <div class="sub-title-wrap"><h4 class="sub-title">流失分析</h4></div>
+  <ng-container *ngIf="posId === '2'">
+    <div class="sub-tabset-wrap">
+      <my-tabset-ui [tabList]="['近6个月', '本月']" [curTab]="'近6个月'" (onTabChanged)="switchTab('loss', $event)"></my-tabset-ui>
+    </div>
+    <div class="track-sel" [class.hidden]="lossType === 'curMonth'">
+      <my-select-box  [seledItem]="curLevel" [dataUrl]="subNameUrl" (onSelChanged)="getTmLossanls($event, 'sixMonth')"></my-select-box>
+    </div>
+  </ng-container>
+  <div class="sub-tabset-container">
+    <div class="chart-wrap">
+      <div echarts [options]="lossAnlsOption" class="lossanls-chart"></div>
+    </div>
+  </div>
+
   <!-- <div class="capacity-chart-wrap">
     <div echarts [options]="capacityOption" class="capacity-chart" id="capacityChart"></div>
   </div> -->
-  <div class="sub-title-wrap"><h4 class="sub-title">开单分析</h4></div>
-  <div class="sub-title-wrap"><h4 class="sub-title">流失分析</h4></div>
   <div class="sub-title-wrap"><h4 class="sub-title">年资段分析</h4></div>
   <div class="seniority-wrap text-center">
     <div class="row font-blue seniority-hd">

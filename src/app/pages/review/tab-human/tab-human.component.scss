@@ -55,3 +55,22 @@
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
+
+.tab-human .sub-title-wrap {
+  margin-bottom: 0;
+}
+.tab-human .sub-tabset-wrap {
+  margin-bottom: .23rem;
+}
+.tab-human .sub-tabset-container {
+  margin-bottom: 1.07rem;
+}
+.tab-human .track-sel {
+  padding:0 .6rem;
+}
+.capanls-chart, .billinganls-chart, .lossanls-chart {
+  height: 7rem;
+}
+.hidden {
+  visibility: hidden;
+}

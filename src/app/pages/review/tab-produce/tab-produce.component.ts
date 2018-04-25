@@ -112,7 +112,6 @@ export class TabProduceComponent implements OnInit {
           if ( res.code === 0) {
             curItem.chartOption = this.cmnFn.deepCopy(echart.LineChartOptions, {});
             curItem.chartOption.xAxis.data = res.data.xAxis;
-            let symbols = ['circle', 'rect', 'triangle', 'diamond', 'pin', 'roundRect', 'arrow'];
             let legendData = [];
             curItem.chartOption.dataZoom = [{
               type: 'inside',
@@ -133,6 +132,7 @@ export class TabProduceComponent implements OnInit {
                 });
               }
             } else {
+              let symbols = ['circle', 'rect', 'triangle', 'diamond', 'pin', 'roundRect', 'arrow'];
               for (let i = 0; i < res.data.yAxis.length; i++) {
                 legendData.push(res.data.yAxis[i].name);
                 curItem.chartOption.series.push({

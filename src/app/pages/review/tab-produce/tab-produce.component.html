@@ -3,14 +3,6 @@
     <div class="sub-title-wrap"><h4 class="sub-title">{{item.title}}</h4></div>
     <div class="sub-tabset-wrap">
       <my-tabset-ui [tabList]="['近6个月', '本月']" [curTab]="'近6个月'" (onTabChanged)="switchChart($event, item.type)"></my-tabset-ui>
-      <!-- <div class="sub-tabset row text-center">
-        <div class="col">
-          <span class="tab-title" [class.selected]="item.curSubTab === 'trend'" (click)="switchChart('trend', item.type)">近6个月</span>
-        </div>
-        <div class="col">
-          <span class="tab-title" [class.selected]="item.curSubTab === 'curMonth'" (click)="switchChart('curMonth', item.type)">本月</span>
-        </div>
-      </div> -->
     </div>
     <div class="sub-tabset-container">
       <div class="track-sel" [class.hidden]="item.curSubTab === 'curMonth'">
