@@ -1,21 +1,64 @@
-.capacity-chart-wrap, .passRate-chart-wrap, .overdueRate-chart-wrap {
-  margin-top: -1.2rem;
-  margin-bottom: 1.15rem;
+// .capacity-chart-wrap, .passRate-chart-wrap, .overdueRate-chart-wrap {
+//   margin-top: -1.2rem;
+//   margin-bottom: 1.15rem;
+// }
+
+// 年资段表格
+.seniority-sel {
+  margin-top: .13rem;
 }
 .seniority-wrap {
-  margin-bottom: 1.64rem;
+  margin-top: .32rem;
+  margin-bottom: 1.4rem;
 }
 .seniority-wrap .row {
   margin-left: 0;
   margin-right: 0;
 }
-.seniority-wrap .col, .seniority-wrap .col-2, .seniority-wrap .col-3{
-  padding-left: 0;
-  padding-right: 0;
+.fixed-table {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.fixed-table .left-fixed {
+  -ms-flex: 0 0 20%;
+  -webkit-flex: 0 0 20%;
+  flex: 0 0 20%;
+  max-width: 20%;
+  padding-right: 2.5%;
+}
+.fixed-table .right-content {
+  -ms-flex: 0 0 80%;
+  -webkit-flex: 0 0 80%;
+  flex: 0 0 80%;
+  max-width: 80%;
 }
 .seniority-hd {
   margin-bottom: .29rem;
   font-size: .37rem;
+}
+.left-fixed .seniority-hd {
+  display: inline-block;
+}
+.left-fixed .seniority-item{
+  background-color: #d74b49;
+}
+.left-fixed .seniority-item:last-child {
+  background-color: #05e8e9;
+  color: #030419;
+}
+.right-content {
+  overflow: scroll;
+}
+.right-content .seniority-hd, .right-content .seniority-item {
+  width: 16rem;
+}
+.seniority-wrap .col, .seniority-wrap .col-2, .seniority-wrap .col-3{
+  padding-left: 0;
+  padding-right: 0;
 }
 .seniority-item {
   background-color: #101225;
@@ -23,9 +66,11 @@
   line-height: .99rem;
   margin-bottom: .23rem;
 }
-.seniority-item span:first-child{
-  background-color: #d74b49;
+.seniority-item:last-child {
+  color: #05e8e9;
+  font-weight: bold;
 }
+
 .competitive-wrap {
   position: relative;
   padding-top: .8rem;

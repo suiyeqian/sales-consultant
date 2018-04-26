@@ -58,14 +58,14 @@ export class AuthGuard implements CanActivate {
       if (localStorage.getItem('bdss_accessToken')) {
         return true;
       } else {
-        let user = {name: '马倩', number: 'xn087432'};
+        let user = {name: '马倩', number: 'xn067182'};
         localStorage.setItem('bdss_accessToken',
-        'sWUJMEq7y2bazOmXxrBGMJpZDIqEzREghfTB6T7fC8ROpv3TcEXXUcumTAwsCngB2aRnCgIIaUw7j2DT8ijI');
-        localStorage.setItem('bdss_weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
+        'Rx9QX0t6oojxsUUnz9FBHgphtVz1MGNUyAPr4djwqk8QohFfKHHYEsC5qfwjrZGhRyToyHDA419q27K08LbN');
+        localStorage.setItem('bdss_weiXinDeviceId', '25c77da2bb874e2fc4d0a5d12068b9b7');
         localStorage.setItem('bdss_refreshToken',
         'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
         localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('posId', '2');
+        localStorage.setItem('posId', '3');
         return true;
         // localStorage.clear();
         // window.location.href = this.redirectUrl;

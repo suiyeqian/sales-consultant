@@ -41,7 +41,7 @@ export class TabHumanComponent implements OnInit {
 
   private subNameUrl = 'achievementanls/sub_name';
   subLevels = [];
-  curLevel = {value: '', text: '全部'};
+  curLevel: any;
 
   constructor(
     private bdService: BackendService,
@@ -54,7 +54,7 @@ export class TabHumanComponent implements OnInit {
   ngOnInit() {
     if (this.isActive) {
       // this.getTmCapacity();
-      this.getTmSeniority();
+      this.getTmSeniority({value: '', text: '全部'});
       this.getTmComp();
       this.getTmCapanls({value: '', text: '全部'}, this.capType);
       this.getTmBillinganls({value: '', text: '全部'}, this.billingType);
@@ -100,9 +100,10 @@ export class TabHumanComponent implements OnInit {
   //       });
   // }
 
-  getTmSeniority(): void {
+  getTmSeniority(level): void {
+    this.curLevel = level;
     this.bdService
-        .getDataByPost(this.tmSeniorityUrl, {posId: localStorage.posId})
+        .getDataByPost(this.tmSeniorityUrl, {posId: localStorage.posId, subName: level.value})
         .then((res) => {
           this.tmSeniority = res.data;
         });
