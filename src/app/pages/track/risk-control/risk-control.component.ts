@@ -20,6 +20,7 @@ export class RiskControlComponent implements OnInit {
   mbsRisk = [];
   hasOther = false;
   posId = localStorage.posId;
+  teamName = localStorage.teamName;
 
   constructor(
     private bdService: BackendService,

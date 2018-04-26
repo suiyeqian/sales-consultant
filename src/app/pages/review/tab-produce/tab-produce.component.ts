@@ -58,7 +58,7 @@ export class TabProduceComponent implements OnInit {
   loanAmtOption: any;
   avgAmtOption: any;
 
-  private subNameUrl = 'achievementanls/sub_name';
+  subNameUrl = 'achievementanls/sub_name';
 
   constructor(
     private bdService: BackendService,

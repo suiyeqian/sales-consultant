@@ -109,6 +109,19 @@ export class BackendService {
                  localStorage.setItem('bdss_weiXinDeviceId', res.json().data.weiXinDeviceId);
                  localStorage.setItem('user', JSON.stringify(res.json().data));
                  localStorage.setItem('posId', res.json().data.posId ? res.json().data.posId : '2');
+                 switch (res.json().data.posId) {
+                   case '3':
+                     localStorage.setItem('teamName', '营业部');
+                     break;
+                   case '4':
+                     localStorage.setItem('teamName', '小区');
+                     break;
+                   case '5':
+                     localStorage.setItem('teamName', '大区');
+                     break;
+                   default:
+                     localStorage.setItem('teamName', '团队');
+                 }
                }
                this.firstOverdue = true;
                window.location.reload();

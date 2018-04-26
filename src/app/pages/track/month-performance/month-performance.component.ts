@@ -17,8 +17,9 @@ export class MonthPerformanceComponent implements OnInit {
   hasOther = false;
   @Input() timeProgress: number;
 
-  private subNameUrl = 'performancetrack/sub_name';
+  subNameUrl = 'performancetrack/sub_name';
   curLevel = {value: '', text: '全部'};
+  teamName = localStorage.teamName;
 
   constructor(
     private bdService: BackendService,

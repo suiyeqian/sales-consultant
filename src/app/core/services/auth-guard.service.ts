@@ -9,7 +9,7 @@ export class AuthGuard implements CanActivate {
   // private apiUrl = 'https://xszs-test.niudingfeng.com';
   private apiUrl = window.location.origin;
   private requestUrl = this.apiUrl + '/servegateway/rest/bduser/weixin/staff/sso';
-  private redirectUri = encodeURIComponent(this.apiUrl + '/bdss/').toLowerCase();
+  private redirectUri = encodeURIComponent(this.apiUrl + '/bdss/index/' + this.generateUUID()).toLowerCase();
   private appId = 2;
   private redirectUrl = this.apiUrl + '/servegateway/wxgateway/oauth2/authorize?appId=' + this.appId + '&redirectUri=' + this.redirectUri;
   headerObj = {
@@ -46,6 +46,19 @@ export class AuthGuard implements CanActivate {
             localStorage.setItem('bdss_refreshToken', res.data.refreshToken);
             localStorage.setItem('bdss_weiXinDeviceId', res.data.weiXinDeviceId);
             localStorage.setItem('posId', res.data.posId ? res.data.posId : '2');
+            switch (res.data.posId) {
+              case '3':
+                localStorage.setItem('teamName', '营业部');
+                break;
+              case '4':
+                localStorage.setItem('teamName', '小区');
+                break;
+              case '5':
+                localStorage.setItem('teamName', '大区');
+                break;
+              default:
+                localStorage.setItem('teamName', '团队');
+            }
             this.router.navigate(['/pages/track']);
             return true;
           } else {
@@ -54,21 +67,22 @@ export class AuthGuard implements CanActivate {
           }
        });
     } else {
-      localStorage.clear();
+      // localStorage.clear();
       if (localStorage.getItem('bdss_accessToken')) {
         return true;
       } else {
-        let user = {name: '马倩', number: 'xn067182'};
-        localStorage.setItem('bdss_accessToken',
-        'Rx9QX0t6oojxsUUnz9FBHgphtVz1MGNUyAPr4djwqk8QohFfKHHYEsC5qfwjrZGhRyToyHDA419q27K08LbN');
-        localStorage.setItem('bdss_weiXinDeviceId', '25c77da2bb874e2fc4d0a5d12068b9b7');
-        localStorage.setItem('bdss_refreshToken',
-        'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('posId', '3');
-        return true;
-        // localStorage.clear();
-        // window.location.href = this.redirectUrl;
+        // let user = {name: '马倩', number: 'xn067182'};
+        // localStorage.setItem('bdss_accessToken',
+        // 'Rx9QX0t6oojxsUUnz9FBHgphtVz1MGNUyAPr4djwqk8QohFfKHHYEsC5qfwjrZGhRyToyHDA419q27K08LbN');
+        // localStorage.setItem('bdss_weiXinDeviceId', '25c77da2bb874e2fc4d0a5d12068b9b7');
+        // localStorage.setItem('bdss_refreshToken',
+        // 'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
+        // localStorage.setItem('user', JSON.stringify(user));
+        // localStorage.setItem('posId', '3');
+        // localStorage.setItem('teamName', '营业部');
+        // return true;
+        localStorage.clear();
+        window.location.href = this.redirectUrl;
       }
     }
   }
@@ -80,6 +94,16 @@ export class AuthGuard implements CanActivate {
              return response.json();
            })
            .catch(this.handleError);
+  }
+
+  generateUUID(): string {
+   let d = new Date().getTime();
+   let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+     let r = (d + Math.random() * 16) % 16 || 0;
+     d = Math.floor(d / 16);
+     return (c === 'x' ? r : (r && 0x3 || 0x8)).toString(16);
+   });
+   return uuid.replace(/-/g, '');
   }
 
   private handleError(error: any): Promise<any> {

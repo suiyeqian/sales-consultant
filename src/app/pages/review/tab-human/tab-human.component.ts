@@ -39,7 +39,7 @@ export class TabHumanComponent implements OnInit {
   curLossLevel: any;
   lossAnlsOption: any;
 
-  private subNameUrl = 'achievementanls/sub_name';
+  subNameUrl = 'achievementanls/sub_name';
   subLevels = [];
   curLevel: any;
 
@@ -283,7 +283,7 @@ export class TabHumanComponent implements OnInit {
         this.getTmBillinganls(this.curBillingLevel, this.billingType);
         break;
       default:
-        this.getTmCapanls(this.curLossLevel, this.lossType);
+        this.getTmLossanls(this.curLossLevel, this.lossType);
     }
   }
 

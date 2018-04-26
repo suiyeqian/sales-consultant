@@ -22,6 +22,7 @@ export class InfoComponent implements OnInit, AfterContentInit {
   radarOption: any;
   private growthtrackUrl = 'personalinfo/growth_track';
   growthTrack = [];
+  teamName = localStorage.teamName;
 
   constructor(
     private bdService: BackendService,

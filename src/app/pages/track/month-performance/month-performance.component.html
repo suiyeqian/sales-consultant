@@ -1,6 +1,6 @@
 <div class="month-performance">
   <div class="sub-title-wrap">
-    <h4 class="sub-title">团队成员进度</h4>
+    <h4 class="sub-title">{{teamName}}成员进度</h4>
   </div>
   <div class="member-list">
     <div class="member-progress" *ngFor="let member of mbsPerformance" [class.warn-red]="member.rate - timeProgress < 0">
@@ -25,7 +25,7 @@
   </div>
 
   <div class="sub-title-wrap">
-    <h4 class="sub-title">每周团队销售情况</h4>
+    <h4 class="sub-title">每周{{teamName}}销售情况</h4>
   </div>
   <div class="performance-trend">
     <div class="track-sel">

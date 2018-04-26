@@ -18,25 +18,25 @@ export class RankComponent implements OnInit, AfterContentInit {
   loanTopTen = [];
   private cm2toptenUrl = 'rankinginfo/cm2_top_ten';
   cm2TopTen = [];
-  teamName: string;
+  teamName = localStorage.teamName;
 
   constructor(
     private bdService: BackendService,
     private waterMark: WaterMarkService
   ) {
-    switch (localStorage.posId) {
-      case '3':
-        this.teamName = '营业部';
-        break;
-      case '4':
-        this.teamName = '小区';
-        break;
-      case '5':
-        this.teamName = '大区';
-        break;
-      default:
-        this.teamName = '团队';
-    }
+    // switch (localStorage.posId) {
+    //   case '3':
+    //     this.teamName = '营业部';
+    //     break;
+    //   case '4':
+    //     this.teamName = '小区';
+    //     break;
+    //   case '5':
+    //     this.teamName = '大区';
+    //     break;
+    //   default:
+    //     this.teamName = '团队';
+    // }
   }
 
   ngOnInit() {

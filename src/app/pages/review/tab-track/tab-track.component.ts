@@ -17,9 +17,9 @@ export class TabTrackComponent implements OnInit {
   loanOption: any;
   overdueOption: any;
   private pfmcTotalUrl = 'achievementanls/year_achv';
-  pfmcTotal = {};
+  pfmcTotal: any;
 
-  private subNameUrl = 'achievementanls/sub_name';
+  subNameUrl = 'achievementanls/sub_name';
   curLevel = {value: '', text: '全部'};
 
   constructor(
