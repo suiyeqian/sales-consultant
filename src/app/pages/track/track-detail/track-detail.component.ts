@@ -61,6 +61,7 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
     } else {
       this.curPageList = this.navList.slice(5);
     }
+    this.switchIndex(this.curPageList[0]);
   }
 
   switchIndex(item): void {

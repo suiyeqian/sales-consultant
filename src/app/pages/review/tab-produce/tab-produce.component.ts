@@ -170,7 +170,7 @@ export class TabProduceComponent implements OnInit {
     }
     curItem.curSubTab = curTabCode;
     if (curItem.curSubTab === 'trend') {
-      this.getTrend(curItem.curLevel, itemType);
+      this.getTrend({value: '', text: '全部'}, itemType);
     } else {
       this.getScatterChart(itemType);
     }

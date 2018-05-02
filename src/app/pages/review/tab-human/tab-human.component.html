@@ -48,7 +48,7 @@
     <div echarts [options]="capacityOption" class="capacity-chart" id="capacityChart"></div>
   </div> -->
   <div class="sub-title-wrap"><h4 class="sub-title">年资段分析</h4></div>
-  <ng-container>
+  <ng-container *ngIf="posId > 2 ">
     <div class="track-sel seniority-sel">
       <my-select-box  [seledItem]="curLevel" [dataUrl]="subNameUrl" (onSelChanged)="getTmSeniority($event)"></my-select-box>
     </div>

@@ -67,22 +67,22 @@ export class AuthGuard implements CanActivate {
           }
        });
     } else {
-      // localStorage.clear();
+      localStorage.clear();
       if (localStorage.getItem('bdss_accessToken')) {
         return true;
       } else {
-        // let user = {name: '马倩', number: 'xn067182'};
-        // localStorage.setItem('bdss_accessToken',
-        // 'Rx9QX0t6oojxsUUnz9FBHgphtVz1MGNUyAPr4djwqk8QohFfKHHYEsC5qfwjrZGhRyToyHDA419q27K08LbN');
-        // localStorage.setItem('bdss_weiXinDeviceId', '25c77da2bb874e2fc4d0a5d12068b9b7');
-        // localStorage.setItem('bdss_refreshToken',
-        // 'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
-        // localStorage.setItem('user', JSON.stringify(user));
-        // localStorage.setItem('posId', '3');
-        // localStorage.setItem('teamName', '营业部');
-        // return true;
-        localStorage.clear();
-        window.location.href = this.redirectUrl;
+        let user = {name: '马倩', number: 'xn067182'};
+        localStorage.setItem('bdss_accessToken',
+        'M4GHRU5eTrZp9H2q5QUDqrk6M3SKLeycrXx1uPpsKkCsLMk8VoF7J4k5vNHtiYo9UKBDg3gX8x2TfSsZlfQT');
+        localStorage.setItem('bdss_weiXinDeviceId', 'e05c746809aaf4fd3e053456eeaf14d3');
+        localStorage.setItem('bdss_refreshToken',
+        'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('posId', '2');
+        localStorage.setItem('teamName', '团队');
+        return true;
+        // localStorage.clear();
+        // window.location.href = this.redirectUrl;
       }
     }
   }

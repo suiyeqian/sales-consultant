@@ -16,6 +16,7 @@ export class RiskControlComponent implements OnInit {
   riskControlOption1: any;
   riskControlOption2: any;
   cm2: number;
+  cm1: number;
   private mbRiskUrl = 'performancetrack/member_risk';
   mbsRisk = [];
   hasOther = false;
@@ -44,6 +45,7 @@ export class RiskControlComponent implements OnInit {
             let resData = res.data;
             this.riskControl = resData;
             this.cm2 = resData.cAmt > 0 ? resData.m2Amt / resData.cAmt * 100 : 0;
+            this.cm1 = resData.cAmt > 0 ? resData.m1Amt / resData.cAmt * 100 : 0;
             this.riskControlOption1 = this.cmnFn.deepCopy(commonOption, {});
             this.riskControlOption1.series[0].axisLine.lineStyle.color[0][1] = '#d74b49';
             this.riskControlOption1.series[0].axisLine.lineStyle.color[0][0] =
@@ -72,5 +74,10 @@ export class RiskControlComponent implements OnInit {
             waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
           }, 0);
         });
+  }
+
+  open(e, t) {
+    window.event ? window.event.cancelBubble = true : e.stopPropagation();
+    t.open();
   }
 }

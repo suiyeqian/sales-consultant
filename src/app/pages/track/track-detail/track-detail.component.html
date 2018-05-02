@@ -1,9 +1,10 @@
 <div class="detail-wrap">
   <header class="nav-hd row">
+    <img src="assets/img/next.png" class="last-btn" [class.hidden]="isFirstPage" (click)="nextPage()">
     <nav *ngFor="let item of curPageList" class="col nav-item" [class.active]="item.name === curIndex.name" (click)="switchIndex(item)">
     {{item.name}}
     </nav>
-    <img src="assets/img/next.png" class="next-btn" (click)="nextPage()">
+    <img src="assets/img/next.png" class="next-btn" [class.hidden]="!isFirstPage" (click)="nextPage()">
   </header>
   <content class="content-wrap">
     <div class="left-nav">

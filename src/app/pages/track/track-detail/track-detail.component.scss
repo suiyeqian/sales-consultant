@@ -19,7 +19,7 @@
   display: -webkit-flex;
   display: flex;
   text-align: center;
-  margin-left: .8rem;
+  margin-left: 0;
   margin-right: 0;
 }
 .detail-wrap .nav-hd .nav-item {
@@ -30,10 +30,17 @@
   background: #06E7E9;
   color: #030419;
 }
+.last-btn {
+  height: .5rem;
+  margin: .15rem .15rem .15rem .2rem;
+  transform: rotate(180deg);
+}
 .next-btn {
   height: .5rem;
   margin: .15rem .2rem .15rem .05rem;
-  // transform: rotate(180deg);
+}
+.hidden{
+  visibility: hidden;
 }
 .detail-wrap .content-wrap {
   flex: 1;

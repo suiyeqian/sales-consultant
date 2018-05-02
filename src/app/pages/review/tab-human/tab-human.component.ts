@@ -277,13 +277,13 @@ export class TabHumanComponent implements OnInit {
     this[type + 'Type'] = curTabCode;
     switch (type) {
       case 'cap':
-        this.getTmCapanls(this.curCapLevel, this.capType);
+        this.getTmCapanls({value: '', text: '全部'}, this.capType);
         break;
       case 'billing':
-        this.getTmBillinganls(this.curBillingLevel, this.billingType);
+        this.getTmBillinganls({value: '', text: '全部'}, this.billingType);
         break;
       default:
-        this.getTmLossanls(this.curLossLevel, this.lossType);
+        this.getTmLossanls({value: '', text: '全部'}, this.lossType);
     }
   }
 
