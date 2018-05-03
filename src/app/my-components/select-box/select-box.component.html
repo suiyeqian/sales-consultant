@@ -1,6 +1,6 @@
 <div class="sel-wrap">
   <span class="sel-title">筛选</span>
-  <span class="sel-btn" (click)="showSelBox()">{{seledItem.text}}</span>
+  <span class="sel-btn" (click)="showSelBox($event)">{{seledItem.text}}</span>
   <div class="sel-box" [class.show]="ifShowSelBox">
     <div class="row">
       <div class="col-3" *ngFor="let item of selItems" (click)="switchSel(item)" [class.active]="seledItem.value==item.value">

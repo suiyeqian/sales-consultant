@@ -22,7 +22,8 @@ export class SelBoxComponent implements OnChanges {
   ngOnChanges() {
   }
 
-  showSelBox(): void {
+  showSelBox(e): void {
+    window.event ? window.event.cancelBubble = true : e.stopPropagation();
     this.ifShowSelBox = !this.ifShowSelBox;
     this.bdService
         .getDataByPost(this.dataUrl, {posId: localStorage.posId})
