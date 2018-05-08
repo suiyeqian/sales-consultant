@@ -23,7 +23,6 @@ export class SelBoxComponent implements OnChanges {
   }
 
   showSelBox(e): void {
-    window.event ? window.event.cancelBubble = true : e.stopPropagation();
     this.ifShowSelBox = !this.ifShowSelBox;
     this.bdService
         .getDataByPost(this.dataUrl, {posId: localStorage.posId})
@@ -33,12 +32,16 @@ export class SelBoxComponent implements OnChanges {
             this.selItems.unshift({value: '', text: '全部'});
           }
         });
-    // this.getSelItems.emit();
   }
-  switchSel(selected): void {
+  switchSel(selected, e): void {
+    window.event ? window.event.cancelBubble = true : e.stopPropagation();
     this.seledItem = selected;
     this.ifShowSelBox = false;
     this.onSelChanged.emit(selected);
+  }
+  blurClose(e): void {
+    window.event ? window.event.cancelBubble = true : e.stopPropagation();
+    this.ifShowSelBox = false;
   }
 
 }

@@ -16,12 +16,6 @@ export class PagesComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    document.onclick = function() {
-      let selBox = document.getElementsByClassName('sel-box');
-      for (let i = 0; i < selBox.length; i++) {
-        selBox[i].className = 'sel-box';
-      }
-    };
   }
 
 }

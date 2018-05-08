@@ -1,10 +1,11 @@
 <div class="sel-wrap">
   <span class="sel-title">筛选</span>
-  <span class="sel-btn" (click)="showSelBox($event)">{{seledItem.text}}</span>
-  <div class="sel-box" [class.show]="ifShowSelBox">
-    <div class="row">
-      <div class="col-3" *ngFor="let item of selItems" (click)="switchSel(item)" [class.active]="seledItem.value==item.value">
-        {{item.text}}
+  <div class="sel-btn" tabindex="1" (click)="showSelBox()" (blur)="blurClose($event)">{{seledItem.text}}
+    <div class="sel-box" [class.show]="ifShowSelBox">
+      <div class="row">
+        <div class="col-3" *ngFor="let item of selItems" (click)="switchSel(item, $event)" [class.active]="seledItem.value==item.value">
+          {{item.text}}
+        </div>
       </div>
     </div>
   </div>
