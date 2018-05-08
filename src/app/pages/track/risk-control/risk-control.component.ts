@@ -76,8 +76,11 @@ export class RiskControlComponent implements OnInit {
         });
   }
 
-  open(e, t) {
-    window.event ? window.event.cancelBubble = true : e.stopPropagation();
-    t.open();
+  open(t) {
+    if (t.isOpen()) {
+      t.close();
+    } else {
+      t.open();
+    }
   }
 }

@@ -1,4 +1,4 @@
-<div class="risk-control"  (click)="t1.close();t2.close()">
+<div class="risk-control">
   <div class="row">
     <div class="col-6">
       <div class="chart-wrap">
@@ -40,17 +40,23 @@
     </div>
   </div>
   <p class="c-m2">
-    <ng-template #tipCm1>
-      <p>C-M1=M1待收余额/上上月底正常还款总待收余额</p>
-    </ng-template>
-    <span class="c-m2-key bold">C-M1 <i class="help-icon" [ngbTooltip]="tipCm1" triggers="manual" (click)="open($event,t1)" #t1="ngbTooltip" placement="right"></i></span>
+    <span class="c-m2-key bold">C-M1
+      <i class="help-icon" tabindex="1" [ngbTooltip]="tipCm1" triggers="manual" (click)="open(t1)" (blur)="t1.close()" #t1="ngbTooltip" placement="right">
+        <ng-template #tipCm1>
+          <p>C-M1=M1待收余额/上上月底正常还款总待收余额</p>
+        </ng-template>
+      </i>
+    </span>
     <span class="bg-red c-m2-val">{{cm1 | number:'1.0-2'}}%</span>
   </p>
   <p class="c-m2">
-    <ng-template #tipCm2>
-      <p>C-M2=M2待收余额/上上月底正常还款总待收余额</p>
-    </ng-template>
-    <span class="c-m2-key bold">C-M2 <i class="help-icon" [ngbTooltip]="tipCm2" triggers="manual" (click)="open($event,t2)" #t2="ngbTooltip" placement="right"></i></span>
+    <span class="c-m2-key bold">C-M2
+      <i class="help-icon" tabindex="1" [ngbTooltip]="tipCm2" triggers="manual" (click)="open(t2)" (blur)="t2.close()" #t2="ngbTooltip" placement="right">
+        <ng-template #tipCm2>
+          <p>C-M2=M2待收余额/上上月底正常还款总待收余额</p>
+        </ng-template>
+      </i>
+    </span>
     <span class="bg-red c-m2-val">{{cm2 | number:'1.0-2'}}%</span>
   </p>
   <div class="sub-title-wrap">

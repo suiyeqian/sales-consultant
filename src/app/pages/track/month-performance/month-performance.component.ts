@@ -68,4 +68,12 @@ export class MonthPerformanceComponent implements OnInit {
         });
   }
 
+  open(t) {
+    if (t.isOpen()) {
+      t.close();
+    } else {
+      t.open();
+    }
+  }
+
 }

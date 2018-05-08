@@ -15,7 +15,8 @@
         <p>预计达成金额：{{member.expReachAmt}}</p>
         <p>预计达成率：{{member.expReachRt}}%</p>
       </ng-template>
-      <div class="progress member-progress-bar" [ngbTooltip]="tipContent" triggers="click">
+      <!-- <i class="help-icon" tabindex="1" [ngbTooltip]="tipCm2" triggers="manual" (click)="open(t2)" (blur)="t2.close()" #t2="ngbTooltip" placement="right"> -->
+      <div class="progress member-progress-bar" tabindex="1" [ngbTooltip]="tipContent" triggers="manual" (click)="open(t)" (blur)="t.close()" #t="ngbTooltip">
         <div class="progress-bar bg-customized progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{'width':member.yDayTotRt+'%'}"><i>{{member.amt | number}}</i></div>
         <div class="progress-bar bg-new progress-bar-striped progress-bar-animated" role="progressbar" [ngStyle]="{'width':member.newRt+'%'}"></div>
       </div>
