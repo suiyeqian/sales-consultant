@@ -30,21 +30,20 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
     private cmnFn: CommonFnService
   ) {
     let self = this;
-    window.onorientationchange = function(){
+    window.onorientationchange = () => {
       if (window.orientation === 90 || window.orientation === -90) {
-        self.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
-          wmk_z_index: '10000003', wmk_cols: 0}, 0);
+        this.getSaleDetail(this.dateType, this.curIndex.code);
+        this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
+          wmk_z_index: '10000003'}, 0);
       }
     };
   }
 
   ngOnInit() {
-    // console.log(this.route.snapshot.params['type']);
-    this.getSaleDetail(this.dateType, this.curIndex.code);
     if (window.orientation === 90 || window.orientation === -90) {
       this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
         wmk_z_index: '10000003'}, 0);
-      // this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).userIdentify, wmk_z_index: '10000003'}, 100);
+      this.getSaleDetail(this.dateType, this.curIndex.code);
     }
   }
 
@@ -82,7 +81,8 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
               this.chartOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
               this.chartOption.series.splice(1, 1);
               this.chartOption.legend.data = legends;
-              this.chartOption.yAxis[0].name = `单位(${this.curIndex.datas[1].unit})`;
+              this.chartOption.yAxis[0].name = `单位(${this.curIndex.datas[0].unit})`;
+              this.chartOption.yAxis[1].name = `单位(${this.curIndex.datas[1].unit})`;
             }
             this.curIndex.datas.map((dataItem, idx) => {
               dataItem.value = res.data[dataItem.type];
@@ -90,7 +90,6 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
               this.chartOption.series[idx].data = res.data.yAxis[dataItem.type];
               this.chartOption.series[idx].name = dataItem.idxName;
             });
-
             this.chartOption.grid = {
               left: '5%',
               right: '5%',

@@ -87,7 +87,7 @@
   flex: 1;
 }
 // 竖屏
-@media screen and (orientation: portrait) {
+@media all and (orientation: portrait) {
   .tran-hint {
     display: block;
     position: fixed;
@@ -114,7 +114,7 @@
   }
 }
 // 横屏
-@media screen and (orientation: landscape) {
+@media all and (orientation: landscape) {
   .tran-hint {
     display: none;
   }

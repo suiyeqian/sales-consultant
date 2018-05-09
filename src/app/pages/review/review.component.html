@@ -10,7 +10,7 @@
       <span class="tab-title" [class.selected]="curTab === 'produce'" (click)="changeTab('produce')">产品分析</span>
     </div>
   </div>
-  <div class="tab-container">
+  <div class="tab-container" id="tabContainer">
     <my-tab-track *ngIf="curTab === 'track'" [isActive]="curTab === 'track'"></my-tab-track>
     <my-tab-human *ngIf="curTab === 'human'" [isActive]="curTab === 'human'"></my-tab-human>
     <my-tab-produce *ngIf="curTab === 'produce'" [isActive]="curTab === 'produce'"></my-tab-produce>

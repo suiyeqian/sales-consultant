@@ -14,6 +14,7 @@ export class ReviewComponent implements OnInit, AfterContentInit {
 
   ngOnInit() {
     this.changeTab('track');
+
   }
 
   ngAfterContentInit() {
@@ -27,5 +28,9 @@ export class ReviewComponent implements OnInit, AfterContentInit {
       return;
     }
     this.curTab = type;
+    const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop > 0) {
+      window.scrollTo(0, 0);
+    }
   }
 }

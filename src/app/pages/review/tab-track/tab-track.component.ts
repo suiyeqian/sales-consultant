@@ -12,19 +12,17 @@ import { WaterMarkService } from '../../../core/services/watermark.service';
 })
 export class TabTrackComponent implements OnInit {
   @Input() isActive: boolean;
-  private pfmctrendUrl = 'achievementanls/month_trend';
+  private pfmctrendUrl = 'achievementanls/achievement';
   applyOption: any;
+  applyArr = [];
   loanOption: any;
+  loanArr = [];
   overdueOption: any;
-  private pfmcTotalUrl = 'achievementanls/year_achv';
-  pfmcTotal = {
-    amt: 0,
-    appNumber: 0,
-    number: 0
-  };
-
+  // private pfmcTotalUrl = 'achievementanls/year_achv';
   subNameUrl = 'achievementanls/sub_name';
-  curLevel = {value: '', text: '全部'};
+  applyLevel = {value: '', text: '全部'};
+  loanLevel = {value: '', text: '全部'};
+  overdueLevel = {value: '', text: '全部'};
 
   constructor(
     private bdService: BackendService,
@@ -35,35 +33,29 @@ export class TabTrackComponent implements OnInit {
 
   ngOnInit() {
     if (this.isActive) {
-      this.getPfmcData(this.curLevel);
+      this.getSqqkData(this.applyLevel);
+      this.getFkqkData(this.loanLevel);
+      this.getYqqkData(this.overdueLevel);
     }
   }
-
-  getPfmcData(level): void {
-    this.curLevel = level;
+  // 申请情况
+  getSqqkData(level): void {
+    this.applyLevel = level;
     this.bdService
-        .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId, subName: level.value})
+        .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId, subName: level.value, type: 'sqqk'})
         .then((res) => {
           if ( res.code === 0) {
             let resData = res.data;
-            let xAxisData = [];
-            for (let item of resData.months) {
-              xAxisData.push(item + '月');
-            }
-            // 申请情况
+            this.applyArr = resData.totAchv;
             this.applyOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
             this.applyOption.series.splice(1, 1);
-            this.applyOption.xAxis[0].data = xAxisData;
+            this.applyOption.xAxis[0].data = resData.xAxis;
             this.applyOption.legend.data = ['申请单量', '通过率'];
-            this.applyOption.series[0].data =
-              [resData.m1AppNumber, resData.m2AppNumber, resData.m3AppNumber, resData.m4AppNumber,
-                 resData.m5AppNumber, resData.m6AppNumber].reverse();
+            this.applyOption.series[0].data = resData.yAxis.cntList;
             this.applyOption.series[1].name = '通过率';
             this.applyOption.yAxis[1].axisLabel.formatter = '{value} %';
             this.applyOption.yAxis[1].name = null;
-            this.applyOption.series[1].data =
-              [resData.m1PassRate, resData.m2PassRate, resData.m3PassRate, resData.m4PassRate,
-                resData.m5PassRate, resData.m6PassRate].reverse();
+            this.applyOption.series[1].data = resData.yAxis.rateList;
             this.applyOption.tooltip.formatter = function(params) {
               let relVal = params[0].name;
               for (let i = 0, l = params.length; i < l; i++) {
@@ -77,50 +69,59 @@ export class TabTrackComponent implements OnInit {
                }
               return relVal;
             };
-            // 放款情况
-            this.loanOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
-            this.loanOption.series.splice(0, 1);
-            this.loanOption.xAxis[0].data = xAxisData;
-            this.loanOption.legend.data = ['放款单量', '放款金额'];
-            this.loanOption.series[0].data =
-              [resData.m1Number, resData.m2Number, resData.m3Number, resData.m4Number, resData.m5Number, resData.m6Number].reverse();
-            // this.loanOption.yAxis[1].axisLabel.formatter = function (value) {
-            //     return value / 10000;
-            //   };
-            this.loanOption.series[1].name = '放款金额';
-            this.loanOption.series[1].data =
-              [resData.m1Amt, resData.m2Amt, resData.m3Amt, resData.m4Amt, resData.m5Amt, resData.m6Amt]
-              .map(item => (item / 10000).toFixed(2))
-              .reverse();
-            // 逾期情况
-            this.overdueOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
-            this.overdueOption.series.splice(1, 1);
-            this.overdueOption.xAxis[0].data = xAxisData;
-            this.overdueOption.legend.data = ['逾期单量', '逾期金额'];
-            this.overdueOption.series[0].name = '逾期单量';
-            this.overdueOption.series[0].itemStyle.normal.color = '#4993d8';
-            this.overdueOption.series[0].data =
-              [resData.m1OvdNumber, resData.m2OvdNumber, resData.m3OvdNumber, resData.m4OvdNumber,
-                 resData.m5OvdNumber, resData.m6OvdNumber].reverse();
-            this.overdueOption.series[1].name = '逾期金额';
-            // this.overdueOption.yAxis[1].axisLabel.formatter = function (value) {
-            //   return value / 10000;
-            // };
-            this.overdueOption.series[1].data =
-              [resData.m1OvdAmt, resData.m2OvdAmt, resData.m3OvdAmt, resData.m4OvdAmt, resData.m5OvdAmt, resData.m6OvdAmt]
-              .map(item => (item / 10000).toFixed(2))
-              .reverse();
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });
 
+    // this.bdService
+    //     .getDataByPost(this.pfmcTotalUrl, {posId: localStorage.posId, subName: level.value})
+    //     .then((res) => {
+    //       if ( res.code === 0) {
+    //         this.pfmcTotal = res.data;
+    //       }
+    //     });
+  }
+// 放款情况
+  getFkqkData(level): void {
+    this.loanLevel = level;
     this.bdService
-        .getDataByPost(this.pfmcTotalUrl, {posId: localStorage.posId, subName: level.value})
+        .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId, subName: level.value, type: 'fkqk'})
         .then((res) => {
           if ( res.code === 0) {
-            this.pfmcTotal = res.data;
+            let resData = res.data;
+            this.loanArr = resData.totAchv;
+            this.loanOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+            this.loanOption.series.splice(0, 1);
+            this.loanOption.xAxis[0].data = resData.xAxis;
+            this.loanOption.legend.data = ['放款单量', '放款金额'];
+            this.loanOption.series[0].data = resData.yAxis.cntList;
+            this.loanOption.series[1].name = '放款金额';
+            this.loanOption.series[1].data = resData.yAxis.amtList.map(item => (item / 10000).toFixed(2));
           }
+          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });
   }
+// 逾期情况
+    getYqqkData(level): void {
+      this.overdueLevel = level;
+      this.bdService
+          .getDataByPost(this.pfmctrendUrl, {posId: localStorage.posId, subName: level.value, type: 'yqqk'})
+          .then((res) => {
+            if ( res.code === 0) {
+              let resData = res.data;
+              let xAxisData = [];
+              // 逾期情况
+              this.overdueOption = this.cmnFn.deepCopy(echart.LineBarChartOptions, {});
+              this.overdueOption.series.splice(1, 1);
+              this.overdueOption.xAxis[0].data = resData.xAxis;
+              this.overdueOption.legend.data = ['逾期单量', '逾期金额'];
+              this.overdueOption.series[0].name = '逾期单量';
+              this.overdueOption.series[0].itemStyle.normal.color = '#4993d8';
+              this.overdueOption.series[0].data = resData.yAxis.cntList;
+              this.overdueOption.series[1].name = '逾期金额';
+              this.overdueOption.series[1].data = resData.yAxis.amtList.map(item => (item / 10000).toFixed(2));
+            }
+          });
+    }
 
 }

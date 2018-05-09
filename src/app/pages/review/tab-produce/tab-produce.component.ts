@@ -98,6 +98,16 @@ export class TabProduceComponent implements OnInit {
             curItem.chartOption.legend.data = legendData;
             if (curItem.type === 'tgl' || curItem.type === 'cm2') {
               curItem.chartOption.yAxis.axisLabel.formatter = '{value} %';
+              curItem.chartOption.tooltip.formatter = function(params) {
+                let relVal = params[0].name;
+                for (let i = 0, l = params.length; i < l; i++) {
+                     relVal += `<br/>
+                                <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
+                                background-color:${params[i].color}"></span>
+                                ${params[i].seriesName} : ${params[i].value} %`;
+                 }
+                return relVal;
+              };
             }
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });

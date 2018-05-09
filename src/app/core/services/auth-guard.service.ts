@@ -73,7 +73,7 @@ export class AuthGuard implements CanActivate {
       } else {
         let user = {name: '马倩', number: 'xn067182'};
         localStorage.setItem('bdss_accessToken',
-        '3waMXtMDshdEvoyLwPczdTwXN4lMbpVgTiY6D5b4ujGc5QfSEc880WelwSXflz9PYT5vTNU3G4SLytLpNhoJ');
+        'fiFGzV1LtkdEPMnVVtEIZjJ0letD7TBN3PtVisV6zrrra4WFtSBlyxz83rcHROYZkHL5ZMvkqR6Bo8kA8Ma3');
         localStorage.setItem('bdss_weiXinDeviceId', '76b8b90e80c8b516c2d5602de6b068e0');
         localStorage.setItem('bdss_refreshToken',
         'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');

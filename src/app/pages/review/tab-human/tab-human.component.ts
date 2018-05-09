@@ -17,8 +17,6 @@ export class TabHumanComponent implements OnInit {
   @Input() isActive: boolean;
   posId = localStorage.posId;
   deviceWidth = document.body.clientWidth;
-  // private tmCapacityUrl = 'humananls/capacity_anls';
-  // capacityOption: any;
   private tmSeniorityUrl = 'humananls/seniority_anls';
   tmSeniority = [];
   private tmCompUrl = 'humananls/member_comp';
@@ -53,7 +51,6 @@ export class TabHumanComponent implements OnInit {
 
   ngOnInit() {
     if (this.isActive) {
-      // this.getTmCapacity();
       this.getTmSeniority({value: '', text: '全部'});
       this.getTmComp();
       this.getTmCapanls({value: '', text: '全部'}, this.capType);
@@ -61,44 +58,6 @@ export class TabHumanComponent implements OnInit {
       this.getTmLossanls({value: '', text: '全部'}, this.lossType);
     }
   }
-
-  // getTmCapacity(): void {
-  //   this.bdService
-  //       .getDataByPost(this.tmCapacityUrl, {posId: localStorage.posId})
-  //       .then((res) => {
-  //         let chartDom = document.getElementById('capacityChart');
-  //         if ( res.code === 0) {
-  //           chartDom.style['height'] = 24 * res.data.dataList.length + 142 + 'px';
-  //           let resData = res.data;
-  //           let xAxisData = [];
-  //           let seriesData = [];
-  //           for (let i = 0; i < resData.months.length; i ++) {
-  //             xAxisData.push(resData.months[i] + '月');
-  //             let dataset = [];
-  //             for (let item of resData.dataList) {
-  //               dataset.push((item['m' + (i + 1) + 'Amt'] / 10000).toFixed(2));
-  //             }
-  //             seriesData.push({
-  //               name: resData.months[i] + '月',
-  //               type: 'bar',
-  //               stack: '总量',
-  //               barWidth: 14,
-  //               data: dataset
-  //             });
-  //           }
-  //           let yAxisData = [];
-  //           for (let item of resData.dataList) {
-  //             yAxisData.push(item.name);
-  //           }
-  //           this.capacityOption = echart.StackBarChartOptions;
-  //           this.capacityOption.legend.data = xAxisData;
-  //           this.capacityOption.yAxis.data = yAxisData;
-  //           this.capacityOption.series = seriesData;
-  //         }
-  //         let waterMark = ;
-  //
-  //       });
-  // }
 
   getTmSeniority(level): void {
     this.curLevel = level;
@@ -196,15 +155,6 @@ export class TabHumanComponent implements OnInit {
         });
   }
 
-  // switchCapTab(tabName): void {
-  //   let curTabCode = tabName === '本月' ? 'curMonth' : 'sixMonth';
-  //   if (this.capType === curTabCode) {
-  //     return;
-  //   }
-  //   this.capType = curTabCode;
-  //   this.getTmCapanls(this.curCapLevel, this.capType);
-  // }
-
   // 开单分析
   getTmBillinganls(level, type): void {
     this.curBillingLevel = level;
@@ -237,15 +187,6 @@ export class TabHumanComponent implements OnInit {
           }
         });
   }
-
-  // switchBillingTab(tabName): void {
-  //   let curTabCode = tabName === '本月' ? 'curMonth' : 'sixMonth';
-  //   if (this.billingType === curTabCode) {
-  //     return;
-  //   }
-  //   this.billingType = curTabCode;
-  //   this.getTmBillinganls(this.curBillingLevel, this.billingType);
-  // }
 
   // 流失分析
   getTmLossanls(level, type): void {
