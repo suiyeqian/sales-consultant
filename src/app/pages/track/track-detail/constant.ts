@@ -52,7 +52,7 @@ export const NavList = [
     code: 'htjj',
     datas: [
       {
-        idxName: '合同件均', type: 'bar', unit: '元', value: 0
+        idxName: '合同件均', type: 'bar', unit: '万元', value: 0
       }
     ]
   }, {
@@ -62,7 +62,7 @@ export const NavList = [
       {
         idxName: '批核金额', type: 'bar', unit: '万元', value: 0
       }, {
-        idxName: '批核件均', type: 'line', unit: '元', value: 0
+        idxName: '批核件均', type: 'line', unit: '万元', value: 0
       }
     ]
   }, {
@@ -80,7 +80,7 @@ export const NavList = [
     code: 'dqqk',
     datas: [
       {
-        idxName: '待签金额', type: 'bar', unit: '元', value: 0
+        idxName: '待签金额', type: 'bar', unit: '万元', value: 0
       }, {
         idxName: '待签件数', type: 'line', unit: '件', value: 0
       }

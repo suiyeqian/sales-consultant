@@ -10,9 +10,9 @@
         <i>{{member.amt | number}}</i>
       </ngb-progressbar> -->
       <ng-template #tipContent>
-        <p>今日新增金额：{{member.newAmt}}</p>
-        <p>本月累计金额：{{member.amt}}</p>
-        <p>预计达成金额：{{member.expReachAmt}}</p>
+        <p>今日新增金额：{{member.newAmt | number}}</p>
+        <p>本月累计金额：{{member.amt | number}}</p>
+        <p>预计达成金额：{{member.expReachAmt | number}}</p>
         <p>预计达成率：{{member.expReachRt}}%</p>
       </ng-template>
       <!-- <i class="help-icon" tabindex="1" [ngbTooltip]="tipCm2" triggers="manual" (click)="open(t2)" (blur)="t2.close()" #t2="ngbTooltip" placement="right"> -->

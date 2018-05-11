@@ -56,19 +56,19 @@ export class TabTrackComponent implements OnInit {
             this.applyOption.yAxis[1].axisLabel.formatter = '{value} %';
             this.applyOption.yAxis[1].name = null;
             this.applyOption.series[1].data = resData.yAxis.rateList;
-            this.applyOption.tooltip.formatter = function(params) {
-              let relVal = params[0].name;
-              for (let i = 0, l = params.length; i < l; i++) {
-                relVal += `<br/>
-                           <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
-                           background-color:${params[i].color}"></span>
-                           ${params[i].seriesName} : ${params[i].value}`;
-                if (params[i].seriesName === '通过率') {
-                  relVal += '%';
-                }
-               }
-              return relVal;
-            };
+            // this.applyOption.tooltip.formatter = function(params) {
+            //   let relVal = params[0].name;
+            //   for (let i = 0, l = params.length; i < l; i++) {
+            //     relVal += `<br/>
+            //                <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
+            //                background-color:${params[i].color}"></span>
+            //                ${params[i].seriesName} : ${params[i].value}`;
+            //     if (params[i].seriesName === '通过率') {
+            //       relVal += '%';
+            //     }
+            //    }
+            //   return relVal;
+            // };
           }
           this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number });
         });

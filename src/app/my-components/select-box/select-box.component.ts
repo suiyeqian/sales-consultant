@@ -22,7 +22,7 @@ export class SelBoxComponent implements OnChanges {
   ngOnChanges() {
   }
 
-  showSelBox(e): void {
+  showSelBox(): void {
     this.ifShowSelBox = !this.ifShowSelBox;
     this.bdService
         .getDataByPost(this.dataUrl, {posId: localStorage.posId})
@@ -33,12 +33,14 @@ export class SelBoxComponent implements OnChanges {
           }
         });
   }
+
   switchSel(selected, e): void {
     window.event ? window.event.cancelBubble = true : e.stopPropagation();
     this.seledItem = selected;
     this.ifShowSelBox = false;
     this.onSelChanged.emit(selected);
   }
+
   blurClose(e): void {
     window.event ? window.event.cancelBubble = true : e.stopPropagation();
     this.ifShowSelBox = false;

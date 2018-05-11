@@ -67,22 +67,22 @@ export class AuthGuard implements CanActivate {
           }
        });
     } else {
-      localStorage.clear();
+      // localStorage.clear();
       if (localStorage.getItem('bdss_accessToken')) {
         return true;
       } else {
-        let user = {name: '马倩', number: 'xn067182'};
-        localStorage.setItem('bdss_accessToken',
-        'fiFGzV1LtkdEPMnVVtEIZjJ0letD7TBN3PtVisV6zrrra4WFtSBlyxz83rcHROYZkHL5ZMvkqR6Bo8kA8Ma3');
-        localStorage.setItem('bdss_weiXinDeviceId', '76b8b90e80c8b516c2d5602de6b068e0');
-        localStorage.setItem('bdss_refreshToken',
-        'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('posId', '4');
-        localStorage.setItem('teamName', '大区');
-        return true;
-        // localStorage.clear();
-        // window.location.href = this.redirectUrl;
+        // let user = {name: '马倩', number: 'xn067182'};
+        // localStorage.setItem('bdss_accessToken',
+        // 'EDvMEZnQniQrh5F68llNCdgLJm9UZqaRILALA1QufeNGGRO0AVAMylHEY750wFbQPNiB5xp9ZsmNASoshMNL');
+        // localStorage.setItem('bdss_weiXinDeviceId', '76b8b90e80c8b516c2d5602de6b068e0');
+        // localStorage.setItem('bdss_refreshToken',
+        // 'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
+        // localStorage.setItem('user', JSON.stringify(user));
+        // localStorage.setItem('posId', '4');
+        // localStorage.setItem('teamName', '大区');
+        // return true;
+        localStorage.clear();
+        window.location.href = this.redirectUrl;
       }
     }
   }

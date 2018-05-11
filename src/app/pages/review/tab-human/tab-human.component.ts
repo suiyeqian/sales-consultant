@@ -166,6 +166,7 @@ export class TabHumanComponent implements OnInit {
             this.billingAnlsOption.xAxis[0].data = res.data.xAxis;
             this.billingAnlsOption.yAxis[0].name = '单位(人)';
             this.billingAnlsOption.yAxis[1].name = '';
+            this.billingAnlsOption.yAxis[1].axisLabel.formatter = '{value}%';
             this.billingAnlsOption.legend.data = ['开单人力', '无效人力', '开单率'];
             this.billingAnlsOption.color = ['#05e8e9', '#d74b49', '#fad972'];
             this.billingAnlsOption.series[0] = {
@@ -199,6 +200,7 @@ export class TabHumanComponent implements OnInit {
             this.lossAnlsOption.xAxis[0].data = res.data.xAxis;
             this.lossAnlsOption.yAxis[0].name = '单位(人)';
             this.lossAnlsOption.yAxis[1].name = '';
+            this.lossAnlsOption.yAxis[1].axisLabel.formatter = '{value}%';
             this.lossAnlsOption.legend.data = ['入职人力', '离职人力', '流失率'];
             this.lossAnlsOption.series[0].name = this.lossAnlsOption.legend.data[0];
             this.lossAnlsOption.series[0].data = res.data.yAxis.bar;

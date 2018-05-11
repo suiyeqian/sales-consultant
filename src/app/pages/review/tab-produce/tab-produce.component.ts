@@ -20,30 +20,35 @@ export class TabProduceComponent implements OnInit {
       type: 'sqdl',
       curSubTab: 'trend',
       curLevel: {},
+      unit: '件',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: '放款金额分析',
       type: 'fkje',
       curSubTab: 'trend',
       curLevel: {},
+      unit: '万元',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: '件均金额分析',
       type: 'jjje',
       curSubTab: 'trend',
       curLevel: {},
+      unit: '万元',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: '通过率分析',
       type: 'tgl',
       curSubTab: 'trend',
       curLevel: {},
+      unit: '%',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: 'C-M2分析',
       type: 'cm2',
       curSubTab: 'trend',
       curLevel: {},
+      unit: '%',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }
   ];
@@ -96,6 +101,8 @@ export class TabProduceComponent implements OnInit {
               });
             }
             curItem.chartOption.legend.data = legendData;
+            curItem.chartOption.yAxis.name = `单位:(${curItem.unit})`;
+            curItem.chartOption.grid.top = '12%';
             if (curItem.type === 'tgl' || curItem.type === 'cm2') {
               curItem.chartOption.yAxis.axisLabel.formatter = '{value} %';
               curItem.chartOption.tooltip.formatter = function(params) {
@@ -155,6 +162,8 @@ export class TabProduceComponent implements OnInit {
               }
             }
             curItem.chartOption.legend.data = legendData;
+            curItem.chartOption.yAxis.name = `单位:(${curItem.unit})`;
+            curItem.chartOption.grid.top = '12%';
             if (curItem.type === 'tgl' || curItem.type === 'cm2') {
               curItem.chartOption.yAxis.axisLabel.formatter = '{value} %';
               curItem.chartOption.tooltip.formatter = function(params) {

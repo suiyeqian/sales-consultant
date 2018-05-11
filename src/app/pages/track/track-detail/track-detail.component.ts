@@ -30,20 +30,20 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
     private cmnFn: CommonFnService
   ) {
     let self = this;
-    window.onorientationchange = () => {
-      if (window.orientation === 90 || window.orientation === -90) {
-        this.getSaleDetail(this.dateType, this.curIndex.code);
-        this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
-          wmk_z_index: '10000003'}, 0);
-      }
-    };
+    window.onorientationchange = () => this.checkOrientation();
   }
 
   ngOnInit() {
+    this.getSaleDetail(this.dateType, this.curIndex.code);
+    this.checkOrientation();
+  }
+  checkOrientation() {
     if (window.orientation === 90 || window.orientation === -90) {
-      this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
-        wmk_z_index: '10000003'}, 0);
-      this.getSaleDetail(this.dateType, this.curIndex.code);
+      setTimeout(() => {
+        this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
+          wmk_z_index: '10000003'}, 0);
+        this.getSaleDetail(this.dateType, this.curIndex.code);
+      }, 0);
     }
   }
 
@@ -90,6 +90,7 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
               this.chartOption.series[idx].data = res.data.yAxis[dataItem.type];
               this.chartOption.series[idx].name = dataItem.idxName;
             });
+            this.chartOption.xAxis[0].axisTick.show = false;
             this.chartOption.grid = {
               left: '5%',
               right: '5%',

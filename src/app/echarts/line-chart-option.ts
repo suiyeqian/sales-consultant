@@ -4,16 +4,16 @@ export const LineChartOptions = {
     axisPointer: {
       type : 'line'
     },
-    formatter: function(params) {
-      let relVal = params[0].name;
-      for (let i = 0, l = params.length; i < l; i++) {
-           relVal += `<br/>
-                      <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
-                      background-color:${params[i].color}"></span>
-                      ${params[i].seriesName} : ${params[i].value}`;
-       }
-      return relVal;
-     }
+    // formatter: function(params) {
+    //   let relVal = params[0].name;
+    //   for (let i = 0, l = params.length; i < l; i++) {
+    //        relVal += `<br/>
+    //                   <span style="display:inline-block;margin-right:5px;border-radius:50%;width:9px;height:9px;
+    //                   background-color:${params[i].color}"></span>
+    //                   ${params[i].seriesName} : ${params[i].value}`;
+    //    }
+    //   return relVal;
+    //  }
   },
   legend: {
     data: [],
@@ -23,9 +23,9 @@ export const LineChartOptions = {
     itemHeight: 10
   },
   grid: {
-    left: '2%',
+    left: '3%',
     top: '6%',
-    right: '2%',
+    right: '3%',
     containLabel: true
   },
   xAxis:  {
