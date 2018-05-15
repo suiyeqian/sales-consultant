@@ -6,9 +6,6 @@
     <div class="member-progress" *ngFor="let member of mbsPerformance" [class.warn-red]="member.rate - timeProgress < 0">
       <i class="avatar-icon"></i>
       <span class="volume-key text-left">{{member.name}}</span>
-      <!-- <ngb-progressbar type="customized" [value]="member.rate" [striped]="true" [animated]="true" class="member-progress-bar">
-        <i>{{member.amt | number}}</i>
-      </ngb-progressbar> -->
       <ng-template #tipContent>
         <p>今日新增金额：{{member.newAmt | number}}</p>
         <p>本月累计金额：{{member.amt | number}}</p>

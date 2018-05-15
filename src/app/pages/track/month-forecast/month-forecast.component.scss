@@ -82,26 +82,41 @@ i.bonus-status.show{
     left: -1%;
     &:nth-child(2){ left: 9.5% }
     &:nth-child(3){ left: 22% }
-    &:nth-child(4){ left: 36.5% }
-    &:nth-child(5){ left: 54% }
+    &:nth-child(4){ left: 35.5% }
+    &:nth-child(5){ left: 52% }
     &:nth-child(6){ left: 73% }
   }
 }
-.eighth-bar.pay-percent{
+// .eighth-bar.pay-percent{
+//   margin-top: .8rem;
+//   margin-bottom: 1.53rem;
+// }
+// .eighth-bar .royalty-coefficient{
+//   width: 12.5%;
+// }
+// .eighth-bar .interval-num span{
+//   &:nth-child(2){ left: 10% }
+//   &:nth-child(3){ left: 22% }
+//   &:nth-child(4){ left: 35.5% }
+//   &:nth-child(5){ left: 48% }
+//   &:nth-child(6){ left: 60% }
+//   &:nth-child(7){ left: 71.5% }
+//   &:nth-child(8){ left: 84% }
+// }
+.seven-bar .pay-percent{
   margin-top: .8rem;
   margin-bottom: 1.53rem;
 }
-.eighth-bar .royalty-coefficient{
-  width: 12.5%;
+.seven-bar .royalty-coefficient{
+  width: 14.3%;
 }
-.eighth-bar .interval-num span{
-  &:nth-child(2){ left: 10% }
-  &:nth-child(3){ left: 22% }
-  &:nth-child(4){ left: 35.5% }
-  &:nth-child(5){ left: 48% }
-  &:nth-child(6){ left: 60% }
-  &:nth-child(7){ left: 71.5% }
-  &:nth-child(8){ left: 84% }
+.seven-bar .interval-num span{
+  &:nth-child(2){ left: 12.5% }
+  &:nth-child(3){ left: 27% }
+  &:nth-child(4){ left: 41% }
+  &:nth-child(5){ left: 55.5% }
+  &:nth-child(6){ left: 70% }
+  &:nth-child(7){ left: 83.5% }
 }
 #my-percent{
   color: #fe4504;
@@ -109,14 +124,18 @@ i.bonus-status.show{
   top: 1px;
   span {
     position: relative;
-    top:-.13rem;
-    left:.13rem;
+    // top:-.13rem;
+    // left:.13rem;
+    top: .05rem;
+    left: -11.5px;
+    display: inline-block;
+    text-align: center;
   }
 }
 #my-real-percent {
   color: #638c0b;
   position: absolute;
-  top: -.65rem;
+  top: -.8rem;
   span {
     position: relative;
     top:-1.7rem;
@@ -129,6 +148,8 @@ i.bonus-status.show{
   width: 10px;
   position: relative;
   left: -5.5px;
+  height: 1.5rem;
+  top: -1px;
 }
 .bonus-box .col-6:first-child{
   padding-right: 0;

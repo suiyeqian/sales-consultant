@@ -4,7 +4,7 @@ import { Injectable }    from '@angular/core';
 export class WaterMarkService {
   watermarkdivs = [];
   dftSettings = {
-    wmk_txt: '销售助手',
+    wmk_txt: '',
     wmk_x: 15, // 起始位置x轴坐标
     wmk_y: 10, // 起始位置Y轴坐标
     wmk_rows: 0, // 行数

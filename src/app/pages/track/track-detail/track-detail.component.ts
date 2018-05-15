@@ -20,7 +20,6 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
   curIndex = this.navList[0];
   isFirstPage = true;
   curPageList = this.navList.slice(0, 5);
-
   chartOption: any;
 
   constructor(
@@ -29,21 +28,29 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
     private waterMark: WaterMarkService,
     private cmnFn: CommonFnService
   ) {
-    let self = this;
     window.onorientationchange = () => this.checkOrientation();
   }
 
   ngOnInit() {
-    this.getSaleDetail(this.dateType, this.curIndex.code);
-    this.checkOrientation();
+    if (window.orientation === 90 || window.orientation === -90) {
+      this.getSaleDetail(this.dateType, this.curIndex.code);
+    } else {
+      this.getSaleDetail(this.dateType, this.navList[2].code);
+    }
   }
   checkOrientation() {
     if (window.orientation === 90 || window.orientation === -90) {
-      setTimeout(() => {
-        this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
-          wmk_z_index: '10000003'}, 0);
-        this.getSaleDetail(this.dateType, this.curIndex.code);
-      }, 0);
+      let chartDom = document.querySelector('.chart-wrap');
+      let time = () => {
+        setTimeout(() => {
+          if (chartDom.clientHeight < chartDom.clientWidth) {
+            this.getSaleDetail(this.dateType, this.curIndex.code);
+          } else {
+            time();
+          }
+        }, 50);
+      }
+      time();
     }
   }
 
@@ -94,12 +101,14 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
             this.chartOption.grid = {
               left: '5%',
               right: '5%',
-              top: '12%',
+              top: '13%',
               bottom: '11%',
               containLabel: true
             };
             this.chartOption.xAxis[0].data = res.data.xAxis;
           }
+          this.waterMark.load({ wmk_txt: JSON.parse(localStorage.user).name + ' ' + JSON.parse(localStorage.user).number,
+            wmk_z_index: '10000003'}, 0);
         });
   }
 

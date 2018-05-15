@@ -37,7 +37,7 @@ export class TabHumanComponent implements OnInit {
   curLossLevel: any;
   lossAnlsOption: any;
 
-  subNameUrl = 'achievementanls/sub_name';
+  subNameUrl = 'humananls/sub_name';
   subLevels = [];
   curLevel: any;
 

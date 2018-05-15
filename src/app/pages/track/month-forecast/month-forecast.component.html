@@ -127,7 +127,19 @@
           <span class="item-value text-right">{{ achieveforecast.coefficient | number:'1.1-1'}} </span>
         </p>
       </div>
-      <div class="pay-percent eighth-bar">
+      <!-- <div class="pay-percent eighth-bar">
+        <div class="percent-bar">
+          <span *ngFor="let i of achieveforecast.coefficients" class="royalty-coefficient">{{i | number:'1.1-1'}}</span>
+        </div>
+        <div class="interval-num">
+          <span *ngFor="let i of achieveforecast.sections">{{i}}</span>
+        </div>
+        <div id="my-percent" [style.left]="myPctPosition">
+          <div class="cursor"><img src="assets/img/cursor.png" height="100%"></div>
+          <span>{{achieveforecast.totalScore}}</span>
+        </div>
+      </div> -->
+      <div class="pay-percent seven-bar">
         <div class="percent-bar">
           <span *ngFor="let i of achieveforecast.coefficients" class="royalty-coefficient">{{i | number:'1.1-1'}}</span>
         </div>

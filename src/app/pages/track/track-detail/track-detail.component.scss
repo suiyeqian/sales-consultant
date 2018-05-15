@@ -14,8 +14,8 @@
   font-size: 14px;
 }
 .detail-wrap .nav-hd {
-  height: .8rem;
-  line-height: .8rem;
+  height: .7rem;
+  line-height: .7rem;
   display: -webkit-flex;
   display: flex;
   text-align: center;
@@ -73,8 +73,8 @@
   flex-direction: column;
 }
 .content .index-val {
-  height: .8rem;
-  line-height: .8rem;
+  height: .75rem;
+  line-height: .75rem;
   display: -webkit-flex;
   display: flex;
   text-align: center;
@@ -89,8 +89,8 @@
 // 竖屏
 @media all and (orientation: portrait) {
   .tran-hint {
-    display: block;
     position: fixed;
+    display: block;
     left: 0;
     top: 0;
     right: 0;

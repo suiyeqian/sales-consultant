@@ -101,7 +101,7 @@ export class TabProduceComponent implements OnInit {
               });
             }
             curItem.chartOption.legend.data = legendData;
-            curItem.chartOption.yAxis.name = `单位:(${curItem.unit})`;
+            curItem.chartOption.yAxis.name = `单位(${curItem.unit})`;
             curItem.chartOption.grid.top = '12%';
             if (curItem.type === 'tgl' || curItem.type === 'cm2') {
               curItem.chartOption.yAxis.axisLabel.formatter = '{value} %';
@@ -162,7 +162,7 @@ export class TabProduceComponent implements OnInit {
               }
             }
             curItem.chartOption.legend.data = legendData;
-            curItem.chartOption.yAxis.name = `单位:(${curItem.unit})`;
+            curItem.chartOption.yAxis.name = `单位(${curItem.unit})`;
             curItem.chartOption.grid.top = '12%';
             if (curItem.type === 'tgl' || curItem.type === 'cm2') {
               curItem.chartOption.yAxis.axisLabel.formatter = '{value} %';
@@ -184,9 +184,7 @@ export class TabProduceComponent implements OnInit {
   switchChart(tabName, itemType): void {
     let curItem = this.list.find((item) => item.type === itemType);
     let curTabCode = tabName === '本月' ? 'curMonth' : 'trend';
-    if (curItem.curSubTab === curTabCode) {
-      return;
-    }
+    if (curItem.curSubTab === curTabCode) { return; }
     curItem.curSubTab = curTabCode;
     if (curItem.curSubTab === 'trend') {
       this.getTrend({value: '', text: '全部'}, itemType);
