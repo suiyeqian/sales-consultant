@@ -6,7 +6,7 @@
     </div>
     <div class="sub-tabset-container">
       <div class="track-sel" [class.hidden]="item.curSubTab === 'curMonth'">
-        <my-select-box  [seledItem]="item.curLevel" [dataUrl]="subNameUrl" (onSelChanged)="getTrend($event, item.type)"></my-select-box>
+        <my-select-box  [seledItem]="item.curLevel" [dataUrl]="item.subNameUrl" (onSelChanged)="getTrend($event, item.type)"></my-select-box>
       </div>
       <div class="chart-wrap">
         <div echarts [options]="item.chartOption" class="chart"></div>

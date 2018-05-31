@@ -47,13 +47,13 @@ export class MonthForecastComponent implements OnInit {
             [resData.coefficient, this.myPctPosition] =
               this.getCoffAndPos(resData.sections, resData.coefficients, expectAmt, posiArr);
             resData.royaltyAmt = this.myPosId === '2' ?
-              resData.expectAmt * resData.coefficient / 100 : resData.cardinality * resData.coefficient;
+              resData.expectAmt * (+resData.coefficient + +resData.cm2AdjustCoef) / 100 : resData.cardinality * resData.coefficient;
             // 计算已完成的提成系数的位置及已完成奖金
             if (this.myPosId === '2') {
               let cmpeAmt = resData.cmpeAmt / 10000;
               [resData.realCoefficient, this.myRealPctPosition] =
                 this.getCoffAndPos(resData.sections, resData.coefficients, cmpeAmt, this.positionPoint6);
-              resData.cmpeBonus = resData.cmpeAmt * resData.realCoefficient / 100;
+              resData.cmpeBonus = resData.cmpeAmt * (+resData.realCoefficient + +resData.cm2AdjustCoef) / 100;
             }
             this.achieveforecast = resData;
           }

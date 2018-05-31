@@ -73,12 +73,12 @@ export class AuthGuard implements CanActivate {
       } else {
         // let user = {name: '马倩', number: 'xn067182'};
         // localStorage.setItem('bdss_accessToken',
-        // 'Mzijq6EWdasK5YU6hW56C00Gz973xAVrTlhkOhFV1r8jKB6M38KS6KLcBWRSCuDXsWsHsiDQk7wzaCmhRa6x');
-        // localStorage.setItem('bdss_weiXinDeviceId', '25c77da2bb874e2fc4d0a5d12068b9b7');
+        // 'KJDd5yBWc1wNaH1M3Jt7WrZTBjARgeGco3LAoav4vO6CV3rb0FZ2jX4Ej37r3tKpMUbcdqVNLOXvSUWVHUzt');
+        // localStorage.setItem('bdss_weiXinDeviceId', '0f035a8947245cf2501f8a78d40ee314');
         // localStorage.setItem('bdss_refreshToken',
         // 'qPEk8541d8tbDUyFAFoLYe8L0bdavjljOrZIDdlzr9VQsABTwrppvdi20XDXxFemzOQkYelBBVt3sNOI9434');
         // localStorage.setItem('user', JSON.stringify(user));
-        // localStorage.setItem('posId', '3');
+        // localStorage.setItem('posId', '2');
         // localStorage.setItem('teamName', '大区');
         // return true;
         localStorage.clear();

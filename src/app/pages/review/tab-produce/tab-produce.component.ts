@@ -21,6 +21,7 @@ export class TabProduceComponent implements OnInit {
       curSubTab: 'trend',
       curLevel: {},
       unit: '件',
+      subNameUrl: 'humananls/sub_name',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: '放款金额分析',
@@ -28,6 +29,7 @@ export class TabProduceComponent implements OnInit {
       curSubTab: 'trend',
       curLevel: {},
       unit: '万元',
+      subNameUrl: 'achievementanls/sub_name',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: '件均金额分析',
@@ -35,6 +37,7 @@ export class TabProduceComponent implements OnInit {
       curSubTab: 'trend',
       curLevel: {},
       unit: '万元',
+      subNameUrl: 'achievementanls/sub_name',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: '通过率分析',
@@ -42,6 +45,7 @@ export class TabProduceComponent implements OnInit {
       curSubTab: 'trend',
       curLevel: {},
       unit: '%',
+      subNameUrl: 'humananls/sub_name',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }, {
       title: 'C-M2分析',
@@ -49,6 +53,7 @@ export class TabProduceComponent implements OnInit {
       curSubTab: 'trend',
       curLevel: {},
       unit: '%',
+      subNameUrl: 'achievementanls/sub_name',
       chartOption: this.cmnFn.deepCopy(echart.LineChartOptions, {})
     }
   ];
@@ -62,8 +67,6 @@ export class TabProduceComponent implements OnInit {
   applyOrderOption: any;
   loanAmtOption: any;
   avgAmtOption: any;
-
-  subNameUrl = 'achievementanls/sub_name';
 
   constructor(
     private bdService: BackendService,

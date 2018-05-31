@@ -32,11 +32,7 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
-    if (window.orientation === 90 || window.orientation === -90) {
-      this.getSaleDetail(this.dateType, this.curIndex.code);
-    } else {
-      this.getSaleDetail(this.dateType, this.navList[2].code);
-    }
+    this.getSaleDetail(this.dateType, this.curIndex.code);
   }
   checkOrientation() {
     if (window.orientation === 90 || window.orientation === -90) {
@@ -48,7 +44,7 @@ export class TrackdetailComponent implements OnInit, AfterContentInit {
           } else {
             time();
           }
-        }, 50);
+        }, 500);
       }
       time();
     }

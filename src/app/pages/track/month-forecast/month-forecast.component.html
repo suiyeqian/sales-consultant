@@ -25,6 +25,10 @@
           <span class="item-name text-left">预计提成系数</span>
           <span class="item-value text-right">{{achieveforecast.coefficient | number:'1.1-2'}} %</span>
         </p>
+        <p class="forecast-item">
+          <span class="item-name text-left">c-m2调节系数</span>
+          <span class="item-value text-right">{{achieveforecast.cm2AdjustCoef | number:'1.1-2'}} %</span>
+        </p>
       </div>
       <div class="pay-percent">
         <div class="percent-bar">
@@ -58,7 +62,7 @@
       </div>
       <p class="remark">* 以上业绩未剔除再贷客户 <br/>* 奖金金额仅供参考，实际奖金金额以薪酬核算结果为准</p>
     </div>
-    <div class="sub-title-wrap">
+    <!-- <div class="sub-title-wrap">
       <h4 class="sub-title">风控绩效</h4>
     </div>
     <div class="riskCtrl-performance">
@@ -100,7 +104,7 @@
           <span class="bonusSum-hide" *ngIf="!bonusSumShow">****</span>
         </span>
       </div>
-    </div>
+    </div> -->
   </ng-container>
   <!-- 营业部及以上经理 -->
   <ng-container *ngIf="myPosId != 2">
@@ -109,6 +113,10 @@
         <p class="forecast-item">
           <span class="item-name text-left">业绩奖金基数</span>
           <span class="item-value text-right">{{ achieveforecast.cardinality | number}}</span>
+        </p>
+        <p class="forecast-item">
+          <span class="item-name text-left">C-M1得分</span>
+          <span class="item-value text-right">{{ achieveforecast.cm1Score }}</span>
         </p>
         <p class="forecast-item">
           <span class="item-name text-left">C-M2得分</span>
@@ -141,7 +149,7 @@
       </div> -->
       <div class="pay-percent seven-bar">
         <div class="percent-bar">
-          <span *ngFor="let i of achieveforecast.coefficients" class="royalty-coefficient">{{i | number:'1.1-1'}}</span>
+          <span *ngFor="let i of achieveforecast.coefficients" class="royalty-coefficient">{{i}}</span>
         </div>
         <div class="interval-num">
           <span *ngFor="let i of achieveforecast.sections">{{i}}</span>

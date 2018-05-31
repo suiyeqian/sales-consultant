@@ -20,6 +20,7 @@ export class TabTrackComponent implements OnInit {
   overdueOption: any;
   // private pfmcTotalUrl = 'achievementanls/year_achv';
   subNameUrl = 'achievementanls/sub_name';
+  subNameUrl1 = 'humananls/sub_name'; //去掉电销的
   applyLevel = {value: '', text: '全部'};
   loanLevel = {value: '', text: '全部'};
   overdueLevel = {value: '', text: '全部'};
